@@ -74,11 +74,10 @@ def rebase_since_coverage(df: pd.DataFrame, coverage_start_date: str | None) -> 
     return filtered
 
 
-def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_coverage: bool) -> go.Figure:
+def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.Figure:
     df = pd.DataFrame(chart_data)
     df["date"] = pd.to_datetime(df["date"])
-    if since_coverage:
-        df = rebase_since_coverage(df, coverage_start_date)
+    df = rebase_since_coverage(df, coverage_start_date)
 
     fig = go.Figure()
     fig.add_trace(
@@ -101,18 +100,6 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_
             hovertemplate="%{x|%Y-%m-%d}<br>Portfolio: %{y:.1%}<extra></extra>",
         )
     )
-
-    if not since_coverage and coverage_start_date:
-        cov = pd.Timestamp(coverage_start_date)
-        fig.add_vline(x=cov, line_color="#f59e0b", line_width=1.5, line_dash="dash")
-        fig.add_annotation(
-            x=cov,
-            y=1.03,
-            yref="paper",
-            text="Full coverage",
-            showarrow=False,
-            font={"size": 11, "color": "#f59e0b"},
-        )
 
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
@@ -151,15 +138,11 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_
     return fig
 
 
-def render_styles(button_active: bool) -> None:
-    button_bg = "rgba(245, 158, 11, 0.18)" if button_active else "rgba(55, 65, 81, 0.5)"
-    button_color = "#fbbf24" if button_active else "#9ca3af"
-    button_border = "rgba(245, 158, 11, 0.45)" if button_active else "rgba(107, 114, 128, 0.5)"
-
+def render_styles() -> None:
     st.markdown(
-        f"""
+        """
 <style>
-:root {{
+:root {
   --app-bg: #030b1d;
   --panel-bg: #111b31;
   --panel-border: rgba(55, 65, 81, 0.45);
@@ -168,95 +151,79 @@ def render_styles(button_active: bool) -> None:
   --green: #34d399;
   --red: #f87171;
   --blue: #60a5fa;
-}}
+}
 
-.stApp {{
+.stApp {
   background: linear-gradient(180deg, #040c20 0%, #020917 100%);
-}}
+}
 
-.block-container {{
+.block-container {
   max-width: 1030px;
   padding-top: 6.2rem;
   padding-bottom: 0.8rem;
-}}
+}
 
-div[data-testid="stHorizontalBlock"] {{
+div[data-testid="stHorizontalBlock"] {
   gap: 0.62rem;
-}}
+}
 
-.kpi-card {{
+.kpi-card {
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   padding: 9px 13px 8px 13px;
   min-height: 76px;
   margin-bottom: 6px;
-}}
+}
 
-.kpi-label {{
+.kpi-label {
   color: var(--text-muted);
   font-size: 0.86rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   margin-bottom: 4px;
   line-height: 1.1;
-}}
+}
 
-.kpi-value {{
+.kpi-value {
   font-size: 1.66rem;
   line-height: 1.05;
   font-weight: 600;
-}}
+}
 
-.kpi-green {{ color: var(--green); }}
-.kpi-red {{ color: var(--red); }}
-.kpi-blue {{ color: var(--blue); }}
-.kpi-default {{ color: var(--text-default); }}
+.kpi-green { color: var(--green); }
+.kpi-red { color: var(--red); }
+.kpi-blue { color: var(--blue); }
+.kpi-default { color: var(--text-default); }
 
-.summary-line {{
+.summary-line {
   color: #6b7280;
   font-size: 0.72rem;
   margin: 9px 0 8px 0;
-}}
+}
 
-.chart-title {{
+.chart-title {
   color: #d1d5db;
   font-size: 0.9rem;
   font-weight: 600;
   margin-top: 1px;
-  margin-bottom: 4px;
-}}
+  margin-bottom: 3px;
+}
 
-div[data-testid="stButton"] > button {{
-  background: {button_bg};
-  color: {button_color};
-  border: 1px solid {button_border};
-  border-radius: 6px;
-  font-size: 0.66rem;
-  font-weight: 600;
-  padding: 0.2rem 0.56rem;
-}}
-
-div[data-testid="stButton"] > button:hover {{
-  color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.6);
-}}
-
-div[data-testid="stPlotlyChart"] {{
+div[data-testid="stPlotlyChart"] {
   background: linear-gradient(180deg, #111c33 0%, #0e1830 100%);
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   padding: 5px 6px 0 6px;
-}}
+}
 
-@media (max-width: 1200px) {{
-  .block-container {{ max-width: 100%; }}
-  .kpi-label {{ font-size: 0.78rem; }}
-  .kpi-value {{ font-size: 1.38rem; }}
-  .summary-line {{ font-size: 0.7rem; }}
-  .chart-title {{ font-size: 0.84rem; }}
-  div[data-testid="stButton"] > button {{ font-size: 0.66rem; }}
-}}
+@media (max-width: 1200px) {
+  .block-container { max-width: 100%; }
+  .kpi-label { font-size: 0.78rem; }
+  .kpi-value { font-size: 1.38rem; }
+  .summary-line { font-size: 0.7rem; }
+  .chart-title { font-size: 0.84rem; }
+}
 </style>
 """,
         unsafe_allow_html=True,
@@ -277,8 +244,6 @@ def render_card(card: dict) -> None:
 
 def main() -> None:
     st.set_page_config(page_title="Portfolio Performance Showcase", layout="wide")
-    if "since_coverage" not in st.session_state:
-        st.session_state.since_coverage = True
 
     if not SNAPSHOT_PATH.exists():
         st.error(f"Missing snapshot file: {SNAPSHOT_PATH}")
@@ -290,7 +255,7 @@ def main() -> None:
     coverage_start_date = snapshot["coverage_start_date"]
     cards = build_cards(kpis, kpis_since_coverage)
 
-    render_styles(button_active=st.session_state.since_coverage)
+    render_styles()
 
     for idx in range(0, len(cards), 4):
         cols = st.columns(4)
@@ -311,19 +276,11 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
-    title_col, button_col = st.columns([8, 1.2], vertical_alignment="center")
-    with title_col:
-        st.markdown('<div class="chart-title">Cumulative Returns vs S&amp;P 500</div>', unsafe_allow_html=True)
-    with button_col:
-        label = "Since coverage" if st.session_state.since_coverage else "Full period"
-        if st.button(label, use_container_width=True):
-            st.session_state.since_coverage = not st.session_state.since_coverage
-            st.rerun()
+    st.markdown('<div class="chart-title">Cumulative Returns vs S&amp;P 500</div>', unsafe_allow_html=True)
 
     figure = build_figure(
         chart_data=snapshot["charts"]["cumulative_returns"],
         coverage_start_date=coverage_start_date,
-        since_coverage=st.session_state.since_coverage,
     )
     st.plotly_chart(figure, use_container_width=True, config={"displayModeBar": False})
 
