@@ -117,21 +117,21 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        height=360,
-        margin={"l": 52, "r": 20, "t": 8, "b": 58},
+        height=320,
+        margin={"l": 44, "r": 16, "t": 6, "b": 48},
         hovermode="x unified",
         legend={
             "orientation": "h",
             "x": 0.5,
             "xanchor": "center",
             "y": -0.1,
-            "font": {"size": 12, "color": "#9ca3af"},
+            "font": {"size": 11, "color": "#9ca3af"},
         },
     )
     fig.update_xaxes(
         tickformat="%Y-%m",
         dtick="M2",
-        tickfont={"size": 11, "color": "#9ca3af"},
+        tickfont={"size": 10, "color": "#9ca3af"},
         showgrid=True,
         gridcolor="#334155",
         gridwidth=1,
@@ -140,7 +140,7 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_
     )
     fig.update_yaxes(
         tickformat=".1%",
-        tickfont={"size": 11, "color": "#9ca3af"},
+        tickfont={"size": 10, "color": "#9ca3af"},
         showgrid=True,
         gridcolor="#334155",
         gridwidth=1,
@@ -175,35 +175,35 @@ def render_styles(button_active: bool) -> None:
 }}
 
 .block-container {{
-  max-width: 1180px;
-  padding-top: 3.1rem;
-  padding-bottom: 1.0rem;
+  max-width: 1030px;
+  padding-top: 6.2rem;
+  padding-bottom: 0.8rem;
 }}
 
 div[data-testid="stHorizontalBlock"] {{
-  gap: 0.75rem;
+  gap: 0.62rem;
 }}
 
 .kpi-card {{
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  padding: 11px 16px 10px 16px;
-  min-height: 92px;
-  margin-bottom: 8px;
+  border-radius: 10px;
+  padding: 9px 13px 8px 13px;
+  min-height: 76px;
+  margin-bottom: 6px;
 }}
 
 .kpi-label {{
   color: var(--text-muted);
-  font-size: 1.02rem;
+  font-size: 0.86rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   line-height: 1.1;
 }}
 
 .kpi-value {{
-  font-size: 1.98rem;
+  font-size: 1.66rem;
   line-height: 1.05;
   font-weight: 600;
 }}
@@ -215,26 +215,26 @@ div[data-testid="stHorizontalBlock"] {{
 
 .summary-line {{
   color: #6b7280;
-  font-size: 0.84rem;
-  margin: 12px 0 10px 0;
+  font-size: 0.72rem;
+  margin: 9px 0 8px 0;
 }}
 
 .chart-title {{
   color: #d1d5db;
-  font-size: 1.02rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-top: 3px;
-  margin-bottom: 6px;
+  margin-top: 1px;
+  margin-bottom: 4px;
 }}
 
 div[data-testid="stButton"] > button {{
   background: {button_bg};
   color: {button_color};
   border: 1px solid {button_border};
-  border-radius: 7px;
-  font-size: 0.74rem;
+  border-radius: 6px;
+  font-size: 0.66rem;
   font-weight: 600;
-  padding: 0.26rem 0.65rem;
+  padding: 0.2rem 0.56rem;
 }}
 
 div[data-testid="stButton"] > button:hover {{
@@ -245,17 +245,17 @@ div[data-testid="stButton"] > button:hover {{
 div[data-testid="stPlotlyChart"] {{
   background: linear-gradient(180deg, #111c33 0%, #0e1830 100%);
   border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  padding: 6px 8px 0 8px;
+  border-radius: 10px;
+  padding: 5px 6px 0 6px;
 }}
 
 @media (max-width: 1200px) {{
   .block-container {{ max-width: 100%; }}
-  .kpi-label {{ font-size: 0.88rem; }}
-  .kpi-value {{ font-size: 1.55rem; }}
-  .summary-line {{ font-size: 0.78rem; }}
-  .chart-title {{ font-size: 0.95rem; }}
-  div[data-testid="stButton"] > button {{ font-size: 0.72rem; }}
+  .kpi-label {{ font-size: 0.78rem; }}
+  .kpi-value {{ font-size: 1.38rem; }}
+  .summary-line {{ font-size: 0.7rem; }}
+  .chart-title {{ font-size: 0.84rem; }}
+  div[data-testid="stButton"] > button {{ font-size: 0.66rem; }}
 }}
 </style>
 """,
