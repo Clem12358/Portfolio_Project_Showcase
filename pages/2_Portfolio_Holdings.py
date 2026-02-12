@@ -9,17 +9,25 @@ import streamlit as st
 REPO_ROOT = Path(__file__).resolve().parents[1]
 HOLDINGS_SNAPSHOT_PATH = REPO_ROOT / "data" / "holdings_snapshot.json"
 PERFORMANCE_SNAPSHOT_PATH = REPO_ROOT / "data" / "performance_snapshot.json"
+SYMBOL_NAME_SNAPSHOT_PATH = REPO_ROOT / "data" / "symbol_name_snapshot.json"
 
 
 @st.cache_data
 def load_snapshots() -> tuple[pd.DataFrame, dict, dict]:
     holdings_payload = json.loads(HOLDINGS_SNAPSHOT_PATH.read_text(encoding="utf-8"))
     performance_payload = json.loads(PERFORMANCE_SNAPSHOT_PATH.read_text(encoding="utf-8"))
+    names_payload = (
+        json.loads(SYMBOL_NAME_SNAPSHOT_PATH.read_text(encoding="utf-8"))
+        if SYMBOL_NAME_SNAPSHOT_PATH.exists()
+        else {"mapping": {}}
+    )
 
     holdings_df = pd.DataFrame(holdings_payload["rows"])
     holdings_df["as_of_date"] = pd.to_datetime(holdings_df["as_of_date"])
     holdings_df["weight"] = pd.to_numeric(holdings_df["weight"], errors="coerce").fillna(0.0)
     holdings_df["expected_return"] = pd.to_numeric(holdings_df["expected_return"], errors="coerce")
+    symbol_name_map = names_payload.get("mapping", {})
+    holdings_df["company_name"] = holdings_df["symbol"].map(symbol_name_map).fillna(holdings_df["symbol"])
 
     coverage_start = performance_payload.get("coverage_start_date")
     if coverage_start:
@@ -109,16 +117,21 @@ div[data-testid="stPlotlyChart"] {
 
 
 def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
-    top = month_df.nlargest(15, "weight").sort_values("weight")
+    top = month_df.nlargest(15, "weight").copy()
+    labels = top["symbol"] + " - " + top["company_name"]
+    values = top["weight"] * 100
 
     fig = go.Figure()
     fig.add_trace(
-        go.Bar(
-            x=top["weight"] * 100,
-            y=top["symbol"],
-            orientation="h",
-            marker={"color": "#3b82f6"},
-            hovertemplate="%{y}<br>Weight: %{x:.2f}%<extra></extra>",
+        go.Pie(
+            labels=labels,
+            values=values,
+            hole=0.0,
+            sort=False,
+            textinfo="percent",
+            textfont={"size": 10, "color": "#e5e7eb"},
+            marker={"line": {"color": "#0f172a", "width": 1}},
+            hovertemplate="%{label}<br>Weight: %{value:.2f}%<extra></extra>",
         )
     )
 
@@ -126,22 +139,16 @@ def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         height=330,
-        margin={"l": 58, "r": 16, "t": 6, "b": 26},
-        showlegend=False,
-    )
-    fig.update_xaxes(
-        title="Weight (%)",
-        title_font={"size": 10, "color": "#9ca3af"},
-        tickfont={"size": 10, "color": "#9ca3af"},
-        showgrid=True,
-        gridcolor="#334155",
-        linecolor="#4b5563",
-        zeroline=False,
-    )
-    fig.update_yaxes(
-        tickfont={"size": 10, "color": "#d1d5db"},
-        showgrid=False,
-        linecolor="#4b5563",
+        margin={"l": 8, "r": 8, "t": 6, "b": 6},
+        showlegend=True,
+        legend={
+            "font": {"size": 10, "color": "#d1d5db"},
+            "orientation": "v",
+            "x": 1.0,
+            "xanchor": "left",
+            "y": 0.5,
+            "yanchor": "middle",
+        },
     )
     return fig
 
@@ -207,18 +214,13 @@ def main() -> None:
     c2.metric("Holdings", f"{len(month_df)}")
     c3.metric("Total Weight", f"{month_df['weight'].sum() * 100:.2f}%")
 
-    st.markdown('<div class="chart-title">Top 15 Weights</div>', unsafe_allow_html=True)
+    st.markdown('<div class="chart-title">Top 15 Weights (Pie)</div>', unsafe_allow_html=True)
     st.plotly_chart(build_weights_figure(month_df), use_container_width=True, config={"displayModeBar": False})
 
     display_df = month_df.copy()
-    display_df.insert(0, "rank", range(1, len(display_df) + 1))
-    display_df["as_of_date"] = display_df["as_of_date"].dt.strftime("%Y-%m-%d")
     display_df["weight_pct"] = display_df["weight"] * 100
-    display_df["expected_return_pct"] = display_df["expected_return"] * 100
 
-    display_df = display_df[
-        ["rank", "symbol", "weight_pct", "sector", "expected_return_pct", "optimizer", "as_of_date"]
-    ]
+    display_df = display_df[["symbol", "company_name", "weight_pct", "sector"]]
 
     st.markdown('<div class="chart-title">All Holdings for Selected Month</div>', unsafe_allow_html=True)
     st.dataframe(
@@ -226,13 +228,10 @@ def main() -> None:
         use_container_width=True,
         hide_index=True,
         column_config={
-            "rank": st.column_config.NumberColumn("Rank", format="%d", width="small"),
             "symbol": st.column_config.TextColumn("Symbol", width="small"),
+            "company_name": st.column_config.TextColumn("Company Name"),
             "weight_pct": st.column_config.NumberColumn("Weight (%)", format="%.2f%%"),
             "sector": st.column_config.TextColumn("Sector"),
-            "expected_return_pct": st.column_config.NumberColumn("Expected Return (%)", format="%.2f%%"),
-            "optimizer": st.column_config.TextColumn("Optimizer"),
-            "as_of_date": st.column_config.TextColumn("As Of"),
         },
     )
 
