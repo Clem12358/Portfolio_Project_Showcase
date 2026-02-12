@@ -117,7 +117,7 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None, since_
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        height=430,
+        height=360,
         margin={"l": 52, "r": 20, "t": 8, "b": 58},
         hovermode="x unified",
         legend={
@@ -175,34 +175,34 @@ def render_styles(button_active: bool) -> None:
 }}
 
 .block-container {{
-  max-width: 1800px;
-  padding-top: 1.2rem;
-  padding-bottom: 1.3rem;
+  max-width: 1180px;
+  padding-top: 0.85rem;
+  padding-bottom: 1.0rem;
 }}
 
 div[data-testid="stHorizontalBlock"] {{
-  gap: 1rem;
+  gap: 0.75rem;
 }}
 
 .kpi-card {{
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  padding: 16px 20px 14px 20px;
-  min-height: 126px;
+  border-radius: 12px;
+  padding: 11px 16px 10px 16px;
+  min-height: 92px;
 }}
 
 .kpi-label {{
   color: var(--text-muted);
-  font-size: 1.45rem;
+  font-size: 1.02rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   line-height: 1.1;
 }}
 
 .kpi-value {{
-  font-size: 2.5rem;
+  font-size: 1.98rem;
   line-height: 1.05;
   font-weight: 600;
 }}
@@ -214,26 +214,26 @@ div[data-testid="stHorizontalBlock"] {{
 
 .summary-line {{
   color: #6b7280;
-  font-size: 1.12rem;
-  margin: 16px 0 14px 0;
+  font-size: 0.84rem;
+  margin: 12px 0 10px 0;
 }}
 
 .chart-title {{
   color: #d1d5db;
-  font-size: 1.65rem;
+  font-size: 1.02rem;
   font-weight: 600;
-  margin-top: 6px;
-  margin-bottom: 8px;
+  margin-top: 3px;
+  margin-bottom: 6px;
 }}
 
 div[data-testid="stButton"] > button {{
   background: {button_bg};
   color: {button_color};
   border: 1px solid {button_border};
-  border-radius: 8px;
-  font-size: 0.86rem;
+  border-radius: 7px;
+  font-size: 0.74rem;
   font-weight: 600;
-  padding: 0.35rem 0.85rem;
+  padding: 0.26rem 0.65rem;
 }}
 
 div[data-testid="stButton"] > button:hover {{
@@ -244,16 +244,17 @@ div[data-testid="stButton"] > button:hover {{
 div[data-testid="stPlotlyChart"] {{
   background: linear-gradient(180deg, #111c33 0%, #0e1830 100%);
   border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  padding: 8px 10px 2px 10px;
+  border-radius: 12px;
+  padding: 6px 8px 0 8px;
 }}
 
 @media (max-width: 1200px) {{
-  .kpi-label {{ font-size: 1rem; }}
-  .kpi-value {{ font-size: 1.9rem; }}
-  .summary-line {{ font-size: 0.95rem; }}
-  .chart-title {{ font-size: 1.2rem; }}
-  div[data-testid="stButton"] > button {{ font-size: 0.8rem; }}
+  .block-container {{ max-width: 100%; }}
+  .kpi-label {{ font-size: 0.88rem; }}
+  .kpi-value {{ font-size: 1.55rem; }}
+  .summary-line {{ font-size: 0.78rem; }}
+  .chart-title {{ font-size: 0.95rem; }}
+  div[data-testid="stButton"] > button {{ font-size: 0.72rem; }}
 }}
 </style>
 """,
