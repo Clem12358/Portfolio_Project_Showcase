@@ -138,6 +138,114 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.
     return fig
 
 
+def build_drawdown_figure(cumulative_chart_data: list[dict], coverage_start_date: str | None) -> go.Figure:
+    df = pd.DataFrame(cumulative_chart_data)
+    df["date"] = pd.to_datetime(df["date"])
+    df = rebase_since_coverage(df, coverage_start_date)
+
+    wealth = 1.0 + df["portfolio"].astype(float)
+    running_peak = wealth.cummax()
+    drawdown = (wealth / running_peak) - 1.0
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatter(
+            x=df["date"],
+            y=drawdown,
+            mode="lines",
+            name="Drawdown",
+            line={"color": "#ef4444", "width": 2},
+            fill="tozeroy",
+            fillcolor="rgba(239, 68, 68, 0.24)",
+            hovertemplate="%{x|%Y-%m-%d}<br>Drawdown: %{y:.1%}<extra></extra>",
+        )
+    )
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        height=230,
+        margin={"l": 44, "r": 16, "t": 6, "b": 28},
+        hovermode="x unified",
+        showlegend=False,
+    )
+    fig.update_xaxes(
+        tickformat="%Y-%m",
+        dtick="M2",
+        tickfont={"size": 10, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        gridwidth=1,
+        zeroline=False,
+        linecolor="#4b5563",
+    )
+    fig.update_yaxes(
+        tickformat=".1%",
+        tickfont={"size": 10, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        gridwidth=1,
+        zeroline=False,
+        range=[-0.12, 0.0],
+        tickvals=[-0.12, -0.09, -0.06, -0.03, 0.0],
+        linecolor="#4b5563",
+    )
+    return fig
+
+
+def build_monthly_returns_figure(monthly_chart_data: list[dict], coverage_start_date: str | None) -> go.Figure:
+    df = pd.DataFrame(monthly_chart_data)
+    month_cutoff = coverage_start_date[:7] if coverage_start_date else None
+    if month_cutoff:
+        df = df[df["month"] >= month_cutoff].copy()
+
+    df["month_date"] = pd.to_datetime(df["month"] + "-01")
+    bar_colors = ["#10b981" if v >= 0 else "#ef4444" for v in df["portfolio"]]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=df["month_date"],
+            y=df["portfolio"],
+            marker_color=bar_colors,
+            name="Portfolio",
+            hovertemplate="%{x|%Y-%m}<br>Return: %{y:.1%}<extra></extra>",
+        )
+    )
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        height=260,
+        margin={"l": 44, "r": 16, "t": 6, "b": 36},
+        hovermode="x unified",
+        showlegend=False,
+        bargap=0.18,
+    )
+    fig.update_xaxes(
+        tickformat="%Y-%m",
+        dtick="M3",
+        tickfont={"size": 10, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        gridwidth=1,
+        zeroline=False,
+        linecolor="#4b5563",
+    )
+    fig.update_yaxes(
+        tickformat=".1%",
+        tickfont={"size": 10, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        gridwidth=1,
+        zeroline=False,
+        range=[-0.055, 0.165],
+        tickvals=[-0.055, 0.0, 0.055, 0.11, 0.165],
+        linecolor="#4b5563",
+    )
+    return fig
+
+
 def render_styles() -> None:
     st.markdown(
         """
@@ -283,6 +391,20 @@ def main() -> None:
         coverage_start_date=coverage_start_date,
     )
     st.plotly_chart(figure, use_container_width=True, config={"displayModeBar": False})
+
+    st.markdown('<div class="chart-title">Drawdown</div>', unsafe_allow_html=True)
+    drawdown_figure = build_drawdown_figure(
+        cumulative_chart_data=snapshot["charts"]["cumulative_returns"],
+        coverage_start_date=coverage_start_date,
+    )
+    st.plotly_chart(drawdown_figure, use_container_width=True, config={"displayModeBar": False})
+
+    st.markdown('<div class="chart-title">Monthly Returns</div>', unsafe_allow_html=True)
+    monthly_figure = build_monthly_returns_figure(
+        monthly_chart_data=snapshot["charts"]["monthly_returns"],
+        coverage_start_date=coverage_start_date,
+    )
+    st.plotly_chart(monthly_figure, use_container_width=True, config={"displayModeBar": False})
 
 
 if __name__ == "__main__":
