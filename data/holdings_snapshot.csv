@@ -1,0 +1,1224 @@
+symbol,as_of_date,weight,expected_return,sector,optimizer
+SUZ,2022-01-31,0.05,-0.092205,Basic Materials,sparse_qp
+AKO-A,2022-01-31,0.05,-0.08759,Consumer Defensive,sparse_qp
+WFC-PY,2022-01-31,0.05,-0.094359,Financial Services,sparse_qp
+PSNY,2022-01-31,0.05,-0.084011,Consumer Cyclical,sparse_qp
+HUM,2022-01-31,0.05,-0.074481,Healthcare,sparse_qp
+AZN,2022-01-31,0.05,-0.076745,Healthcare,sparse_qp
+ET-PI,2022-01-31,0.05,-0.079025,Energy,sparse_qp
+CME,2022-01-31,0.05,-0.071366,Financial Services,sparse_qp
+QVCGP,2022-01-31,0.05,-0.074389,Consumer Cyclical,sparse_qp
+USB-PA,2022-01-31,0.05,-0.073699,Financial Services,sparse_qp
+CNSP,2022-01-31,0.05,-0.038966,Healthcare,sparse_qp
+SCHW-PD,2022-01-31,0.05,-0.067413,Financial Services,sparse_qp
+SPG-PJ,2022-01-31,0.05,-0.054414,Real Estate,sparse_qp
+ELC,2022-01-31,0.05,-0.057817,Utilities,sparse_qp
+IPB,2022-01-31,0.05,-0.054803,Financial Services,sparse_qp
+MRK,2022-01-31,0.05,-0.04411,Healthcare,sparse_qp
+PFE,2022-01-31,0.05,-0.042854,Healthcare,sparse_qp
+CTA-PA,2022-01-31,0.05,-0.034125,Basic Materials,sparse_qp
+WBX,2022-01-31,0.036762,-0.084832,Technology,sparse_qp
+SNY,2022-01-31,0.026117,-0.098785,Healthcare,sparse_qp
+LMT,2022-01-31,0.024394,-0.102189,Industrials,sparse_qp
+CPNG,2022-01-31,0.012728,-0.097179,Consumer Cyclical,sparse_qp
+SCHW-PD,2022-02-28,0.05,-0.049465,Financial Services,sparse_qp
+BAC-PB,2022-02-28,0.05,-0.098643,Financial Services,sparse_qp
+LMT,2022-02-28,0.05,-0.09644,Industrials,sparse_qp
+FITBP,2022-02-28,0.05,-0.094868,Financial Services,sparse_qp
+BALL,2022-02-28,0.05,-0.084484,Consumer Cyclical,sparse_qp
+BBDO,2022-02-28,0.05,-0.074989,Financial Services,sparse_qp
+CME,2022-02-28,0.05,-0.079745,Financial Services,sparse_qp
+QVCGP,2022-02-28,0.05,-0.082561,Consumer Cyclical,sparse_qp
+MRK,2022-02-28,0.05,-0.07633,Healthcare,sparse_qp
+ZS,2022-02-28,0.05,-0.060576,Technology,sparse_qp
+HUM,2022-02-28,0.05,-0.070947,Healthcare,sparse_qp
+PSKY,2022-02-28,0.05,-0.054625,Communication Services,sparse_qp
+WFC-PY,2022-02-28,0.05,-0.07339,Financial Services,sparse_qp
+ELC,2022-02-28,0.05,-0.055984,Utilities,sparse_qp
+PCG-PA,2022-02-28,0.05,-0.053794,Utilities,sparse_qp
+SPG-PJ,2022-02-28,0.05,-0.047546,Real Estate,sparse_qp
+CCZ,2022-02-28,0.05,-0.042794,Communication Services,sparse_qp
+CTA-PA,2022-02-28,0.05,-0.0425,Basic Materials,sparse_qp
+IPB,2022-02-28,0.05,-0.018003,Financial Services,sparse_qp
+SNAP,2022-02-28,0.025298,-0.066963,Communication Services,sparse_qp
+PFE,2022-02-28,0.018935,-0.100469,Healthcare,sparse_qp
+ABBV,2022-02-28,0.005767,-0.099926,Healthcare,sparse_qp
+AVAL,2022-03-31,0.05,-0.001941,Financial Services,sparse_qp
+ELC,2022-03-31,0.05,-0.05811,Utilities,sparse_qp
+CCZ,2022-03-31,0.05,0.004215,Communication Services,sparse_qp
+IPB,2022-03-31,0.05,-0.001124,Financial Services,sparse_qp
+PSKY,2022-03-31,0.05,-0.077982,Communication Services,sparse_qp
+BAC-PB,2022-03-31,0.05,-0.091616,Financial Services,sparse_qp
+CTA-PA,2022-03-31,0.05,-0.030037,Basic Materials,sparse_qp
+SPG-PJ,2022-03-31,0.05,-0.041289,Real Estate,sparse_qp
+PCG-PA,2022-03-31,0.05,-0.044527,Utilities,sparse_qp
+SCHW-PD,2022-03-31,0.05,-0.046111,Financial Services,sparse_qp
+PFE,2022-03-31,0.05,-0.090999,Healthcare,sparse_qp
+BALL,2022-03-31,0.05,-0.067527,Consumer Cyclical,sparse_qp
+WFC-PY,2022-03-31,0.05,-0.076105,Financial Services,sparse_qp
+EA,2022-03-31,0.05,-0.074245,Technology,sparse_qp
+WBX,2022-03-31,0.05,-0.055547,Technology,sparse_qp
+LMT,2022-03-31,0.05,-0.082356,Industrials,sparse_qp
+MRK,2022-03-31,0.05,-0.07808,Healthcare,sparse_qp
+FITBP,2022-03-31,0.05,-0.083666,Financial Services,sparse_qp
+ET-PI,2022-03-31,0.05,-0.08684,Energy,sparse_qp
+TAK,2022-03-31,0.037071,-0.094514,Healthcare,sparse_qp
+HUM,2022-03-31,0.012929,-0.092623,Healthcare,sparse_qp
+BALL,2022-04-30,0.05,-0.089767,Consumer Cyclical,sparse_qp
+CCZ,2022-04-30,0.05,0.006988,Communication Services,sparse_qp
+IPB,2022-04-30,0.05,-0.004674,Financial Services,sparse_qp
+HOLO,2022-04-30,0.05,-0.01256,Technology,sparse_qp
+AVAL,2022-04-30,0.05,-0.023874,Financial Services,sparse_qp
+SCHW-PD,2022-04-30,0.05,-0.046973,Financial Services,sparse_qp
+CTA-PA,2022-04-30,0.05,-0.052367,Basic Materials,sparse_qp
+ELC,2022-04-30,0.05,-0.062695,Utilities,sparse_qp
+SPG-PJ,2022-04-30,0.05,-0.058125,Real Estate,sparse_qp
+FITBP,2022-04-30,0.05,-0.066333,Financial Services,sparse_qp
+ET-PI,2022-04-30,0.05,-0.068315,Energy,sparse_qp
+PCG-PA,2022-04-30,0.05,-0.070364,Utilities,sparse_qp
+LMT,2022-04-30,0.05,-0.076574,Industrials,sparse_qp
+CTA-PB,2022-04-30,0.05,-0.080606,Basic Materials,sparse_qp
+WFC-PY,2022-04-30,0.05,-0.091255,Financial Services,sparse_qp
+BAC-PB,2022-04-30,0.05,-0.09123,Financial Services,sparse_qp
+TBB,2022-04-30,0.05,-0.09065,Communication Services,sparse_qp
+WBX,2022-04-30,0.05,-0.070745,Technology,sparse_qp
+PSKY,2022-04-30,0.05,-0.082817,Communication Services,sparse_qp
+KT,2022-04-30,0.031579,-0.094154,Communication Services,sparse_qp
+TLK,2022-04-30,0.018421,-0.095662,Communication Services,sparse_qp
+AVAL,2022-05-31,0.05,-0.053099,Financial Services,sparse_qp
+PCG-PB,2022-05-31,0.05,-0.032172,Utilities,sparse_qp
+CCZ,2022-05-31,0.05,-0.022706,Communication Services,sparse_qp
+HOLO,2022-05-31,0.05,-0.013944,Technology,sparse_qp
+CTA-PA,2022-05-31,0.05,-0.076465,Basic Materials,sparse_qp
+ET-PI,2022-05-31,0.05,-0.073287,Energy,sparse_qp
+CTA-PB,2022-05-31,0.05,-0.075767,Basic Materials,sparse_qp
+IPB,2022-05-31,0.05,-0.000262,Financial Services,sparse_qp
+SCHW-PD,2022-05-31,0.05,-0.075577,Financial Services,sparse_qp
+DUKB,2022-05-31,0.05,-0.105608,Utilities,sparse_qp
+LHX,2022-05-31,0.05,-0.102416,Industrials,sparse_qp
+FITBP,2022-05-31,0.05,-0.104365,Financial Services,sparse_qp
+PCG-PA,2022-05-31,0.05,-0.10043,Utilities,sparse_qp
+C-PN,2022-05-31,0.05,-0.097428,Financial Services,sparse_qp
+ALL-PB,2022-05-31,0.05,-0.097086,Financial Services,sparse_qp
+LMT,2022-05-31,0.05,-0.09316,Industrials,sparse_qp
+TBB,2022-05-31,0.05,-0.089525,Communication Services,sparse_qp
+PSKY,2022-05-31,0.05,-0.068627,Communication Services,sparse_qp
+SPG-PJ,2022-05-31,0.05,-0.078492,Real Estate,sparse_qp
+TAK,2022-05-31,0.029481,-0.107632,Healthcare,sparse_qp
+SNY,2022-05-31,0.011765,-0.108411,Healthcare,sparse_qp
+AGNCM,2022-05-31,0.008754,-0.108362,Real Estate,sparse_qp
+C-PN,2022-06-30,0.050228,-0.09129,Financial Services,sparse_qp
+SPG-PJ,2022-06-30,0.050228,-0.078417,Real Estate,sparse_qp
+CTA-PA,2022-06-30,0.050228,-0.066253,Basic Materials,sparse_qp
+CTA-PB,2022-06-30,0.050228,-0.060211,Basic Materials,sparse_qp
+PCG-PB,2022-06-30,0.050228,-0.045726,Utilities,sparse_qp
+CCZ,2022-06-30,0.050228,-0.035205,Communication Services,sparse_qp
+IPB,2022-06-30,0.050228,-0.034296,Financial Services,sparse_qp
+HOLO,2022-06-30,0.050228,-0.014331,Technology,sparse_qp
+AGNCP,2022-06-30,0.050228,-0.121941,Real Estate,sparse_qp
+AKO-A,2022-06-30,0.050228,-0.113135,Consumer Defensive,sparse_qp
+SNY,2022-06-30,0.050228,-0.119178,Healthcare,sparse_qp
+LMT,2022-06-30,0.050228,-0.116132,Industrials,sparse_qp
+DUKB,2022-06-30,0.050228,-0.115633,Utilities,sparse_qp
+TAK,2022-06-30,0.050228,-0.101812,Healthcare,sparse_qp
+FITBP,2022-06-30,0.050228,-0.105395,Financial Services,sparse_qp
+AVAL,2022-06-30,0.050228,-0.084476,Financial Services,sparse_qp
+ET-PI,2022-06-30,0.050228,-0.094843,Energy,sparse_qp
+TBB,2022-06-30,0.050228,-0.093908,Communication Services,sparse_qp
+SCHW-PD,2022-06-30,0.050228,-0.088759,Financial Services,sparse_qp
+CME,2022-06-30,0.045673,-0.119667,Financial Services,sparse_qp
+SNY,2022-07-31,0.050093,-0.118276,Healthcare,sparse_qp
+LMT,2022-07-31,0.050093,-0.119419,Industrials,sparse_qp
+AKO-A,2022-07-31,0.050093,-0.11233,Consumer Defensive,sparse_qp
+ABBV,2022-07-31,0.050093,-0.120317,Healthcare,sparse_qp
+CTA-PA,2022-07-31,0.050093,-0.071034,Basic Materials,sparse_qp
+CTA-PB,2022-07-31,0.050093,-0.056637,Basic Materials,sparse_qp
+CCZ,2022-07-31,0.050093,-0.04434,Communication Services,sparse_qp
+PCG-PB,2022-07-31,0.050093,-0.040194,Utilities,sparse_qp
+IPB,2022-07-31,0.050093,-0.039164,Financial Services,sparse_qp
+HOLO,2022-07-31,0.050093,-0.012511,Technology,sparse_qp
+SPG-PJ,2022-07-31,0.050093,-0.072557,Real Estate,sparse_qp
+SCHW-PD,2022-07-31,0.050093,-0.085351,Financial Services,sparse_qp
+C-PN,2022-07-31,0.050093,-0.088046,Financial Services,sparse_qp
+AVAL,2022-07-31,0.050093,-0.079385,Financial Services,sparse_qp
+ET-PI,2022-07-31,0.050093,-0.096156,Energy,sparse_qp
+TBB,2022-07-31,0.050093,-0.091781,Communication Services,sparse_qp
+FITBP,2022-07-31,0.050093,-0.103962,Financial Services,sparse_qp
+TAK,2022-07-31,0.050093,-0.100013,Healthcare,sparse_qp
+DUKB,2022-07-31,0.050093,-0.118632,Utilities,sparse_qp
+CMS-PB,2022-07-31,0.020159,-0.121815,Utilities,sparse_qp
+BAC-PB,2022-07-31,0.014292,-0.122655,Financial Services,sparse_qp
+CME,2022-07-31,0.013781,-0.119784,Financial Services,sparse_qp
+HOLO,2022-08-31,0.05,-0.013284,Technology,sparse_qp
+PCG-PB,2022-08-31,0.05,-0.017721,Utilities,sparse_qp
+IPB,2022-08-31,0.05,-0.034555,Financial Services,sparse_qp
+CCZ,2022-08-31,0.05,-0.050594,Communication Services,sparse_qp
+CTA-PA,2022-08-31,0.05,-0.067293,Basic Materials,sparse_qp
+CTA-PB,2022-08-31,0.05,-0.074672,Basic Materials,sparse_qp
+SPG-PJ,2022-08-31,0.05,-0.081259,Real Estate,sparse_qp
+SCHW-PD,2022-08-31,0.05,-0.088777,Financial Services,sparse_qp
+C-PN,2022-08-31,0.05,-0.08902,Financial Services,sparse_qp
+ET-PI,2022-08-31,0.05,-0.089832,Energy,sparse_qp
+TBB,2022-08-31,0.05,-0.091352,Communication Services,sparse_qp
+AVAL,2022-08-31,0.05,-0.077301,Financial Services,sparse_qp
+TAK,2022-08-31,0.05,-0.095604,Healthcare,sparse_qp
+FITBP,2022-08-31,0.05,-0.108972,Financial Services,sparse_qp
+SNY,2022-08-31,0.05,-0.11442,Healthcare,sparse_qp
+MS-PE,2022-08-31,0.05,-0.118412,Financial Services,sparse_qp
+DUKB,2022-08-31,0.05,-0.118946,Utilities,sparse_qp
+BMY,2022-08-31,0.030518,-0.121372,Healthcare,sparse_qp
+CME,2022-08-31,0.03021,-0.119133,Financial Services,sparse_qp
+AKO-A,2022-08-31,0.029497,-0.117725,Consumer Defensive,sparse_qp
+TLK,2022-08-31,0.028852,-0.120044,Communication Services,sparse_qp
+CNSP,2022-08-31,0.022955,-0.103703,Healthcare,sparse_qp
+BAC-PB,2022-08-31,0.007969,-0.122347,Financial Services,sparse_qp
+PCG-PB,2022-09-30,0.050427,-0.000155,Utilities,sparse_qp
+CCZ,2022-09-30,0.050427,-0.006996,Communication Services,sparse_qp
+IPB,2022-09-30,0.050427,-0.011158,Financial Services,sparse_qp
+SPG-PJ,2022-09-30,0.050427,-0.015447,Real Estate,sparse_qp
+TAK,2022-09-30,0.050427,-0.012093,Healthcare,sparse_qp
+CTA-PB,2022-09-30,0.050427,-0.017622,Basic Materials,sparse_qp
+ET-PI,2022-09-30,0.050427,-0.018501,Energy,sparse_qp
+CTA-PA,2022-09-30,0.050427,-0.020049,Basic Materials,sparse_qp
+TBB,2022-09-30,0.050427,-0.022502,Communication Services,sparse_qp
+C-PN,2022-09-30,0.050427,-0.025336,Financial Services,sparse_qp
+KT,2022-09-30,0.050427,-0.01721,Communication Services,sparse_qp
+MRK,2022-09-30,0.050427,-0.018517,Healthcare,sparse_qp
+SCHW-PD,2022-09-30,0.050427,-0.026726,Financial Services,sparse_qp
+SNY,2022-09-30,0.050427,-0.022488,Healthcare,sparse_qp
+BMY,2022-09-30,0.050427,-0.024568,Healthcare,sparse_qp
+BIP,2022-09-30,0.050427,-0.024413,Utilities,sparse_qp
+CME,2022-09-30,0.050427,-0.022775,Financial Services,sparse_qp
+AVAL,2022-09-30,0.046817,-0.01083,Financial Services,sparse_qp
+HOLO,2022-09-30,0.022802,-0.017381,Technology,sparse_qp
+CNSP,2022-09-30,0.019049,-0.010608,Healthcare,sparse_qp
+JNJ,2022-09-30,0.016545,-0.026696,Healthcare,sparse_qp
+BCH,2022-09-30,0.014069,-0.020644,Financial Services,sparse_qp
+DUKB,2022-09-30,0.013372,-0.028664,Utilities,sparse_qp
+PHI,2022-09-30,0.010093,-0.024453,Communication Services,sparse_qp
+PCG-PB,2022-10-31,0.05,0.002397,Utilities,sparse_qp
+CCZ,2022-10-31,0.05,-0.008623,Communication Services,sparse_qp
+CHT,2022-10-31,0.05,-0.011682,Communication Services,sparse_qp
+IPB,2022-10-31,0.05,-0.014681,Financial Services,sparse_qp
+CTA-PA,2022-10-31,0.05,-0.017405,Basic Materials,sparse_qp
+SPG-PJ,2022-10-31,0.05,-0.018418,Real Estate,sparse_qp
+CTA-PB,2022-10-31,0.05,-0.017572,Basic Materials,sparse_qp
+TAK,2022-10-31,0.05,-0.016098,Healthcare,sparse_qp
+ET-PI,2022-10-31,0.05,-0.019184,Energy,sparse_qp
+C-PN,2022-10-31,0.05,-0.025282,Financial Services,sparse_qp
+TBB,2022-10-31,0.05,-0.025702,Communication Services,sparse_qp
+KT,2022-10-31,0.05,-0.017686,Communication Services,sparse_qp
+MRK,2022-10-31,0.05,-0.020845,Healthcare,sparse_qp
+BMY,2022-10-31,0.05,-0.025868,Healthcare,sparse_qp
+SCHW-PD,2022-10-31,0.05,-0.029496,Financial Services,sparse_qp
+TLK,2022-10-31,0.049491,-0.025392,Communication Services,sparse_qp
+TRV,2022-10-31,0.044253,-0.023568,Financial Services,sparse_qp
+SNY,2022-10-31,0.043769,-0.023498,Healthcare,sparse_qp
+AVAL,2022-10-31,0.035867,-0.011924,Financial Services,sparse_qp
+BCH,2022-10-31,0.033772,-0.018739,Financial Services,sparse_qp
+CNSP,2022-10-31,0.02549,-0.008231,Healthcare,sparse_qp
+JNJ,2022-10-31,0.011494,-0.027359,Healthcare,sparse_qp
+SKM,2022-10-31,0.005866,-0.020828,Communication Services,sparse_qp
+PCG-PB,2022-11-30,0.050057,0.002067,Utilities,sparse_qp
+CCZ,2022-11-30,0.050057,-0.005599,Communication Services,sparse_qp
+IPB,2022-11-30,0.050057,-0.016165,Financial Services,sparse_qp
+CHT,2022-11-30,0.050057,-0.014468,Communication Services,sparse_qp
+CTA-PA,2022-11-30,0.050057,-0.016237,Basic Materials,sparse_qp
+ET-PI,2022-11-30,0.050057,-0.018772,Energy,sparse_qp
+SPG-PJ,2022-11-30,0.050057,-0.019881,Real Estate,sparse_qp
+CTA-PB,2022-11-30,0.050057,-0.018576,Basic Materials,sparse_qp
+C-PN,2022-11-30,0.050057,-0.026126,Financial Services,sparse_qp
+KT,2022-11-30,0.050057,-0.019032,Communication Services,sparse_qp
+BMY,2022-11-30,0.050057,-0.025503,Healthcare,sparse_qp
+TAK,2022-11-30,0.050057,-0.025175,Healthcare,sparse_qp
+MS-PE,2022-11-30,0.050057,-0.03203,Financial Services,sparse_qp
+MCK,2022-11-30,0.050057,-0.024297,Healthcare,sparse_qp
+CME,2022-11-30,0.050057,-0.024817,Financial Services,sparse_qp
+MRK,2022-11-30,0.048074,-0.027356,Healthcare,sparse_qp
+MO,2022-11-30,0.042828,-0.025283,Consumer Defensive,sparse_qp
+AVAL,2022-11-30,0.029735,-0.016391,Financial Services,sparse_qp
+JNJ,2022-11-30,0.02297,-0.029253,Healthcare,sparse_qp
+BBD,2022-11-30,0.01968,-0.018815,Financial Services,sparse_qp
+SNY,2022-11-30,0.018564,-0.026566,Healthcare,sparse_qp
+CNSP,2022-11-30,0.015746,-0.019434,Healthcare,sparse_qp
+TLK,2022-11-30,0.014922,-0.028152,Communication Services,sparse_qp
+SKM,2022-11-30,0.014532,-0.017526,Communication Services,sparse_qp
+HCTI,2022-11-30,0.00912,-0.014891,Healthcare,sparse_qp
+PBR-A,2022-11-30,0.006533,-0.020217,Energy,sparse_qp
+QXO,2022-11-30,0.006434,-0.023667,Technology,sparse_qp
+CDT,2022-12-31,0.050229,-0.008966,Healthcare,sparse_qp
+PCG-PB,2022-12-31,0.050229,-0.003702,Utilities,sparse_qp
+CCZ,2022-12-31,0.050229,-0.005234,Communication Services,sparse_qp
+CHT,2022-12-31,0.050229,-0.011812,Communication Services,sparse_qp
+CTA-PA,2022-12-31,0.050229,-0.016466,Basic Materials,sparse_qp
+ET-PI,2022-12-31,0.050229,-0.016823,Energy,sparse_qp
+IPB,2022-12-31,0.050229,-0.016707,Financial Services,sparse_qp
+SPG-PJ,2022-12-31,0.050229,-0.018259,Real Estate,sparse_qp
+SKM,2022-12-31,0.050229,-0.012967,Communication Services,sparse_qp
+KT,2022-12-31,0.050229,-0.011821,Communication Services,sparse_qp
+CTA-PB,2022-12-31,0.050229,-0.019812,Basic Materials,sparse_qp
+C-PN,2022-12-31,0.050229,-0.025447,Financial Services,sparse_qp
+TAK,2022-12-31,0.050229,-0.018891,Healthcare,sparse_qp
+BMY,2022-12-31,0.050229,-0.02319,Healthcare,sparse_qp
+CME,2022-12-31,0.050229,-0.021738,Financial Services,sparse_qp
+PBR-A,2022-12-31,0.050229,-0.005876,Energy,sparse_qp
+AVAL,2022-12-31,0.0437,-0.005704,Financial Services,sparse_qp
+MO,2022-12-31,0.037948,-0.021712,Consumer Defensive,sparse_qp
+JNJ,2022-12-31,0.030388,-0.027484,Healthcare,sparse_qp
+BBD,2022-12-31,0.027538,-0.009687,Financial Services,sparse_qp
+CNSP,2022-12-31,0.024779,-0.009056,Healthcare,sparse_qp
+VALE,2022-12-31,0.02469,-0.009674,Basic Materials,sparse_qp
+HCTI,2022-12-31,0.007286,-0.008441,Healthcare,sparse_qp
+GSK,2023-01-31,0.050355,0.047286,Healthcare,sparse_qp
+UNH,2023-01-31,0.050355,0.049184,Healthcare,sparse_qp
+WF,2023-01-31,0.050355,0.044681,Financial Services,sparse_qp
+CI,2023-01-31,0.050355,0.048011,Financial Services,sparse_qp
+LHX,2023-01-31,0.050355,0.044673,Industrials,sparse_qp
+ELV,2023-01-31,0.050355,0.04915,Healthcare,sparse_qp
+LMT,2023-01-31,0.050355,0.04231,Industrials,sparse_qp
+PSA,2023-01-31,0.050355,0.048513,Real Estate,sparse_qp
+LYG,2023-01-31,0.050355,0.055809,Financial Services,sparse_qp
+SNY,2023-01-31,0.050355,0.041706,Healthcare,sparse_qp
+DUK,2023-01-31,0.050355,0.040461,Utilities,sparse_qp
+CL,2023-01-31,0.050355,0.037873,Consumer Defensive,sparse_qp
+NEM,2023-01-31,0.049911,0.044134,Basic Materials,sparse_qp
+BBDO,2023-01-31,0.048635,0.046659,Financial Services,sparse_qp
+NOC,2023-01-31,0.045783,0.04369,Industrials,sparse_qp
+AMGN,2023-01-31,0.039498,0.034924,Healthcare,sparse_qp
+AZN,2023-01-31,0.036632,0.044536,Healthcare,sparse_qp
+GD,2023-01-31,0.034321,0.044657,Industrials,sparse_qp
+ABT,2023-01-31,0.021543,0.044348,Healthcare,sparse_qp
+CVS,2023-01-31,0.021243,0.043322,Healthcare,sparse_qp
+GIS,2023-01-31,0.020107,0.03463,Consumer Defensive,sparse_qp
+CNP,2023-01-31,0.016064,0.043427,Utilities,sparse_qp
+VRTX,2023-01-31,0.015705,0.042748,Healthcare,sparse_qp
+ABBV,2023-01-31,0.012442,0.035307,Healthcare,sparse_qp
+AMT,2023-01-31,0.01062,0.047501,Real Estate,sparse_qp
+WFC,2023-01-31,0.009486,0.046944,Financial Services,sparse_qp
+MRK,2023-01-31,0.008354,0.034484,Healthcare,sparse_qp
+RSG,2023-01-31,0.005394,0.039752,Industrials,sparse_qp
+LMT,2023-02-28,0.050006,0.045157,Industrials,sparse_qp
+GSK,2023-02-28,0.050006,0.049114,Healthcare,sparse_qp
+LHX,2023-02-28,0.050006,0.050877,Industrials,sparse_qp
+CL,2023-02-28,0.050006,0.043659,Consumer Defensive,sparse_qp
+NOC,2023-02-28,0.050006,0.049782,Industrials,sparse_qp
+WF,2023-02-28,0.050006,0.050638,Financial Services,sparse_qp
+BBDO,2023-02-28,0.050006,0.055318,Financial Services,sparse_qp
+ELV,2023-02-28,0.050006,0.050338,Healthcare,sparse_qp
+MRK,2023-02-28,0.050006,0.039073,Healthcare,sparse_qp
+RTX,2023-02-28,0.050006,0.051795,Industrials,sparse_qp
+UNH,2023-02-28,0.050006,0.04784,Healthcare,sparse_qp
+WFC,2023-02-28,0.050006,0.053512,Financial Services,sparse_qp
+AMT,2023-02-28,0.050006,0.053327,Real Estate,sparse_qp
+WM,2023-02-28,0.050006,0.043027,Industrials,sparse_qp
+GIS,2023-02-28,0.037575,0.037637,Consumer Defensive,sparse_qp
+NEM,2023-02-28,0.037401,0.045405,Basic Materials,sparse_qp
+BSX,2023-02-28,0.033709,0.048042,Healthcare,sparse_qp
+DUK,2023-02-28,0.027651,0.042061,Utilities,sparse_qp
+HOLO,2023-02-28,0.024738,0.068243,Technology,sparse_qp
+DE,2023-02-28,0.024438,0.051432,Industrials,sparse_qp
+ENIC,2023-02-28,0.023077,0.054385,Utilities,sparse_qp
+CB,2023-02-28,0.021858,0.045632,Financial Services,sparse_qp
+BAC,2023-02-28,0.021582,0.052006,Financial Services,sparse_qp
+SHG,2023-02-28,0.018721,0.04763,Financial Services,sparse_qp
+LLY,2023-02-28,0.01252,0.043468,Healthcare,sparse_qp
+KMB,2023-02-28,0.011445,0.036267,Consumer Defensive,sparse_qp
+ITUB,2023-02-28,0.005195,0.052311,Financial Services,sparse_qp
+LHX,2023-03-31,0.050374,0.047755,Industrials,sparse_qp
+AVAL,2023-03-31,0.050374,0.051571,Financial Services,sparse_qp
+WF,2023-03-31,0.050374,0.052292,Financial Services,sparse_qp
+NEM,2023-03-31,0.050374,0.048301,Basic Materials,sparse_qp
+TD,2023-03-31,0.050374,0.044541,Financial Services,sparse_qp
+LMT,2023-03-31,0.050374,0.035628,Industrials,sparse_qp
+AMGN,2023-03-31,0.050374,0.028244,Healthcare,sparse_qp
+GSK,2023-03-31,0.050374,0.032748,Healthcare,sparse_qp
+RY,2023-03-31,0.050374,0.041524,Financial Services,sparse_qp
+NOC,2023-03-31,0.050374,0.03632,Industrials,sparse_qp
+WEC,2023-03-31,0.050374,0.036305,Utilities,sparse_qp
+SHG,2023-03-31,0.050374,0.047943,Financial Services,sparse_qp
+GILD,2023-03-31,0.050374,0.033502,Healthcare,sparse_qp
+YPF,2023-03-31,0.045563,0.070918,Energy,sparse_qp
+BSX,2023-03-31,0.045508,0.039857,Healthcare,sparse_qp
+CVE,2023-03-31,0.036223,0.067441,Energy,sparse_qp
+AEE,2023-03-31,0.031571,0.037063,Utilities,sparse_qp
+BMO,2023-03-31,0.031076,0.045613,Financial Services,sparse_qp
+CVS,2023-03-31,0.0269,0.035769,Healthcare,sparse_qp
+WM,2023-03-31,0.024378,0.031139,Industrials,sparse_qp
+XEL,2023-03-31,0.021189,0.036111,Utilities,sparse_qp
+E,2023-03-31,0.019944,0.049668,Energy,sparse_qp
+QXO,2023-03-31,0.019759,0.040495,Technology,sparse_qp
+WFC,2023-03-31,0.015602,0.047687,Financial Services,sparse_qp
+FCX,2023-03-31,0.010856,0.072216,Basic Materials,sparse_qp
+BTI,2023-03-31,0.009486,0.033444,Consumer Defensive,sparse_qp
+KB,2023-03-31,0.007084,0.047497,Financial Services,sparse_qp
+NEM,2023-04-30,0.05,0.04402,Basic Materials,sparse_qp
+FCX,2023-04-30,0.05,0.077288,Basic Materials,sparse_qp
+LHX,2023-04-30,0.05,0.033807,Industrials,sparse_qp
+TD,2023-04-30,0.05,0.042119,Financial Services,sparse_qp
+XEL,2023-04-30,0.05,0.035073,Utilities,sparse_qp
+RY,2023-04-30,0.05,0.039613,Financial Services,sparse_qp
+DUKB,2023-04-30,0.05,0.020441,Utilities,sparse_qp
+QCOM,2023-04-30,0.05,0.059072,Technology,sparse_qp
+ED,2023-04-30,0.05,0.030201,Utilities,sparse_qp
+AEE,2023-04-30,0.047434,0.034048,Utilities,sparse_qp
+AVAL,2023-04-30,0.045981,0.041174,Financial Services,sparse_qp
+WEC,2023-04-30,0.043152,0.032474,Utilities,sparse_qp
+ON,2023-04-30,0.040059,0.07621,Technology,sparse_qp
+MS-PF,2023-04-30,0.040033,0.013568,Financial Services,sparse_qp
+KB,2023-04-30,0.039138,0.043868,Financial Services,sparse_qp
+IX,2023-04-30,0.036806,0.036642,Financial Services,sparse_qp
+CNH,2023-04-30,0.031739,0.057873,Industrials,sparse_qp
+BAX,2023-04-30,0.030906,0.033436,Healthcare,sparse_qp
+YPF,2023-04-30,0.029985,0.061202,Energy,sparse_qp
+BNS,2023-04-30,0.029698,0.041016,Financial Services,sparse_qp
+FTS,2023-04-30,0.023032,0.028772,Utilities,sparse_qp
+QXO,2023-04-30,0.020221,0.031012,Technology,sparse_qp
+TKC,2023-04-30,0.01835,0.029267,Communication Services,sparse_qp
+ASML,2023-04-30,0.012888,0.070444,Technology,sparse_qp
+CNSP,2023-04-30,0.010291,0.073825,Healthcare,sparse_qp
+DUK,2023-04-30,0.009182,0.029023,Utilities,sparse_qp
+TEO,2023-04-30,0.008744,0.049368,Communication Services,sparse_qp
+DELL,2023-04-30,0.007897,0.05432,Technology,sparse_qp
+SCCO,2023-04-30,0.007216,0.053021,Basic Materials,sparse_qp
+MSFT,2023-04-30,0.006361,0.045166,Technology,sparse_qp
+ENIC,2023-04-30,0.005552,0.04184,Utilities,sparse_qp
+TXN,2023-04-30,0.005335,0.044644,Technology,sparse_qp
+WF,2023-05-31,0.050466,0.062354,Financial Services,sparse_qp
+NEM,2023-05-31,0.050466,0.062214,Basic Materials,sparse_qp
+LHX,2023-05-31,0.050466,0.050244,Industrials,sparse_qp
+BAC-PN,2023-05-31,0.050466,0.042058,Financial Services,sparse_qp
+IX,2023-05-31,0.050466,0.049723,Financial Services,sparse_qp
+LMT,2023-05-31,0.050466,0.045748,Industrials,sparse_qp
+CL,2023-05-31,0.050466,0.040817,Consumer Defensive,sparse_qp
+NOC,2023-05-31,0.050466,0.045463,Industrials,sparse_qp
+PPL,2023-05-31,0.050466,0.049476,Utilities,sparse_qp
+BAC-PS,2023-05-31,0.050466,0.039321,Financial Services,sparse_qp
+MRK,2023-05-31,0.046382,0.036934,Healthcare,sparse_qp
+SHG,2023-05-31,0.044975,0.052731,Financial Services,sparse_qp
+RTX,2023-05-31,0.044856,0.050263,Industrials,sparse_qp
+KMB,2023-05-31,0.043721,0.038919,Consumer Defensive,sparse_qp
+BSX,2023-05-31,0.042117,0.045299,Healthcare,sparse_qp
+ASML,2023-05-31,0.04061,0.072245,Technology,sparse_qp
+TEO,2023-05-31,0.034922,0.057849,Communication Services,sparse_qp
+AMGN,2023-05-31,0.03469,0.038667,Healthcare,sparse_qp
+JKS,2023-05-31,0.032773,0.068251,Energy,sparse_qp
+WEC,2023-05-31,0.023306,0.045436,Utilities,sparse_qp
+KB,2023-05-31,0.022536,0.053133,Financial Services,sparse_qp
+NVDA,2023-05-31,0.021686,0.073572,Technology,sparse_qp
+GDS,2023-05-31,0.015894,0.084938,Technology,sparse_qp
+GSK,2023-05-31,0.01403,0.039267,Healthcare,sparse_qp
+YPF,2023-05-31,0.013481,0.060845,Energy,sparse_qp
+TD,2023-05-31,0.009099,0.048759,Financial Services,sparse_qp
+BAC-PK,2023-05-31,0.005137,0.035075,Financial Services,sparse_qp
+CNSP,2023-05-31,0.005128,0.053379,Healthcare,sparse_qp
+WF,2023-06-30,0.050009,0.060086,Financial Services,sparse_qp
+YPF,2023-06-30,0.050009,0.082895,Energy,sparse_qp
+AVAL,2023-06-30,0.050009,0.059236,Financial Services,sparse_qp
+LHX,2023-06-30,0.050009,0.045444,Industrials,sparse_qp
+MSFT,2023-06-30,0.050009,0.055619,Technology,sparse_qp
+TEO,2023-06-30,0.050009,0.069511,Communication Services,sparse_qp
+BSX,2023-06-30,0.050009,0.042773,Healthcare,sparse_qp
+NEM,2023-06-30,0.050009,0.050895,Basic Materials,sparse_qp
+FTNT,2023-06-30,0.050009,0.063685,Technology,sparse_qp
+FCX,2023-06-30,0.050009,0.077661,Basic Materials,sparse_qp
+TD,2023-06-30,0.050009,0.049784,Financial Services,sparse_qp
+BAX,2023-06-30,0.049298,0.046632,Healthcare,sparse_qp
+SHG,2023-06-30,0.043968,0.05302,Financial Services,sparse_qp
+KB,2023-06-30,0.039678,0.052872,Financial Services,sparse_qp
+NOC,2023-06-30,0.039555,0.037711,Industrials,sparse_qp
+IX,2023-06-30,0.037798,0.045638,Financial Services,sparse_qp
+NVDA,2023-06-30,0.028014,0.0721,Technology,sparse_qp
+RTX,2023-06-30,0.027329,0.043501,Industrials,sparse_qp
+TKC,2023-06-30,0.024506,0.036131,Communication Services,sparse_qp
+SYK,2023-06-30,0.023696,0.047278,Healthcare,sparse_qp
+ENIC,2023-06-30,0.019382,0.051592,Utilities,sparse_qp
+LLY,2023-06-30,0.019307,0.03077,Healthcare,sparse_qp
+BBVA,2023-06-30,0.018585,0.059072,Financial Services,sparse_qp
+JKS,2023-06-30,0.017682,0.06312,Energy,sparse_qp
+LMT,2023-06-30,0.017273,0.035847,Industrials,sparse_qp
+CQP,2023-06-30,0.016261,0.051584,Energy,sparse_qp
+A,2023-06-30,0.016257,0.052604,Healthcare,sparse_qp
+XEL,2023-06-30,0.00608,0.037975,Utilities,sparse_qp
+GDS,2023-06-30,0.005225,0.0807,Technology,sparse_qp
+NVDA,2023-07-31,0.050535,0.105577,Technology,sparse_qp
+MRK,2023-07-31,0.050535,0.054316,Healthcare,sparse_qp
+REGN,2023-07-31,0.050535,0.063331,Healthcare,sparse_qp
+TSM,2023-07-31,0.050535,0.070759,Technology,sparse_qp
+MSFT,2023-07-31,0.050535,0.067379,Technology,sparse_qp
+BAC-PN,2023-07-31,0.050535,0.053655,Financial Services,sparse_qp
+AMGN,2023-07-31,0.050535,0.049629,Healthcare,sparse_qp
+KEY,2023-07-31,0.050535,0.081464,Financial Services,sparse_qp
+BAC-PS,2023-07-31,0.050535,0.051192,Financial Services,sparse_qp
+BSX,2023-07-31,0.050535,0.051944,Healthcare,sparse_qp
+BAC-PM,2023-07-31,0.050535,0.048771,Financial Services,sparse_qp
+BAC-PK,2023-07-31,0.050535,0.046265,Financial Services,sparse_qp
+RTX,2023-07-31,0.050535,0.053082,Industrials,sparse_qp
+GSK,2023-07-31,0.050535,0.044864,Healthcare,sparse_qp
+BPYPO,2023-07-31,0.048072,0.054885,Real Estate,sparse_qp
+LLY,2023-07-31,0.044465,0.045605,Healthcare,sparse_qp
+LHX,2023-07-31,0.044239,0.050374,Industrials,sparse_qp
+BBVA,2023-07-31,0.035265,0.061933,Financial Services,sparse_qp
+QCOM,2023-07-31,0.022362,0.070429,Technology,sparse_qp
+GILD,2023-07-31,0.019189,0.04985,Healthcare,sparse_qp
+WFC,2023-07-31,0.01901,0.060768,Financial Services,sparse_qp
+EL,2023-07-31,0.015789,0.063018,Consumer Defensive,sparse_qp
+META,2023-07-31,0.01138,0.071216,Communication Services,sparse_qp
+BML-PL,2023-07-31,0.010834,0.047738,Financial Services,sparse_qp
+CQP,2023-07-31,0.010805,0.053457,Energy,sparse_qp
+BIIB,2023-07-31,0.005824,0.060002,Healthcare,sparse_qp
+WF,2023-07-31,0.00527,0.052861,Financial Services,sparse_qp
+MRK,2023-08-31,0.050277,0.058141,Healthcare,sparse_qp
+REGN,2023-08-31,0.050277,0.062049,Healthcare,sparse_qp
+BSX,2023-08-31,0.050277,0.058324,Healthcare,sparse_qp
+MSFT,2023-08-31,0.050277,0.069632,Technology,sparse_qp
+NVDA,2023-08-31,0.050277,0.089303,Technology,sparse_qp
+TSM,2023-08-31,0.050277,0.06837,Technology,sparse_qp
+GSK,2023-08-31,0.050277,0.049102,Healthcare,sparse_qp
+AMGN,2023-08-31,0.050277,0.050257,Healthcare,sparse_qp
+GILD,2023-08-31,0.050277,0.055688,Healthcare,sparse_qp
+NOC,2023-08-31,0.050277,0.051152,Industrials,sparse_qp
+EL,2023-08-31,0.050277,0.066247,Consumer Defensive,sparse_qp
+BBVA,2023-08-31,0.050277,0.063607,Financial Services,sparse_qp
+LHX,2023-08-31,0.048964,0.052058,Industrials,sparse_qp
+LMT,2023-08-31,0.044138,0.048363,Industrials,sparse_qp
+KEY,2023-08-31,0.042818,0.076788,Financial Services,sparse_qp
+CQP,2023-08-31,0.039869,0.057048,Energy,sparse_qp
+BAC-PK,2023-08-31,0.038875,0.043594,Financial Services,sparse_qp
+AEP,2023-08-31,0.034186,0.051054,Utilities,sparse_qp
+SHG,2023-08-31,0.033447,0.055862,Financial Services,sparse_qp
+QCOM,2023-08-31,0.022027,0.068825,Technology,sparse_qp
+BIIB,2023-08-31,0.020193,0.061516,Healthcare,sparse_qp
+WF,2023-08-31,0.019932,0.054587,Financial Services,sparse_qp
+ELV,2023-08-31,0.01885,0.047574,Healthcare,sparse_qp
+LLY,2023-08-31,0.016969,0.044401,Healthcare,sparse_qp
+META,2023-08-31,0.016408,0.069716,Communication Services,sparse_qp
+REGN,2023-09-30,0.05,0.053481,Healthcare,sparse_qp
+YPF,2023-09-30,0.05,0.084277,Energy,sparse_qp
+NVDA,2023-09-30,0.05,0.096961,Technology,sparse_qp
+MSFT,2023-09-30,0.05,0.068611,Technology,sparse_qp
+WF,2023-09-30,0.05,0.065216,Financial Services,sparse_qp
+BSX,2023-09-30,0.05,0.048239,Healthcare,sparse_qp
+KB,2023-09-30,0.05,0.062488,Financial Services,sparse_qp
+FCX,2023-09-30,0.05,0.079593,Basic Materials,sparse_qp
+BNS,2023-09-30,0.05,0.058285,Financial Services,sparse_qp
+TD,2023-09-30,0.05,0.055806,Financial Services,sparse_qp
+RY,2023-09-30,0.05,0.053504,Financial Services,sparse_qp
+LRCX,2023-09-30,0.05,0.078871,Technology,sparse_qp
+SHG,2023-09-30,0.05,0.060929,Financial Services,sparse_qp
+BBVA,2023-09-30,0.05,0.063507,Financial Services,sparse_qp
+BMO,2023-09-30,0.05,0.058477,Financial Services,sparse_qp
+TSM,2023-09-30,0.044903,0.06719,Technology,sparse_qp
+LOMA,2023-09-30,0.039004,0.054694,Basic Materials,sparse_qp
+QXO,2023-09-30,0.038134,0.049989,Technology,sparse_qp
+ENIC,2023-09-30,0.034138,0.053643,Utilities,sparse_qp
+CQP,2023-09-30,0.030636,0.052369,Energy,sparse_qp
+AVAL,2023-09-30,0.024341,0.056266,Financial Services,sparse_qp
+SAN,2023-09-30,0.014474,0.066411,Financial Services,sparse_qp
+MRVL,2023-09-30,0.013319,0.091986,Technology,sparse_qp
+SO,2023-09-30,0.011048,0.04084,Utilities,sparse_qp
+NEM,2023-10-31,0.050126,0.066047,Basic Materials,sparse_qp
+AVAL,2023-10-31,0.050126,0.066462,Financial Services,sparse_qp
+NVDA,2023-10-31,0.050126,0.0915,Technology,sparse_qp
+MSFT,2023-10-31,0.050126,0.066832,Technology,sparse_qp
+KT,2023-10-31,0.050126,0.058925,Communication Services,sparse_qp
+TV,2023-10-31,0.050126,0.076457,Communication Services,sparse_qp
+BPYPP,2023-10-31,0.050126,0.05369,Real Estate,sparse_qp
+KEP,2023-10-31,0.050126,0.053712,Utilities,sparse_qp
+MRVL,2023-10-31,0.050126,0.093507,Technology,sparse_qp
+CRESY,2023-10-31,0.050126,0.065431,Industrials,sparse_qp
+LOMA,2023-10-31,0.050126,0.054781,Basic Materials,sparse_qp
+SKM,2023-10-31,0.050126,0.043814,Communication Services,sparse_qp
+KB,2023-10-31,0.050126,0.054278,Financial Services,sparse_qp
+BNS,2023-10-31,0.050126,0.053439,Financial Services,sparse_qp
+WF,2023-10-31,0.050126,0.055935,Financial Services,sparse_qp
+BMO,2023-10-31,0.041524,0.051002,Financial Services,sparse_qp
+QXO,2023-10-31,0.036378,0.041346,Technology,sparse_qp
+META,2023-10-31,0.029807,0.063642,Communication Services,sparse_qp
+GDS,2023-10-31,0.028463,0.103056,Technology,sparse_qp
+ENIC,2023-10-31,0.025457,0.047074,Utilities,sparse_qp
+ON,2023-10-31,0.02428,0.076573,Technology,sparse_qp
+ARES,2023-10-31,0.021701,0.057709,Financial Services,sparse_qp
+LRCX,2023-10-31,0.010772,0.068874,Technology,sparse_qp
+SHOP,2023-10-31,0.008571,0.080723,Technology,sparse_qp
+IRS,2023-10-31,0.008563,0.062684,Industrials,sparse_qp
+SHG,2023-10-31,0.007358,0.05258,Financial Services,sparse_qp
+YPF,2023-10-31,0.005238,0.059055,Energy,sparse_qp
+MSFT,2023-11-30,0.050062,0.082604,Technology,sparse_qp
+WF,2023-11-30,0.050062,0.078018,Financial Services,sparse_qp
+TV,2023-11-30,0.050062,0.098381,Communication Services,sparse_qp
+NVDA,2023-11-30,0.050062,0.097031,Technology,sparse_qp
+GDS,2023-11-30,0.050062,0.119812,Technology,sparse_qp
+META,2023-11-30,0.050062,0.07855,Communication Services,sparse_qp
+TSM,2023-11-30,0.050062,0.074772,Technology,sparse_qp
+FCX,2023-11-30,0.050062,0.075805,Basic Materials,sparse_qp
+CQP,2023-11-30,0.050062,0.058824,Energy,sparse_qp
+ALC,2023-11-30,0.050062,0.061012,Healthcare,sparse_qp
+BBVA,2023-11-30,0.050062,0.067135,Financial Services,sparse_qp
+UPS,2023-11-30,0.050062,0.062763,Industrials,sparse_qp
+NEM,2023-11-30,0.050062,0.058978,Basic Materials,sparse_qp
+BML-PL,2023-11-30,0.050062,0.050773,Financial Services,sparse_qp
+KB,2023-11-30,0.046864,0.061802,Financial Services,sparse_qp
+EL,2023-11-30,0.046564,0.068714,Consumer Defensive,sparse_qp
+ENIC,2023-11-30,0.042193,0.06277,Utilities,sparse_qp
+BML-PJ,2023-11-30,0.033609,0.049317,Financial Services,sparse_qp
+BAC-PS,2023-11-30,0.025983,0.052325,Financial Services,sparse_qp
+IX,2023-11-30,0.019474,0.054163,Financial Services,sparse_qp
+YPF,2023-11-30,0.019462,0.070002,Energy,sparse_qp
+BAC-PE,2023-11-30,0.019193,0.049794,Financial Services,sparse_qp
+TGL,2023-11-30,0.018796,0.058934,Technology,sparse_qp
+MRVL,2023-11-30,0.013995,0.086892,Technology,sparse_qp
+QXO,2023-11-30,0.012998,0.053253,Technology,sparse_qp
+GDHG,2023-12-31,0.050128,0.277129,Consumer Cyclical,sparse_qp
+GDS,2023-12-31,0.050128,0.144096,Technology,sparse_qp
+NVDA,2023-12-31,0.050128,0.111279,Technology,sparse_qp
+MSFT,2023-12-31,0.050128,0.088711,Technology,sparse_qp
+TSM,2023-12-31,0.050128,0.093835,Technology,sparse_qp
+META,2023-12-31,0.050128,0.077318,Communication Services,sparse_qp
+EL,2023-12-31,0.050128,0.074329,Consumer Defensive,sparse_qp
+BBVA,2023-12-31,0.050128,0.071215,Financial Services,sparse_qp
+ADBE,2023-12-31,0.050128,0.075143,Technology,sparse_qp
+CQP,2023-12-31,0.050128,0.059077,Energy,sparse_qp
+WF,2023-12-31,0.050128,0.065356,Financial Services,sparse_qp
+NEM,2023-12-31,0.050128,0.062618,Basic Materials,sparse_qp
+UPS,2023-12-31,0.050128,0.062446,Industrials,sparse_qp
+CNP,2023-12-31,0.050128,0.052652,Utilities,sparse_qp
+UL,2023-12-31,0.049598,0.050439,Consumer Defensive,sparse_qp
+ALC,2023-12-31,0.045695,0.059668,Healthcare,sparse_qp
+QXO,2023-12-31,0.033683,0.070837,Technology,sparse_qp
+ENIC,2023-12-31,0.026215,0.06182,Utilities,sparse_qp
+MCO,2023-12-31,0.025613,0.061144,Financial Services,sparse_qp
+KLAC,2023-12-31,0.020854,0.071073,Technology,sparse_qp
+YPF,2023-12-31,0.019044,0.070807,Energy,sparse_qp
+SPGI,2023-12-31,0.018183,0.06167,Financial Services,sparse_qp
+TV,2023-12-31,0.014639,0.075849,Communication Services,sparse_qp
+KEY,2023-12-31,0.014155,0.078365,Financial Services,sparse_qp
+BAC-PN,2023-12-31,0.012992,0.052898,Financial Services,sparse_qp
+NOC,2023-12-31,0.006377,0.04597,Industrials,sparse_qp
+SYK,2023-12-31,0.005633,0.054899,Healthcare,sparse_qp
+IRS,2023-12-31,0.005531,0.06904,Industrials,sparse_qp
+LPL,2024-01-31,0.050334,0.146731,Technology,sparse_qp
+TEO,2024-01-31,0.050334,0.123227,Communication Services,sparse_qp
+ENIC,2024-01-31,0.050334,0.101216,Utilities,sparse_qp
+YPF,2024-01-31,0.050334,0.116057,Energy,sparse_qp
+BCH,2024-01-31,0.050334,0.079011,Financial Services,sparse_qp
+LOMA,2024-01-31,0.050334,0.086017,Basic Materials,sparse_qp
+FCX,2024-01-31,0.050334,0.087324,Basic Materials,sparse_qp
+ORCL,2024-01-31,0.050334,0.069103,Technology,sparse_qp
+WF,2024-01-31,0.050334,0.073123,Financial Services,sparse_qp
+BHP,2024-01-31,0.050334,0.078608,Basic Materials,sparse_qp
+NOC,2024-01-31,0.050334,0.062452,Industrials,sparse_qp
+PYPL,2024-01-31,0.050334,0.075669,Financial Services,sparse_qp
+NVS,2024-01-31,0.050334,0.059273,Healthcare,sparse_qp
+IX,2024-01-31,0.049988,0.063424,Financial Services,sparse_qp
+SPGI,2024-01-31,0.04957,0.06778,Financial Services,sparse_qp
+EL,2024-01-31,0.038637,0.07219,Consumer Defensive,sparse_qp
+HDB,2024-01-31,0.038506,0.063849,Financial Services,sparse_qp
+LMT,2024-01-31,0.035242,0.059211,Industrials,sparse_qp
+RIO,2024-01-31,0.029356,0.072123,Basic Materials,sparse_qp
+A,2024-01-31,0.023011,0.064648,Healthcare,sparse_qp
+AJG,2024-01-31,0.017646,0.059371,Financial Services,sparse_qp
+GDHG,2024-01-31,0.017427,0.089128,Consumer Cyclical,sparse_qp
+HCA,2024-01-31,0.0132,0.062118,Healthcare,sparse_qp
+LLY,2024-01-31,0.01305,0.056806,Healthcare,sparse_qp
+NEM,2024-01-31,0.011244,0.065847,Basic Materials,sparse_qp
+LHX,2024-01-31,0.008777,0.063294,Industrials,sparse_qp
+LPL,2024-02-29,0.050008,0.152828,Technology,sparse_qp
+TEO,2024-02-29,0.050008,0.130202,Communication Services,sparse_qp
+ENIC,2024-02-29,0.050008,0.105133,Utilities,sparse_qp
+YPF,2024-02-29,0.050008,0.124825,Energy,sparse_qp
+FCX,2024-02-29,0.050008,0.099048,Basic Materials,sparse_qp
+BCH,2024-02-29,0.050008,0.084743,Financial Services,sparse_qp
+BAK,2024-02-29,0.050008,0.095541,Basic Materials,sparse_qp
+ORCL,2024-02-29,0.050008,0.070774,Technology,sparse_qp
+LOMA,2024-02-29,0.050008,0.085753,Basic Materials,sparse_qp
+SPGI,2024-02-29,0.050008,0.071042,Financial Services,sparse_qp
+HDB,2024-02-29,0.050008,0.06841,Financial Services,sparse_qp
+SCCO,2024-02-29,0.050008,0.084686,Basic Materials,sparse_qp
+NVS,2024-02-29,0.050008,0.0604,Healthcare,sparse_qp
+IX,2024-02-29,0.050008,0.064743,Financial Services,sparse_qp
+BHP,2024-02-29,0.050008,0.079266,Basic Materials,sparse_qp
+RIO,2024-02-29,0.050008,0.075273,Basic Materials,sparse_qp
+NOC,2024-02-29,0.050008,0.060876,Industrials,sparse_qp
+BIIB,2024-02-29,0.03163,0.061099,Healthcare,sparse_qp
+TGT,2024-02-29,0.031182,0.064337,Consumer Defensive,sparse_qp
+DE,2024-02-29,0.017532,0.067439,Industrials,sparse_qp
+GDHG,2024-02-29,0.017032,0.091941,Consumer Cyclical,sparse_qp
+LMT,2024-02-29,0.015714,0.057808,Industrials,sparse_qp
+WF,2024-02-29,0.015055,0.066883,Financial Services,sparse_qp
+PYPL,2024-02-29,0.011643,0.072785,Financial Services,sparse_qp
+LHX,2024-02-29,0.010073,0.062762,Industrials,sparse_qp
+TEO,2024-03-31,0.050719,0.121031,Communication Services,sparse_qp
+ENIC,2024-03-31,0.050719,0.103245,Utilities,sparse_qp
+LPL,2024-03-31,0.050719,0.098882,Technology,sparse_qp
+WBD,2024-03-31,0.050719,0.102314,Communication Services,sparse_qp
+YPF,2024-03-31,0.050719,0.118341,Energy,sparse_qp
+BCH,2024-03-31,0.050719,0.082192,Financial Services,sparse_qp
+NVS,2024-03-31,0.050719,0.068396,Healthcare,sparse_qp
+SPGI,2024-03-31,0.050719,0.07092,Financial Services,sparse_qp
+TGS,2024-03-31,0.050719,0.095406,Energy,sparse_qp
+LHX,2024-03-31,0.050719,0.066997,Industrials,sparse_qp
+RY,2024-03-31,0.050719,0.065313,Financial Services,sparse_qp
+JNJ,2024-03-31,0.050719,0.05789,Healthcare,sparse_qp
+GILD,2024-03-31,0.050719,0.061063,Healthcare,sparse_qp
+AJG,2024-03-31,0.050719,0.058093,Financial Services,sparse_qp
+CM,2024-03-31,0.050719,0.065182,Financial Services,sparse_qp
+NOC,2024-03-31,0.050719,0.060166,Industrials,sparse_qp
+V,2024-03-31,0.050616,0.057872,Financial Services,sparse_qp
+GDHG,2024-03-31,0.035491,0.120507,Consumer Cyclical,sparse_qp
+LLY,2024-03-31,0.031934,0.055293,Healthcare,sparse_qp
+BAK,2024-03-31,0.025879,0.077063,Basic Materials,sparse_qp
+LOMA,2024-03-31,0.018436,0.075867,Basic Materials,sparse_qp
+LMT,2024-03-31,0.013636,0.05669,Industrials,sparse_qp
+FCX,2024-03-31,0.012508,0.067827,Basic Materials,sparse_qp
+GDS,2024-04-30,0.05006,0.165444,Technology,sparse_qp
+ENIC,2024-04-30,0.05006,0.100569,Utilities,sparse_qp
+TEO,2024-04-30,0.05006,0.104779,Communication Services,sparse_qp
+BCH,2024-04-30,0.05006,0.085024,Financial Services,sparse_qp
+WBD,2024-04-30,0.05006,0.100134,Communication Services,sparse_qp
+FCX,2024-04-30,0.05006,0.086831,Basic Materials,sparse_qp
+CIB,2024-04-30,0.05006,0.076391,Financial Services,sparse_qp
+EL,2024-04-30,0.05006,0.081728,Consumer Defensive,sparse_qp
+HDB,2024-04-30,0.05006,0.069781,Financial Services,sparse_qp
+ORCL,2024-04-30,0.05006,0.067778,Technology,sparse_qp
+NVS,2024-04-30,0.05006,0.062651,Healthcare,sparse_qp
+ADBE,2024-04-30,0.05006,0.071243,Technology,sparse_qp
+LHX,2024-04-30,0.05006,0.068705,Industrials,sparse_qp
+SPGI,2024-04-30,0.05006,0.068962,Financial Services,sparse_qp
+SBUX,2024-04-30,0.05006,0.065856,Consumer Cyclical,sparse_qp
+GD,2024-04-30,0.043981,0.060224,Industrials,sparse_qp
+LOMA,2024-04-30,0.043679,0.072658,Basic Materials,sparse_qp
+BDX,2024-04-30,0.04203,0.059311,Healthcare,sparse_qp
+GDHG,2024-04-30,0.030871,0.116108,Consumer Cyclical,sparse_qp
+FTNT,2024-04-30,0.02605,0.065455,Technology,sparse_qp
+NOC,2024-04-30,0.024112,0.058598,Industrials,sparse_qp
+WF,2024-04-30,0.021712,0.066695,Financial Services,sparse_qp
+COIN,2024-04-30,0.016664,0.090864,Financial Services,sparse_qp
+GDS,2024-05-31,0.050302,0.159931,Technology,sparse_qp
+TEO,2024-05-31,0.050302,0.104381,Communication Services,sparse_qp
+ENIC,2024-05-31,0.050302,0.098227,Utilities,sparse_qp
+SPGI,2024-05-31,0.050302,0.073597,Financial Services,sparse_qp
+WBD,2024-05-31,0.050302,0.091406,Communication Services,sparse_qp
+JNJ,2024-05-31,0.050302,0.061675,Healthcare,sparse_qp
+NOC,2024-05-31,0.050302,0.062024,Industrials,sparse_qp
+WF,2024-05-31,0.050302,0.071167,Financial Services,sparse_qp
+EL,2024-05-31,0.050302,0.076804,Consumer Defensive,sparse_qp
+FCX,2024-05-31,0.050302,0.077316,Basic Materials,sparse_qp
+RY,2024-05-31,0.050302,0.066045,Financial Services,sparse_qp
+ENB,2024-05-31,0.050302,0.064951,Energy,sparse_qp
+GD,2024-05-31,0.050302,0.05958,Industrials,sparse_qp
+CIB,2024-05-31,0.047057,0.068365,Financial Services,sparse_qp
+ADBE,2024-05-31,0.042369,0.061778,Technology,sparse_qp
+NVS,2024-05-31,0.041735,0.058515,Healthcare,sparse_qp
+GILD,2024-05-31,0.037509,0.060675,Healthcare,sparse_qp
+BCH,2024-05-31,0.035342,0.065362,Financial Services,sparse_qp
+PSA,2024-05-31,0.02672,0.064309,Real Estate,sparse_qp
+COIN,2024-05-31,0.025469,0.087391,Financial Services,sparse_qp
+SBUX,2024-05-31,0.023818,0.062238,Consumer Cyclical,sparse_qp
+GDHG,2024-05-31,0.022748,0.106107,Consumer Cyclical,sparse_qp
+CL,2024-05-31,0.022421,0.054633,Consumer Defensive,sparse_qp
+TGS,2024-05-31,0.012583,0.07173,Energy,sparse_qp
+MCO,2024-05-31,0.008308,0.063523,Financial Services,sparse_qp
+TEO,2024-06-30,0.050306,0.116727,Communication Services,sparse_qp
+ENIC,2024-06-30,0.050306,0.096103,Utilities,sparse_qp
+GDS,2024-06-30,0.050306,0.120495,Technology,sparse_qp
+WBD,2024-06-30,0.050306,0.090181,Communication Services,sparse_qp
+PSA,2024-06-30,0.050306,0.074172,Real Estate,sparse_qp
+SPGI,2024-06-30,0.050306,0.071368,Financial Services,sparse_qp
+JNJ,2024-06-30,0.050306,0.064042,Healthcare,sparse_qp
+FCX,2024-06-30,0.050306,0.080692,Basic Materials,sparse_qp
+CNP,2024-06-30,0.050306,0.068291,Utilities,sparse_qp
+NOC,2024-06-30,0.050306,0.064363,Industrials,sparse_qp
+YPF,2024-06-30,0.050306,0.09891,Energy,sparse_qp
+GD,2024-06-30,0.050306,0.063297,Industrials,sparse_qp
+GILD,2024-06-30,0.050306,0.064331,Healthcare,sparse_qp
+RY,2024-06-30,0.050306,0.066943,Financial Services,sparse_qp
+PLD,2024-06-30,0.039487,0.070821,Real Estate,sparse_qp
+EQIX,2024-06-30,0.030999,0.066564,Real Estate,sparse_qp
+NVS,2024-06-30,0.030541,0.059187,Healthcare,sparse_qp
+TGS,2024-06-30,0.02727,0.090562,Energy,sparse_qp
+BDX,2024-06-30,0.026007,0.060596,Healthcare,sparse_qp
+IQV,2024-06-30,0.024596,0.067722,Healthcare,sparse_qp
+LMT,2024-06-30,0.022026,0.058454,Industrials,sparse_qp
+EDN,2024-06-30,0.017217,0.094096,Utilities,sparse_qp
+GDHG,2024-06-30,0.016548,0.101766,Consumer Cyclical,sparse_qp
+EL,2024-06-30,0.011853,0.067232,Consumer Defensive,sparse_qp
+SBUX,2024-06-30,0.011585,0.060564,Consumer Cyclical,sparse_qp
+CIB,2024-06-30,0.01144,0.066503,Financial Services,sparse_qp
+COP,2024-06-30,0.010196,0.062204,Energy,sparse_qp
+COIN,2024-06-30,0.008088,0.084054,Financial Services,sparse_qp
+PH,2024-06-30,0.007868,0.065227,Industrials,sparse_qp
+GDS,2024-07-31,0.050133,0.138785,Technology,sparse_qp
+TEO,2024-07-31,0.050133,0.123789,Communication Services,sparse_qp
+TV,2024-07-31,0.050133,0.125236,Communication Services,sparse_qp
+ENIC,2024-07-31,0.050133,0.093592,Utilities,sparse_qp
+NOC,2024-07-31,0.050133,0.068686,Industrials,sparse_qp
+YPF,2024-07-31,0.050133,0.111668,Energy,sparse_qp
+SHOP,2024-07-31,0.050133,0.09274,Technology,sparse_qp
+JNJ,2024-07-31,0.050133,0.063527,Healthcare,sparse_qp
+GD,2024-07-31,0.050133,0.066389,Industrials,sparse_qp
+SPGI,2024-07-31,0.050133,0.071016,Financial Services,sparse_qp
+WBD,2024-07-31,0.050133,0.087969,Communication Services,sparse_qp
+NDAQ,2024-07-31,0.050133,0.068699,Financial Services,sparse_qp
+FCX,2024-07-31,0.050133,0.081526,Basic Materials,sparse_qp
+PSA,2024-07-31,0.050133,0.070245,Real Estate,sparse_qp
+EOG,2024-07-31,0.050133,0.06745,Energy,sparse_qp
+CRESY,2024-07-31,0.050133,0.093699,Industrials,sparse_qp
+CRM,2024-07-31,0.040021,0.06835,Technology,sparse_qp
+EDN,2024-07-31,0.033439,0.104803,Utilities,sparse_qp
+GDHG,2024-07-31,0.028673,0.131537,Consumer Cyclical,sparse_qp
+SBUX,2024-07-31,0.02706,0.063321,Consumer Cyclical,sparse_qp
+BDX,2024-07-31,0.022004,0.060823,Healthcare,sparse_qp
+COIN,2024-07-31,0.021924,0.094422,Financial Services,sparse_qp
+COP,2024-07-31,0.013487,0.063718,Energy,sparse_qp
+RY,2024-07-31,0.011257,0.066319,Financial Services,sparse_qp
+TV,2024-08-31,0.050102,0.152049,Communication Services,sparse_qp
+TEO,2024-08-31,0.050102,0.127451,Communication Services,sparse_qp
+ENIC,2024-08-31,0.050102,0.091762,Utilities,sparse_qp
+GDS,2024-08-31,0.050102,0.130542,Technology,sparse_qp
+NOC,2024-08-31,0.050102,0.076299,Industrials,sparse_qp
+BAK,2024-08-31,0.050102,0.107306,Basic Materials,sparse_qp
+WBD,2024-08-31,0.050102,0.10644,Communication Services,sparse_qp
+EDN,2024-08-31,0.050102,0.118864,Utilities,sparse_qp
+SHOP,2024-08-31,0.050102,0.102789,Technology,sparse_qp
+GD,2024-08-31,0.050102,0.07099,Industrials,sparse_qp
+JNJ,2024-08-31,0.050102,0.06647,Healthcare,sparse_qp
+GILD,2024-08-31,0.050102,0.069806,Healthcare,sparse_qp
+SPGI,2024-08-31,0.050102,0.074716,Financial Services,sparse_qp
+PSA,2024-08-31,0.050102,0.075823,Real Estate,sparse_qp
+LHX,2024-08-31,0.050102,0.070837,Industrials,sparse_qp
+PYPL,2024-08-31,0.050102,0.084856,Financial Services,sparse_qp
+LMT,2024-08-31,0.047992,0.062304,Industrials,sparse_qp
+GDHG,2024-08-31,0.038476,0.174411,Consumer Cyclical,sparse_qp
+IBN,2024-08-31,0.033356,0.067737,Financial Services,sparse_qp
+NDAQ,2024-08-31,0.027616,0.070316,Financial Services,sparse_qp
+MRK,2024-08-31,0.019527,0.060447,Healthcare,sparse_qp
+GEHC,2024-08-31,0.01824,0.076836,Healthcare,sparse_qp
+PSKY,2024-08-31,0.013154,0.064292,Communication Services,sparse_qp
+TV,2024-09-30,0.05,0.141906,Communication Services,sparse_qp
+SHOP,2024-09-30,0.05,0.1286,Technology,sparse_qp
+SONY,2024-09-30,0.05,0.093337,Technology,sparse_qp
+ENIC,2024-09-30,0.05,0.098648,Utilities,sparse_qp
+TEO,2024-09-30,0.05,0.117954,Communication Services,sparse_qp
+BAK,2024-09-30,0.05,0.110141,Basic Materials,sparse_qp
+WBD,2024-09-30,0.05,0.111729,Communication Services,sparse_qp
+GD,2024-09-30,0.05,0.081312,Industrials,sparse_qp
+NOC,2024-09-30,0.05,0.079091,Industrials,sparse_qp
+PSA,2024-09-30,0.05,0.085607,Real Estate,sparse_qp
+PFE,2024-09-30,0.05,0.079016,Healthcare,sparse_qp
+LHX,2024-09-30,0.05,0.078442,Industrials,sparse_qp
+SPGI,2024-09-30,0.05,0.078566,Financial Services,sparse_qp
+MCO,2024-09-30,0.05,0.080522,Financial Services,sparse_qp
+GPN,2024-09-30,0.05,0.081594,Industrials,sparse_qp
+IRM,2024-09-30,0.05,0.077241,Real Estate,sparse_qp
+JNJ,2024-09-30,0.04349,0.065677,Healthcare,sparse_qp
+GDHG,2024-09-30,0.037816,0.174764,Consumer Cyclical,sparse_qp
+EDN,2024-09-30,0.032488,0.110215,Utilities,sparse_qp
+AJG,2024-09-30,0.030591,0.066361,Financial Services,sparse_qp
+MET,2024-09-30,0.017333,0.073119,Financial Services,sparse_qp
+PSNY,2024-09-30,0.015009,0.103619,Consumer Cyclical,sparse_qp
+NDAQ,2024-09-30,0.014538,0.072451,Financial Services,sparse_qp
+GILD,2024-09-30,0.008736,0.067293,Healthcare,sparse_qp
+TV,2024-10-31,0.05,0.153731,Communication Services,sparse_qp
+CIB,2024-10-31,0.05,0.11303,Financial Services,sparse_qp
+ENIC,2024-10-31,0.05,0.112802,Utilities,sparse_qp
+KEP,2024-10-31,0.05,0.105246,Utilities,sparse_qp
+SHOP,2024-10-31,0.05,0.127675,Technology,sparse_qp
+TEO,2024-10-31,0.05,0.115812,Communication Services,sparse_qp
+GDS,2024-10-31,0.05,0.140773,Technology,sparse_qp
+WBD,2024-10-31,0.05,0.115894,Communication Services,sparse_qp
+LPL,2024-10-31,0.05,0.106709,Technology,sparse_qp
+NOC,2024-10-31,0.05,0.076295,Industrials,sparse_qp
+IBN,2024-10-31,0.05,0.080294,Financial Services,sparse_qp
+WF,2024-10-31,0.05,0.09191,Financial Services,sparse_qp
+PKX,2024-10-31,0.05,0.097343,Basic Materials,sparse_qp
+PYPL,2024-10-31,0.05,0.095824,Financial Services,sparse_qp
+GILD,2024-10-31,0.05,0.074154,Healthcare,sparse_qp
+BMY,2024-10-31,0.05,0.076095,Healthcare,sparse_qp
+SPGI,2024-10-31,0.05,0.07763,Financial Services,sparse_qp
+NSC,2024-10-31,0.03732,0.079889,Industrials,sparse_qp
+BAK,2024-10-31,0.029169,0.09463,Basic Materials,sparse_qp
+EQIX,2024-10-31,0.027453,0.075524,Real Estate,sparse_qp
+GD,2024-10-31,0.022903,0.070095,Industrials,sparse_qp
+IRM,2024-10-31,0.016609,0.076468,Real Estate,sparse_qp
+PFE,2024-10-31,0.016545,0.073288,Healthcare,sparse_qp
+GPJA,2024-11-30,0.050562,0.136313,Utilities,sparse_qp
+GDS,2024-11-30,0.050562,0.1655,Technology,sparse_qp
+TV,2024-11-30,0.050562,0.135188,Communication Services,sparse_qp
+CIB,2024-11-30,0.050562,0.112541,Financial Services,sparse_qp
+LPL,2024-11-30,0.050562,0.121145,Technology,sparse_qp
+ENIC,2024-11-30,0.050562,0.114408,Utilities,sparse_qp
+BAK,2024-11-30,0.050562,0.118905,Basic Materials,sparse_qp
+SSL,2024-11-30,0.050562,0.110562,Basic Materials,sparse_qp
+WBD,2024-11-30,0.050562,0.109541,Communication Services,sparse_qp
+KEP,2024-11-30,0.050562,0.092753,Utilities,sparse_qp
+PFE,2024-11-30,0.050562,0.085117,Healthcare,sparse_qp
+PSA,2024-11-30,0.050562,0.087629,Real Estate,sparse_qp
+SONY,2024-11-30,0.050562,0.08566,Technology,sparse_qp
+IRM,2024-11-30,0.050562,0.086433,Real Estate,sparse_qp
+BMY,2024-11-30,0.050562,0.079339,Healthcare,sparse_qp
+JNJ,2024-11-30,0.050562,0.072036,Healthcare,sparse_qp
+IBN,2024-11-30,0.050562,0.0764,Financial Services,sparse_qp
+SHOP,2024-11-30,0.049277,0.092371,Technology,sparse_qp
+GSK,2024-11-30,0.03568,0.072928,Healthcare,sparse_qp
+TLK,2024-11-30,0.030959,0.078366,Communication Services,sparse_qp
+JD,2024-11-30,0.016323,0.101956,Consumer Cyclical,sparse_qp
+PSNY,2024-11-30,0.0082,0.104284,Consumer Cyclical,sparse_qp
+TV,2024-12-31,0.050064,0.199782,Communication Services,sparse_qp
+GPJA,2024-12-31,0.050064,0.105838,Utilities,sparse_qp
+ENIC,2024-12-31,0.050064,0.115975,Utilities,sparse_qp
+KEP,2024-12-31,0.050064,0.107544,Utilities,sparse_qp
+LPL,2024-12-31,0.050064,0.115473,Technology,sparse_qp
+SHOP,2024-12-31,0.050064,0.110398,Technology,sparse_qp
+PFE,2024-12-31,0.050064,0.094227,Healthcare,sparse_qp
+WBD,2024-12-31,0.050064,0.109569,Communication Services,sparse_qp
+NSC,2024-12-31,0.050064,0.092079,Industrials,sparse_qp
+FCX,2024-12-31,0.050064,0.105897,Basic Materials,sparse_qp
+WF,2024-12-31,0.050064,0.096257,Financial Services,sparse_qp
+SSL,2024-12-31,0.050064,0.105329,Basic Materials,sparse_qp
+PSA,2024-12-31,0.050064,0.087637,Real Estate,sparse_qp
+IQV,2024-12-31,0.050064,0.088774,Healthcare,sparse_qp
+NEM,2024-12-31,0.050064,0.092424,Basic Materials,sparse_qp
+BMY,2024-12-31,0.050064,0.079041,Healthcare,sparse_qp
+JD,2024-12-31,0.049627,0.104672,Consumer Cyclical,sparse_qp
+IRM,2024-12-31,0.040859,0.082045,Real Estate,sparse_qp
+SPG,2024-12-31,0.033841,0.082291,Real Estate,sparse_qp
+NOC,2024-12-31,0.027763,0.070977,Industrials,sparse_qp
+IBN,2024-12-31,0.024806,0.076202,Financial Services,sparse_qp
+GSK,2024-12-31,0.016257,0.074246,Healthcare,sparse_qp
+GD,2024-12-31,0.005821,0.073218,Industrials,sparse_qp
+IX,2025-01-31,0.050101,0.104661,Financial Services,sparse_qp
+OXY,2025-01-31,0.050101,0.088451,Energy,sparse_qp
+EOG,2025-01-31,0.050101,0.086029,Energy,sparse_qp
+COP,2025-01-31,0.050101,0.082207,Energy,sparse_qp
+VLO,2025-01-31,0.050101,0.087624,Energy,sparse_qp
+PLD,2025-01-31,0.050101,0.085062,Real Estate,sparse_qp
+NVS,2025-01-31,0.050101,0.076204,Healthcare,sparse_qp
+BAK,2025-01-31,0.050101,0.093327,Basic Materials,sparse_qp
+AAL,2025-01-31,0.050101,0.086362,Industrials,sparse_qp
+SPG,2025-01-31,0.050101,0.080717,Real Estate,sparse_qp
+CRM,2025-01-31,0.050101,0.080967,Technology,sparse_qp
+ABBV,2025-01-31,0.050101,0.075836,Healthcare,sparse_qp
+FCNCA,2025-01-31,0.050101,0.081517,Financial Services,sparse_qp
+SNY,2025-01-31,0.050101,0.073837,Healthcare,sparse_qp
+TLK,2025-01-31,0.050101,0.076515,Communication Services,sparse_qp
+PSA,2025-01-31,0.047694,0.076104,Real Estate,sparse_qp
+GSK,2025-01-31,0.033908,0.072421,Healthcare,sparse_qp
+UL,2025-01-31,0.031416,0.071589,Consumer Defensive,sparse_qp
+LMT,2025-01-31,0.030644,0.070851,Industrials,sparse_qp
+OKE,2025-01-31,0.029855,0.076602,Energy,sparse_qp
+GPN,2025-01-31,0.028618,0.079338,Industrials,sparse_qp
+TAK,2025-01-31,0.028548,0.072125,Healthcare,sparse_qp
+NGG,2025-01-31,0.012016,0.074905,Utilities,sparse_qp
+PSNY,2025-01-31,0.005783,0.089222,Consumer Cyclical,sparse_qp
+IX,2025-02-28,0.05,0.132451,Financial Services,sparse_qp
+BAK,2025-02-28,0.05,0.115278,Basic Materials,sparse_qp
+COIN,2025-02-28,0.05,0.145646,Financial Services,sparse_qp
+JD,2025-02-28,0.05,0.113499,Consumer Cyclical,sparse_qp
+ADBE,2025-02-28,0.05,0.090133,Technology,sparse_qp
+VLO,2025-02-28,0.05,0.087622,Energy,sparse_qp
+URI,2025-02-28,0.05,0.092441,Industrials,sparse_qp
+NEM,2025-02-28,0.05,0.083772,Basic Materials,sparse_qp
+ALC,2025-02-28,0.05,0.07262,Healthcare,sparse_qp
+OXY,2025-02-28,0.05,0.074662,Energy,sparse_qp
+RTX,2025-02-28,0.05,0.06651,Industrials,sparse_qp
+OTIS,2025-02-28,0.05,0.070232,Industrials,sparse_qp
+PH,2025-02-28,0.05,0.08047,Industrials,sparse_qp
+COP,2025-02-28,0.05,0.06726,Energy,sparse_qp
+PSNY,2025-02-28,0.045471,0.109604,Consumer Cyclical,sparse_qp
+HCA,2025-02-28,0.039958,0.064125,Healthcare,sparse_qp
+LMT,2025-02-28,0.036855,0.058596,Industrials,sparse_qp
+CRM,2025-02-28,0.032286,0.074591,Technology,sparse_qp
+IBM,2025-02-28,0.027348,0.067374,Technology,sparse_qp
+VST,2025-02-28,0.023173,0.094846,Utilities,sparse_qp
+IQV,2025-02-28,0.022514,0.068525,Healthcare,sparse_qp
+MMM,2025-02-28,0.022366,0.069324,Industrials,sparse_qp
+SSL,2025-02-28,0.019381,0.07755,Basic Materials,sparse_qp
+SPG,2025-02-28,0.013192,0.06738,Real Estate,sparse_qp
+WF,2025-02-28,0.011845,0.070056,Financial Services,sparse_qp
+SONY,2025-02-28,0.005611,0.067572,Technology,sparse_qp
+BAK,2025-03-31,0.050546,0.095822,Basic Materials,sparse_qp
+KEP,2025-03-31,0.050546,0.072114,Utilities,sparse_qp
+KB,2025-03-31,0.050546,0.068696,Financial Services,sparse_qp
+KT,2025-03-31,0.050546,0.057125,Communication Services,sparse_qp
+IX,2025-03-31,0.050546,0.055681,Financial Services,sparse_qp
+SHG,2025-03-31,0.050546,0.059553,Financial Services,sparse_qp
+PHI,2025-03-31,0.050546,0.041838,Communication Services,sparse_qp
+LPL,2025-03-31,0.050546,0.054607,Technology,sparse_qp
+BCH,2025-03-31,0.050546,0.037248,Financial Services,sparse_qp
+PKX,2025-03-31,0.050546,0.051653,Basic Materials,sparse_qp
+YPF,2025-03-31,0.050546,0.056974,Energy,sparse_qp
+TLK,2025-03-31,0.050546,0.036699,Communication Services,sparse_qp
+TEO,2025-03-31,0.050546,0.061603,Communication Services,sparse_qp
+TD,2025-03-31,0.050546,0.027105,Financial Services,sparse_qp
+TAK,2025-03-31,0.050546,0.021295,Healthcare,sparse_qp
+VOD,2025-03-31,0.048271,0.025962,Communication Services,sparse_qp
+CCZ,2025-03-31,0.036968,0.011684,Communication Services,sparse_qp
+LOMA,2025-03-31,0.030128,0.050727,Basic Materials,sparse_qp
+CEG,2025-03-31,0.028891,0.041987,Utilities,sparse_qp
+JD,2025-03-31,0.026367,0.046622,Consumer Cyclical,sparse_qp
+BHP,2025-03-31,0.017396,0.031066,Basic Materials,sparse_qp
+PDD,2025-03-31,0.014792,0.040957,Consumer Cyclical,sparse_qp
+SUZ,2025-03-31,0.012294,0.023493,Basic Materials,sparse_qp
+IBN,2025-03-31,0.010013,0.020166,Financial Services,sparse_qp
+SKM,2025-03-31,0.009964,0.025188,Communication Services,sparse_qp
+AMD,2025-03-31,0.006726,0.043267,Technology,sparse_qp
+BAK,2025-04-30,0.05,0.123425,Basic Materials,sparse_qp
+LPL,2025-04-30,0.05,0.096391,Technology,sparse_qp
+KEP,2025-04-30,0.05,0.072167,Utilities,sparse_qp
+SUZ,2025-04-30,0.05,0.068833,Basic Materials,sparse_qp
+TV,2025-04-30,0.05,0.079126,Communication Services,sparse_qp
+HMC,2025-04-30,0.05,0.0618,Consumer Cyclical,sparse_qp
+CRESY,2025-04-30,0.05,0.065374,Industrials,sparse_qp
+SONY,2025-04-30,0.05,0.055199,Technology,sparse_qp
+SSL,2025-04-30,0.05,0.071,Basic Materials,sparse_qp
+CCZ,2025-04-30,0.05,0.031447,Communication Services,sparse_qp
+SKM,2025-04-30,0.05,0.041419,Communication Services,sparse_qp
+IX,2025-04-30,0.05,0.054496,Financial Services,sparse_qp
+KT,2025-04-30,0.05,0.044045,Communication Services,sparse_qp
+AKO-A,2025-04-30,0.05,0.036185,Consumer Defensive,sparse_qp
+TAK,2025-04-30,0.05,0.028322,Healthcare,sparse_qp
+PHI,2025-04-30,0.044209,0.030863,Communication Services,sparse_qp
+BCH,2025-04-30,0.041484,0.034599,Financial Services,sparse_qp
+CSAN,2025-04-30,0.037467,0.054912,Energy,sparse_qp
+JD,2025-04-30,0.033999,0.055657,Consumer Cyclical,sparse_qp
+TD,2025-04-30,0.026259,0.027336,Financial Services,sparse_qp
+TGS,2025-04-30,0.024663,0.05926,Energy,sparse_qp
+PAGS,2025-04-30,0.021378,0.052189,Technology,sparse_qp
+CBIO,2025-04-30,0.011334,0.112058,Healthcare,sparse_qp
+AMX,2025-04-30,0.009206,0.033818,Communication Services,sparse_qp
+BAK,2025-05-31,0.050076,0.187008,Basic Materials,sparse_qp
+CBIO,2025-05-31,0.050076,0.317555,Healthcare,sparse_qp
+IX,2025-05-31,0.050076,0.088518,Financial Services,sparse_qp
+SUZ,2025-05-31,0.050076,0.080595,Basic Materials,sparse_qp
+SONY,2025-05-31,0.050076,0.081839,Technology,sparse_qp
+TV,2025-05-31,0.050076,0.097986,Communication Services,sparse_qp
+CRESY,2025-05-31,0.050076,0.086605,Industrials,sparse_qp
+ADBE,2025-05-31,0.050076,0.068237,Technology,sparse_qp
+JD,2025-05-31,0.050076,0.082799,Consumer Cyclical,sparse_qp
+SSL,2025-05-31,0.050076,0.090926,Basic Materials,sparse_qp
+GOOGL,2025-05-31,0.050076,0.070539,Communication Services,sparse_qp
+GOOG,2025-05-31,0.050076,0.070078,Communication Services,sparse_qp
+KEP,2025-05-31,0.050076,0.059642,Utilities,sparse_qp
+SKM,2025-05-31,0.050076,0.048383,Communication Services,sparse_qp
+HMC,2025-05-31,0.050076,0.066977,Consumer Cyclical,sparse_qp
+BHP,2025-05-31,0.050076,0.067912,Basic Materials,sparse_qp
+LMT,2025-05-31,0.050076,0.039475,Industrials,sparse_qp
+CCZ,2025-05-31,0.045869,0.036182,Communication Services,sparse_qp
+CSAN,2025-05-31,0.041819,0.076697,Energy,sparse_qp
+REGN,2025-05-31,0.035403,0.056514,Healthcare,sparse_qp
+AKO-A,2025-05-31,0.025619,0.045407,Consumer Defensive,sparse_qp
+CBIO,2025-06-30,0.050047,0.382152,Healthcare,sparse_qp
+BAK,2025-06-30,0.050047,0.185936,Basic Materials,sparse_qp
+REGN,2025-06-30,0.050047,0.086965,Healthcare,sparse_qp
+SONY,2025-06-30,0.050047,0.082628,Technology,sparse_qp
+LMT,2025-06-30,0.050047,0.0649,Industrials,sparse_qp
+ALNY,2025-06-30,0.050047,0.084617,Healthcare,sparse_qp
+IX,2025-06-30,0.050047,0.076821,Financial Services,sparse_qp
+SSL,2025-06-30,0.050047,0.092644,Basic Materials,sparse_qp
+LHX,2025-06-30,0.050047,0.061208,Industrials,sparse_qp
+SUZ,2025-06-30,0.050047,0.064093,Basic Materials,sparse_qp
+NEM,2025-06-30,0.050047,0.073436,Basic Materials,sparse_qp
+JNJ,2025-06-30,0.050047,0.052888,Healthcare,sparse_qp
+CRESY,2025-06-30,0.050047,0.076712,Industrials,sparse_qp
+ABBV,2025-06-30,0.050047,0.062649,Healthcare,sparse_qp
+TV,2025-06-30,0.050047,0.085546,Communication Services,sparse_qp
+TLK,2025-06-30,0.050047,0.068306,Communication Services,sparse_qp
+BHP,2025-06-30,0.050047,0.073109,Basic Materials,sparse_qp
+MRK,2025-06-30,0.050047,0.057166,Healthcare,sparse_qp
+SNY,2025-06-30,0.050047,0.058341,Healthcare,sparse_qp
+BABA,2025-06-30,0.02399,0.074439,Consumer Cyclical,sparse_qp
+GD,2025-06-30,0.016951,0.056602,Industrials,sparse_qp
+ROP,2025-06-30,0.008171,0.059017,Industrials,sparse_qp
+CBIO,2025-07-31,0.050211,0.303149,Healthcare,sparse_qp
+BAK,2025-07-31,0.050211,0.111848,Basic Materials,sparse_qp
+NOC,2025-07-31,0.050211,0.059367,Industrials,sparse_qp
+TV,2025-07-31,0.050211,0.085253,Communication Services,sparse_qp
+CME,2025-07-31,0.050211,0.048237,Financial Services,sparse_qp
+IX,2025-07-31,0.050211,0.065825,Financial Services,sparse_qp
+LHX,2025-07-31,0.050211,0.05436,Industrials,sparse_qp
+CRESY,2025-07-31,0.050211,0.067432,Industrials,sparse_qp
+GD,2025-07-31,0.050211,0.055573,Industrials,sparse_qp
+SONY,2025-07-31,0.050211,0.059827,Technology,sparse_qp
+TDG,2025-07-31,0.050211,0.053938,Industrials,sparse_qp
+ELV,2025-07-31,0.050211,0.048549,Healthcare,sparse_qp
+TRP,2025-07-31,0.050211,0.04702,Energy,sparse_qp
+TLK,2025-07-31,0.050211,0.057003,Communication Services,sparse_qp
+NEM,2025-07-31,0.050211,0.057933,Basic Materials,sparse_qp
+MRK,2025-07-31,0.050211,0.046998,Healthcare,sparse_qp
+ABBV,2025-07-31,0.050211,0.05088,Healthcare,sparse_qp
+BHP,2025-07-31,0.050211,0.059544,Basic Materials,sparse_qp
+AKO-A,2025-07-31,0.037472,0.043659,Consumer Defensive,sparse_qp
+BRLS,2025-07-31,0.029626,0.066407,Consumer Defensive,sparse_qp
+LMT,2025-07-31,0.012545,0.041847,Industrials,sparse_qp
+GIS,2025-07-31,0.010708,0.040938,Consumer Defensive,sparse_qp
+TKC,2025-07-31,0.005843,0.041794,Communication Services,sparse_qp
+CBIO,2025-08-31,0.050047,0.303068,Healthcare,sparse_qp
+BAK,2025-08-31,0.050047,0.109392,Basic Materials,sparse_qp
+ALNY,2025-08-31,0.050047,0.093296,Healthcare,sparse_qp
+PHI,2025-08-31,0.050047,0.077369,Communication Services,sparse_qp
+SONY,2025-08-31,0.050047,0.081282,Technology,sparse_qp
+SUZ,2025-08-31,0.050047,0.066883,Basic Materials,sparse_qp
+LPL,2025-08-31,0.050047,0.078176,Technology,sparse_qp
+NOC,2025-08-31,0.050047,0.050531,Industrials,sparse_qp
+LHX,2025-08-31,0.050047,0.051933,Industrials,sparse_qp
+CALC,2025-08-31,0.050047,0.073877,Healthcare,sparse_qp
+TV,2025-08-31,0.050047,0.07691,Communication Services,sparse_qp
+TLK,2025-08-31,0.050047,0.058598,Communication Services,sparse_qp
+GD,2025-08-31,0.050047,0.053707,Industrials,sparse_qp
+TDG,2025-08-31,0.050047,0.052058,Industrials,sparse_qp
+CME,2025-08-31,0.050047,0.038874,Financial Services,sparse_qp
+LMT,2025-08-31,0.048052,0.043562,Industrials,sparse_qp
+TEO,2025-08-31,0.046072,0.062068,Communication Services,sparse_qp
+TRP,2025-08-31,0.043135,0.04579,Energy,sparse_qp
+BRLS,2025-08-31,0.032552,0.069109,Consumer Defensive,sparse_qp
+AMX,2025-08-31,0.02218,0.045597,Communication Services,sparse_qp
+PAYX,2025-08-31,0.021422,0.050688,Industrials,sparse_qp
+EOG,2025-08-31,0.018361,0.050728,Energy,sparse_qp
+CAH,2025-08-31,0.012399,0.042294,Healthcare,sparse_qp
+REGN,2025-08-31,0.005127,0.053963,Healthcare,sparse_qp
+CBIO,2025-09-30,0.05,0.353171,Healthcare,sparse_qp
+LPL,2025-09-30,0.05,0.137646,Technology,sparse_qp
+BAK,2025-09-30,0.05,0.121329,Basic Materials,sparse_qp
+PHI,2025-09-30,0.05,0.08386,Communication Services,sparse_qp
+ALNY,2025-09-30,0.05,0.084467,Healthcare,sparse_qp
+SONY,2025-09-30,0.05,0.07625,Technology,sparse_qp
+TV,2025-09-30,0.05,0.090544,Communication Services,sparse_qp
+YPF,2025-09-30,0.05,0.089513,Energy,sparse_qp
+NOC,2025-09-30,0.05,0.054569,Industrials,sparse_qp
+CALC,2025-09-30,0.05,0.081785,Healthcare,sparse_qp
+EOG,2025-09-30,0.05,0.065539,Energy,sparse_qp
+IX,2025-09-30,0.05,0.063496,Financial Services,sparse_qp
+LHX,2025-09-30,0.05,0.0524,Industrials,sparse_qp
+GD,2025-09-30,0.05,0.054465,Industrials,sparse_qp
+PAYX,2025-09-30,0.05,0.057112,Industrials,sparse_qp
+BMO,2025-09-30,0.05,0.0501,Financial Services,sparse_qp
+HUM,2025-09-30,0.040099,0.052288,Healthcare,sparse_qp
+CME,2025-09-30,0.037704,0.036168,Financial Services,sparse_qp
+MRK,2025-09-30,0.035635,0.048295,Healthcare,sparse_qp
+OXY,2025-09-30,0.02736,0.061773,Energy,sparse_qp
+TGS,2025-09-30,0.025332,0.076531,Energy,sparse_qp
+PKX,2025-09-30,0.022616,0.059665,Basic Materials,sparse_qp
+TEO,2025-09-30,0.011254,0.067817,Communication Services,sparse_qp
+LPL,2025-10-31,0.05,0.125241,Technology,sparse_qp
+PHI,2025-10-31,0.05,0.085797,Communication Services,sparse_qp
+BAK,2025-10-31,0.05,0.11282,Basic Materials,sparse_qp
+REGN,2025-10-31,0.05,0.089146,Healthcare,sparse_qp
+NOC,2025-10-31,0.05,0.063893,Industrials,sparse_qp
+ALNY,2025-10-31,0.05,0.080526,Healthcare,sparse_qp
+HMC,2025-10-31,0.05,0.074595,Consumer Cyclical,sparse_qp
+ABT,2025-10-31,0.05,0.059922,Healthcare,sparse_qp
+IX,2025-10-31,0.05,0.063303,Financial Services,sparse_qp
+TV,2025-10-31,0.05,0.07152,Communication Services,sparse_qp
+CRESY,2025-10-31,0.05,0.076014,Industrials,sparse_qp
+SONY,2025-10-31,0.05,0.064724,Technology,sparse_qp
+LHX,2025-10-31,0.05,0.051772,Industrials,sparse_qp
+PAYX,2025-10-31,0.05,0.056308,Industrials,sparse_qp
+EOG,2025-10-31,0.05,0.057353,Energy,sparse_qp
+ELV,2025-10-31,0.05,0.052299,Healthcare,sparse_qp
+RTX,2025-10-31,0.05,0.05284,Industrials,sparse_qp
+BMO,2025-10-31,0.05,0.049044,Financial Services,sparse_qp
+CME,2025-10-31,0.028655,0.035524,Financial Services,sparse_qp
+FISV,2025-10-31,0.016648,0.055845,Technology,sparse_qp
+CALC,2025-10-31,0.015992,0.053972,Healthcare,sparse_qp
+TWNP,2025-10-31,0.014591,0.054569,Consumer Cyclical,sparse_qp
+TLK,2025-10-31,0.01413,0.054409,Communication Services,sparse_qp
+YPF,2025-10-31,0.009985,0.0737,Energy,sparse_qp
+BAK,2025-11-30,0.05,0.134436,Basic Materials,sparse_qp
+SONY,2025-11-30,0.05,0.098454,Technology,sparse_qp
+PHI,2025-11-30,0.05,0.08382,Communication Services,sparse_qp
+LPL,2025-11-30,0.05,0.08729,Technology,sparse_qp
+REGN,2025-11-30,0.05,0.086444,Healthcare,sparse_qp
+TV,2025-11-30,0.05,0.080841,Communication Services,sparse_qp
+NOC,2025-11-30,0.05,0.058072,Industrials,sparse_qp
+ALNY,2025-11-30,0.05,0.072834,Healthcare,sparse_qp
+HMC,2025-11-30,0.05,0.068112,Consumer Cyclical,sparse_qp
+OXY,2025-11-30,0.05,0.065216,Energy,sparse_qp
+GS-PD,2025-11-30,0.05,0.040781,Financial Services,sparse_qp
+KHC,2025-11-30,0.05,0.051094,Consumer Defensive,sparse_qp
+PAYX,2025-11-30,0.05,0.053513,Industrials,sparse_qp
+RTX,2025-11-30,0.05,0.051097,Industrials,sparse_qp
+ARGX,2025-11-30,0.05,0.051098,Healthcare,sparse_qp
+EOG,2025-11-30,0.05,0.057465,Energy,sparse_qp
+IX,2025-11-30,0.05,0.055174,Financial Services,sparse_qp
+CAH,2025-11-30,0.04277,0.042911,Healthcare,sparse_qp
+CRESY,2025-11-30,0.033578,0.063878,Industrials,sparse_qp
+ELV,2025-11-30,0.028174,0.047355,Healthcare,sparse_qp
+LHX,2025-11-30,0.023161,0.045075,Industrials,sparse_qp
+SATS,2025-11-30,0.013447,0.070905,Technology,sparse_qp
+IQV,2025-11-30,0.00887,0.063391,Healthcare,sparse_qp
+OTLK,2025-12-31,0.05,0.141655,Healthcare,sparse_qp
+BPYPP,2025-12-31,0.05,0.052787,Real Estate,sparse_qp
+BPYPO,2025-12-31,0.05,0.049104,Real Estate,sparse_qp
+SSL,2025-12-31,0.05,0.0722,Basic Materials,sparse_qp
+TV,2025-12-31,0.05,0.062363,Communication Services,sparse_qp
+TEO,2025-12-31,0.05,0.082979,Communication Services,sparse_qp
+SUZ,2025-12-31,0.05,0.047219,Basic Materials,sparse_qp
+BPYPN,2025-12-31,0.05,0.037629,Real Estate,sparse_qp
+LPL,2025-12-31,0.05,0.053814,Technology,sparse_qp
+KEP,2025-12-31,0.05,0.043233,Utilities,sparse_qp
+AMX,2025-12-31,0.05,0.034704,Communication Services,sparse_qp
+CCZ,2025-12-31,0.05,0.023473,Communication Services,sparse_qp
+GS-PC,2025-12-31,0.05,0.024271,Financial Services,sparse_qp
+CALC,2025-12-31,0.05,0.057924,Healthcare,sparse_qp
+SKM,2025-12-31,0.05,0.029658,Communication Services,sparse_qp
+EQT,2025-12-31,0.05,0.038397,Energy,sparse_qp
+SONY,2025-12-31,0.05,0.039317,Technology,sparse_qp
+PHI,2025-12-31,0.05,0.028819,Communication Services,sparse_qp
+BAK,2025-12-31,0.05,0.063747,Basic Materials,sparse_qp
+YPF,2025-12-31,0.038819,0.066208,Energy,sparse_qp
+ALNY,2025-12-31,0.011181,0.033548,Healthcare,sparse_qp
+SKM,2026-01-31,0.05,0.198184,Communication Services,sparse_qp
+CALC,2026-01-31,0.05,0.161086,Healthcare,sparse_qp
+PKX,2026-01-31,0.05,0.148102,Basic Materials,sparse_qp
+PHI,2026-01-31,0.05,0.095593,Communication Services,sparse_qp
+OTLK,2026-01-31,0.05,0.143908,Healthcare,sparse_qp
+KEP,2026-01-31,0.05,0.088219,Utilities,sparse_qp
+TEO,2026-01-31,0.05,0.085994,Communication Services,sparse_qp
+SSL,2026-01-31,0.05,0.081827,Basic Materials,sparse_qp
+KT,2026-01-31,0.05,0.055381,Communication Services,sparse_qp
+HMC,2026-01-31,0.05,0.061891,Consumer Cyclical,sparse_qp
+CCZ,2026-01-31,0.05,0.035094,Communication Services,sparse_qp
+LPL,2026-01-31,0.05,0.057296,Technology,sparse_qp
+BAK,2026-01-31,0.05,0.076391,Basic Materials,sparse_qp
+SUZ,2026-01-31,0.05,0.045351,Basic Materials,sparse_qp
+GS-PA,2026-01-31,0.05,0.027964,Financial Services,sparse_qp
+NEM,2026-01-31,0.05,0.0441,Basic Materials,sparse_qp
+BPYPO,2026-01-31,0.05,0.031933,Real Estate,sparse_qp
+PCG-PB,2026-01-31,0.05,0.022868,Utilities,sparse_qp
+TRP,2026-01-31,0.05,0.026961,Energy,sparse_qp
+GOOG,2026-01-31,0.021812,0.039188,Communication Services,sparse_qp
+LOCL,2026-01-31,0.014919,0.020383,Consumer Defensive,sparse_qp
+GOOGL,2026-01-31,0.013268,0.038827,Communication Services,sparse_qp
+TCRX,2026-02-28,0.051116,0.228054,Healthcare,sparse_qp
+ORMP,2026-02-28,0.051116,0.159206,Healthcare,sparse_qp
+MGNX,2026-02-28,0.051116,0.19046,Healthcare,sparse_qp
+PLRX,2026-02-28,0.051116,0.190682,Healthcare,sparse_qp
+VTGN,2026-02-28,0.051116,0.168015,Healthcare,sparse_qp
+CUE,2026-02-28,0.051116,0.151842,Healthcare,sparse_qp
+ACRV,2026-02-28,0.051116,0.154676,Healthcare,sparse_qp
+SNTI,2026-02-28,0.050726,0.129796,Healthcare,sparse_qp
+ABOS,2026-02-28,0.047755,0.137341,Healthcare,sparse_qp
+ZNTL,2026-02-28,0.047537,0.150681,Healthcare,sparse_qp
+PMVP,2026-02-28,0.046362,0.111568,Healthcare,sparse_qp
+CBUS,2026-02-28,0.045719,0.140428,Healthcare,sparse_qp
+ALXO,2026-02-28,0.040244,0.141769,Healthcare,sparse_qp
+IPSC,2026-02-28,0.039249,0.120191,Healthcare,sparse_qp
+GBIO,2026-02-28,0.039041,0.138642,Healthcare,sparse_qp
+SPRB,2026-02-28,0.0361,0.085166,Healthcare,sparse_qp
+COYA,2026-02-28,0.026748,0.084741,Healthcare,sparse_qp
+ALEC,2026-02-28,0.023929,0.119236,Healthcare,sparse_qp
+KRRO,2026-02-28,0.020791,0.134969,Healthcare,sparse_qp
+PEPG,2026-02-28,0.020515,0.12581,Healthcare,sparse_qp
+WINT,2026-02-28,0.017543,0.091025,Healthcare,sparse_qp
+INO,2026-02-28,0.017229,0.091061,Healthcare,sparse_qp
+DTIL,2026-02-28,0.015349,0.082714,Healthcare,sparse_qp
+MOLN,2026-02-28,0.014117,0.044745,Healthcare,sparse_qp
+ATOS,2026-02-28,0.013389,0.075089,Healthcare,sparse_qp
+ARTV,2026-02-28,0.013013,0.108704,Healthcare,sparse_qp
+TKLF,2026-02-28,0.01222,0.047693,Consumer Defensive,sparse_qp
+VRCA,2026-02-28,0.011081,0.060449,Healthcare,sparse_qp
+IFRX,2026-02-28,0.010813,0.09217,Healthcare,sparse_qp
+CLYM,2026-02-28,0.010186,0.090066,Healthcare,sparse_qp
+ALGS,2026-02-28,0.008345,0.113771,Healthcare,sparse_qp
+COSM,2026-02-28,0.007946,0.063259,Healthcare,sparse_qp
+CNTM,2026-02-28,0.00624,0.080118,Technology,sparse_qp
