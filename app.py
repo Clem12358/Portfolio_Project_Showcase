@@ -176,7 +176,7 @@ def render_styles(button_active: bool) -> None:
 
 .block-container {{
   max-width: 1180px;
-  padding-top: 0.85rem;
+  padding-top: 3.1rem;
   padding-bottom: 1.0rem;
 }}
 
@@ -190,6 +190,7 @@ div[data-testid="stHorizontalBlock"] {{
   border-radius: 12px;
   padding: 11px 16px 10px 16px;
   min-height: 92px;
+  margin-bottom: 8px;
 }}
 
 .kpi-label {{
