@@ -146,9 +146,22 @@ def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def render_navigation_links() -> None:
+    if not hasattr(st, "page_link"):
+        st.warning("Page navigation is unavailable in this Streamlit version.")
+        return
+
+    nav_left, nav_right = st.columns(2)
+    with nav_left:
+        st.page_link("app.py", label="Performance")
+    with nav_right:
+        st.page_link("pages/2_Portfolio_Holdings.py", label="Portfolio Holdings")
+
+
 def main() -> None:
     st.set_page_config(page_title="Portfolio Holdings", layout="wide")
     render_styles()
+    render_navigation_links()
 
     if not HOLDINGS_SNAPSHOT_PATH.exists():
         st.error(f"Missing holdings snapshot file: {HOLDINGS_SNAPSHOT_PATH}")

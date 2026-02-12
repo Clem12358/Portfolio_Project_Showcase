@@ -350,6 +350,18 @@ def render_card(card: dict) -> None:
     )
 
 
+def render_navigation_links() -> None:
+    if not hasattr(st, "page_link"):
+        st.warning("Page navigation is unavailable in this Streamlit version.")
+        return
+
+    nav_left, nav_right = st.columns(2)
+    with nav_left:
+        st.page_link("app.py", label="Performance")
+    with nav_right:
+        st.page_link("pages/2_Portfolio_Holdings.py", label="Portfolio Holdings")
+
+
 def main() -> None:
     st.set_page_config(page_title="Portfolio Performance Showcase", layout="wide")
 
@@ -364,6 +376,7 @@ def main() -> None:
     cards = build_cards(kpis, kpis_since_coverage)
 
     render_styles()
+    render_navigation_links()
 
     for idx in range(0, len(cards), 4):
         cols = st.columns(4)
