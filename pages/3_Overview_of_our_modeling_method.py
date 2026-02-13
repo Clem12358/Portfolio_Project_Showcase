@@ -509,6 +509,11 @@ def render_visibility_callouts() -> None:
     )
 
 
+def render_formula(expression: str) -> None:
+    # Force bright formula color at source in case renderer-level CSS is ignored.
+    st.latex(rf"\color{{white}}{{\displaystyle {expression}}}")
+
+
 def render_title_1() -> None:
     with st.expander("1. Multi-Model Valuation Architecture", expanded=True):
         st.markdown(
@@ -531,17 +536,17 @@ def render_title_2() -> None:
         st.markdown(
             "1. **Base Growth ($g_0$):** 3-year adjusted CAGR, clamped to $[-50\\%, +50\\%]$."
         )
-        st.latex(r"g_0 = \operatorname{clip}\!\left(\mathrm{CAGR}^{\mathrm{adj}}_{3y}, -0.50,\ 0.50\right)")
+        render_formula(r"g_0 = \operatorname{clip}\!\left(\mathrm{CAGR}^{\mathrm{adj}}_{3y}, -0.50,\ 0.50\right)")
         st.markdown(
             "2. **Terminal Convergence ($g_{term}$):** sector long-run growth from mature stable peers, scaled by 0.35 and clamped to $[1\\%, 4\\%]$."
         )
-        st.latex(
+        render_formula(
             r"g_{\mathrm{term}} = \operatorname{clip}\!\left(0.35 \times \bar{g}^{\mathrm{stable}}_{\mathrm{sector}},\ 0.01,\ 0.04\right)"
         )
         st.markdown(
             "3. **Fade Mechanism:** Years 1-5 keep $g_0$, years 6-10 fade linearly from $g_0$ to $g_{term}$."
         )
-        st.latex(
+        render_formula(
             r"g_t = \begin{cases}"
             r"g_0, & t \in \{1,\dots,5\} \\"
             r"g_0 + \dfrac{t-5}{5}\left(g_{\mathrm{term}}-g_0\right), & t \in \{6,\dots,10\}"
@@ -559,7 +564,7 @@ def render_title_3() -> None:
         st.markdown(
             "- **Synthesis:** stabilized ratios are applied to forecast revenue to derive NOPAT and reinvestment."
         )
-        st.latex(r"UFCF = EBIT \times (1 - Tax) + D\&A - CapEx - \Delta NWC")
+        render_formula(r"UFCF = EBIT \times (1 - Tax) + D\&A - CapEx - \Delta NWC")
 
 
 def render_title_4() -> None:
@@ -590,12 +595,12 @@ def render_title_6() -> None:
     with st.expander("6. Monte Carlo Simulation & Uncertainty Quantification", expanded=False):
         st.markdown("Each asset runs **10,000 simulations** to quantify valuation uncertainty.")
         st.markdown("- **Stochastic Inputs:** WACC/CoE, terminal growth, and cash-flow multipliers.")
-        st.latex(r"WACC,\ CoE \sim \mathcal{N}\!\left(\mu_{\mathrm{sector}},\ \sigma^2_{\mathrm{sector}}\right)")
-        st.latex(r"m_t \sim \operatorname{LogNormal}(\mu_t,\ \sigma_t^2), \quad m_t > 0")
+        render_formula(r"WACC,\ CoE \sim \mathcal{N}\!\left(\mu_{\mathrm{sector}},\ \sigma^2_{\mathrm{sector}}\right)")
+        render_formula(r"m_t \sim \operatorname{LogNormal}(\mu_t,\ \sigma_t^2), \quad m_t > 0")
         st.markdown(
             "- **Time-Horizon Scaling:** uncertainty widens with horizon, increasing shock variance from Year 1 to Year 10."
         )
-        st.latex(r"\sigma_t = \sigma_1 + \frac{t-1}{9}\left(\sigma_{10} - \sigma_1\right), \quad t \in \{1,\dots,10\}")
+        render_formula(r"\sigma_t = \sigma_1 + \frac{t-1}{9}\left(\sigma_{10} - \sigma_1\right), \quad t \in \{1,\dots,10\}")
 
 
 def render_title_7() -> None:
@@ -603,7 +608,7 @@ def render_title_7() -> None:
         st.markdown(
             "Valuation outputs are transformed into standardized **Upside Ratios** and distributional risk descriptors."
         )
-        st.latex(r"Upside = \frac{\text{Implied Price}}{\text{Current Price}} - 1")
+        render_formula(r"Upside = \frac{\text{Implied Price}}{\text{Current Price}} - 1")
         st.markdown("- **Risk Features:** IQR% for uncertainty magnitude and skew for tail asymmetry.")
 
 
@@ -614,7 +619,7 @@ def render_title_8() -> None:
             "- **Inputs:** valuation upside features, Monte Carlo uncertainty features, and meta-features (size, peer count, data richness)."
         )
         st.markdown("- **Target:** market-adjusted forward return (stock return minus market mean).")
-        st.latex(r"y_{i,t+h} = r_{i,t+h} - \bar{r}_{m,t+h}")
+        render_formula(r"y_{i,t+h} = r_{i,t+h} - \bar{r}_{m,t+h}")
         st.markdown(
             "- **Validation:** walk-forward expanding-window training to eliminate look-ahead bias."
         )
@@ -627,7 +632,7 @@ def render_title_9() -> None:
             "- **Rationale:** some repricing is rapid (multiples), some is slow (intrinsic DCF convergence)."
         )
         st.markdown("- **Inference:** query at blended horizon (0.75 years) for medium-term alpha.")
-        st.latex(r"\hat{\alpha}_{i,t}(h=0.75) \approx \mathcal{F}_{\mathrm{XGB}}(x_{i,t}, h)")
+        render_formula(r"\hat{\alpha}_{i,t}(h=0.75) \approx \mathcal{F}_{\mathrm{XGB}}(x_{i,t}, h)")
 
 
 def render_title_10() -> None:
@@ -635,7 +640,7 @@ def render_title_10() -> None:
         st.markdown("Final portfolio weights are solved via quadratic programming.")
         st.markdown("- **Covariance:** Ledoit-Wolf shrinkage for stable risk estimation.")
         st.markdown("- **Objective:** maximize expected return while penalizing risk and excess dispersion.")
-        st.latex(
+        render_formula(
             r"\max_w \quad w^\top\mu - \frac{\gamma}{2}\,w^\top\Sigma w - \lambda \lVert w \rVert_1"
         )
         st.markdown(
