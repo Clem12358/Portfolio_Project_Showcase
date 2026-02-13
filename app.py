@@ -1,12 +1,14 @@
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 
 SNAPSHOT_PATH = Path("data/performance_snapshot.json")
+RISK_FREE_RATE_ANNUAL = 0.02
 
 
 def load_snapshot(path: Path) -> dict:
@@ -72,6 +74,54 @@ def rebase_since_coverage(df: pd.DataFrame, coverage_start_date: str | None) -> 
             lambda x: ((1 + x) / (1 + base_benchmark) - 1) if pd.notna(x) else None
         )
     return filtered
+
+
+def cumulative_to_weekly_returns(cumulative: pd.Series) -> pd.Series:
+    if cumulative.empty:
+        return pd.Series(dtype=float)
+
+    wealth = 1.0 + cumulative.astype(float)
+    weekly = pd.Series(index=cumulative.index, dtype=float)
+    weekly.iloc[0] = float(cumulative.iloc[0])
+    if len(cumulative) > 1:
+        weekly.iloc[1:] = (wealth.iloc[1:].values / wealth.iloc[:-1].values) - 1.0
+    return weekly
+
+
+def compute_standard_sharpe(
+    chart_data: list[dict],
+    coverage_start_date: str | None,
+    rf_annual: float = RISK_FREE_RATE_ANNUAL,
+) -> float:
+    df = pd.DataFrame(chart_data)
+    if df.empty:
+        return 0.0
+
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date").reset_index(drop=True)
+    cumulative = pd.to_numeric(df["portfolio"], errors="coerce")
+    valid_mask = cumulative.notna()
+    if valid_mask.sum() < 2:
+        return 0.0
+
+    df = df[valid_mask].reset_index(drop=True)
+    cumulative = pd.to_numeric(df["portfolio"], errors="coerce").astype(float)
+    weekly_returns = cumulative_to_weekly_returns(cumulative)
+
+    if coverage_start_date:
+        weekly_returns = weekly_returns[df["date"] >= pd.Timestamp(coverage_start_date)]
+
+    if len(weekly_returns) < 2:
+        return 0.0
+
+    weekly_vol = float(np.std(weekly_returns.values, ddof=1)) if len(weekly_returns) > 1 else 0.0
+    if weekly_vol <= 0:
+        return 0.0
+
+    rf_weekly = (1 + rf_annual) ** (1 / 52.0) - 1
+    mean_weekly = float(np.mean(weekly_returns.values))
+    sharpe = ((mean_weekly - rf_weekly) / weekly_vol) * np.sqrt(52)
+    return float(sharpe)
 
 
 def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.Figure:
@@ -528,6 +578,15 @@ def main() -> None:
     kpis = snapshot["kpis"]
     kpis_since_coverage = snapshot["kpis_since_coverage"]
     coverage_start_date = snapshot["coverage_start_date"]
+
+    cumulative_returns = snapshot["charts"]["cumulative_returns"]
+    kpis["sharpe"] = round(compute_standard_sharpe(cumulative_returns, None), 4)
+    if kpis_since_coverage:
+        kpis_since_coverage["sharpe"] = round(
+            compute_standard_sharpe(cumulative_returns, coverage_start_date),
+            4,
+        )
+
     cards = build_cards(kpis, kpis_since_coverage)
 
     render_styles()
