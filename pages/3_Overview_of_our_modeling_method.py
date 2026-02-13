@@ -7,6 +7,8 @@ def render_styles() -> None:
 <style>
 .stApp {
   background: linear-gradient(180deg, #040c20 0%, #020917 100%);
+  --text-color: #e5e7eb !important;
+  --secondary-text-color: #cbd5e1 !important;
 }
 
 [data-testid="stAppViewContainer"],
@@ -208,6 +210,33 @@ details[data-testid="stExpander"] {
   border-radius: 10px !important;
 }
 
+div[data-testid="stExpander"] details > summary,
+details[data-testid="stExpander"] > summary {
+  background: linear-gradient(160deg, #141f37 0%, #101a2e 100%) !important;
+  border-radius: 10px !important;
+}
+
+div[data-testid="stExpander"] details[open] > summary,
+details[data-testid="stExpander"][open] > summary {
+  background: #f3f4f6 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+div[data-baseweb="accordion"] button,
+div[data-baseweb="accordion"] button[aria-expanded="false"],
+div[data-baseweb="accordion"] button[aria-expanded="true"] {
+  background: linear-gradient(160deg, #141f37 0%, #101a2e 100%) !important;
+  border: 1px solid rgba(55, 65, 81, 0.45) !important;
+  box-shadow: none !important;
+}
+
+div[data-baseweb="accordion"] button[aria-expanded="true"] {
+  background: #f3f4f6 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
 div[data-testid="stExpander"] details summary,
 details[data-testid="stExpander"] summary,
 div[data-baseweb="accordion"] button {
@@ -236,6 +265,31 @@ div[data-baseweb="accordion"] button svg * {
   stroke: #93c5fd !important;
 }
 
+div[data-testid="stExpander"] details[open] > summary,
+details[data-testid="stExpander"][open] > summary,
+div[data-baseweb="accordion"] button[aria-expanded="true"] {
+  color: #111827 !important;
+}
+
+div[data-testid="stExpander"] details[open] > summary *,
+details[data-testid="stExpander"][open] > summary *,
+div[data-baseweb="accordion"] button[aria-expanded="true"] * {
+  color: #111827 !important;
+}
+
+div[data-testid="stExpander"] details[open] > summary svg,
+details[data-testid="stExpander"][open] > summary svg,
+div[data-baseweb="accordion"] button[aria-expanded="true"] svg {
+  color: #1f2937 !important;
+}
+
+div[data-testid="stExpander"] details[open] > summary svg *,
+details[data-testid="stExpander"][open] > summary svg *,
+div[data-baseweb="accordion"] button[aria-expanded="true"] svg * {
+  fill: #1f2937 !important;
+  stroke: #1f2937 !important;
+}
+
 div[data-baseweb="tab-list"] button {
   color: #cbd5e1 !important;
 }
@@ -251,25 +305,51 @@ div[data-testid="stLatex"] {
 
 div[data-testid="stLatex"] * {
   color: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 div[data-testid="stLatex"] .katex,
 div[data-testid="stLatex"] .katex * {
   color: #e5e7eb !important;
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 mjx-container {
   color: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 mjx-container * {
   color: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 mjx-container[jax="SVG"] svg,
 mjx-container[jax="SVG"] svg * {
   fill: currentColor !important;
   stroke: currentColor !important;
+}
+
+mjx-container[jax="SVG"] svg g,
+mjx-container[jax="SVG"] svg path,
+mjx-container[jax="SVG"] svg use,
+mjx-container[jax="SVG"] svg rect,
+mjx-container[jax="SVG"] svg text,
+mjx-container[jax="SVG"] svg tspan {
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+  color: #e5e7eb !important;
+  opacity: 1 !important;
+}
+
+mjx-container[jax="CHTML"] mjx-math,
+mjx-container[jax="CHTML"] mjx-math * {
+  color: #e5e7eb !important;
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 div[data-testid="stMarkdownContainer"] p,
