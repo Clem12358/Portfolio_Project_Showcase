@@ -28,6 +28,77 @@ def render_styles() -> None:
   margin-bottom: 0.65rem;
 }
 
+.automation-banner {
+  background: linear-gradient(120deg, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.14) 100%);
+  border: 1px solid rgba(52, 211, 153, 0.55);
+  border-radius: 10px;
+  padding: 0.62rem 0.76rem;
+  margin-bottom: 0.7rem;
+}
+
+.automation-title {
+  color: #6ee7b7;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.16rem;
+}
+
+.automation-text {
+  color: #ecfeff;
+  font-size: 0.87rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.highlight-banner {
+  border-radius: 12px;
+  padding: 0.72rem 0.86rem;
+  margin-bottom: 0.62rem;
+}
+
+.highlight-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.18rem;
+}
+
+.highlight-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.38;
+  font-weight: 600;
+}
+
+.highlight-primary {
+  background: linear-gradient(120deg, rgba(234, 179, 8, 0.3) 0%, rgba(245, 158, 11, 0.18) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.72);
+}
+
+.highlight-primary .highlight-title {
+  color: #fde68a;
+}
+
+.highlight-primary .highlight-text {
+  color: #fffbeb;
+}
+
+.highlight-secondary {
+  background: linear-gradient(120deg, rgba(14, 165, 233, 0.28) 0%, rgba(59, 130, 246, 0.16) 100%);
+  border: 1px solid rgba(125, 211, 252, 0.75);
+}
+
+.highlight-secondary .highlight-title {
+  color: #bfdbfe;
+}
+
+.highlight-secondary .highlight-text {
+  color: #eff6ff;
+}
+
 .nav-kicker {
   color: #cbd5e1;
   font-size: 0.8rem;
@@ -126,9 +197,42 @@ details[data-testid="stExpander"] {
   border-radius: 10px !important;
 }
 
-details[data-testid="stExpander"] summary p {
+details[data-testid="stExpander"] summary {
+  color: #e5e7eb !important;
+}
+
+details[data-testid="stExpander"] summary * {
   color: #e5e7eb !important;
   font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+details[data-testid="stExpander"] summary svg {
+  color: #93c5fd !important;
+  fill: #93c5fd !important;
+}
+
+div[data-baseweb="tab-list"] button {
+  color: #cbd5e1 !important;
+}
+
+div[data-baseweb="tab-list"] button[aria-selected="true"] {
+  color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
+div[data-testid="stLatex"] {
+  color: #e5e7eb !important;
+}
+
+div[data-testid="stLatex"] .katex,
+div[data-testid="stLatex"] .katex * {
+  color: #e5e7eb !important;
+}
+
+mjx-container,
+mjx-container * {
+  color: #e5e7eb !important;
 }
 
 div[data-testid="stMarkdownContainer"] p,
@@ -215,6 +319,47 @@ def render_stage_map() -> None:
 """,
                 unsafe_allow_html=True,
             )
+
+
+def render_automation_banner() -> None:
+    st.markdown(
+        """
+<div class="automation-banner">
+  <div class="automation-title">Fully Automated Pipeline</div>
+  <p class="automation-text">
+    This model runs end-to-end autonomously: data ingestion, valuation generation, feature extraction,
+    ML inference, and portfolio optimization are executed without manual stock picking.
+  </p>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def render_visibility_callouts() -> None:
+    st.markdown(
+        """
+<div class="highlight-banner highlight-primary">
+  <div class="highlight-title">Scope Note</div>
+  <p class="highlight-text">
+    This outline represents only a small fraction of the fully automated engine we designed and implemented
+    over more than 7 months of work.
+  </p>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+<div class="highlight-banner highlight-secondary">
+  <div class="highlight-title">Interview Discussion</div>
+  <p class="highlight-text">
+    We would be glad to discuss further details and explain the rationale behind each component during an interview.
+  </p>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
 
 
 def render_title_1() -> None:
@@ -368,6 +513,8 @@ def main() -> None:
         "</div>",
         unsafe_allow_html=True,
     )
+    render_automation_banner()
+    render_visibility_callouts()
 
     render_stage_map()
 
