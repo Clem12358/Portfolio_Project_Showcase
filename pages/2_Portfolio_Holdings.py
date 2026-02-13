@@ -108,11 +108,13 @@ div[data-testid="stMetric"] {
 }
 
 div[data-testid="stMetricLabel"] {
-  color: #cbd5e1;
+  color: #9ca3af !important;
+  opacity: 1 !important;
 }
 
 div[data-testid="stMetricLabel"] p {
-  color: #cbd5e1 !important;
+  color: #9ca3af !important;
+  opacity: 1 !important;
   font-weight: 600 !important;
 }
 
@@ -122,6 +124,17 @@ div[data-testid="stMetricValue"] {
 
 div[data-testid="stMetricValue"] > div {
   color: #f8fafc !important;
+}
+
+div[data-testid="stSelectbox"] label {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+div[data-testid="stSelectbox"] label p {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
 }
 
 div[data-testid="stDataFrame"] {
