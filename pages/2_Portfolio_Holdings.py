@@ -100,30 +100,33 @@ div[data-testid="stPageLink"] a:hover {
   margin-bottom: 4px;
 }
 
-div[data-testid="stMetric"] {
+.field-label {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card {
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid rgba(55, 65, 81, 0.45);
   border-radius: 10px;
-  padding: 6px 8px;
+  padding: 10px 12px 8px 12px;
+  min-height: 90px;
 }
 
-div[data-testid="stMetricLabel"] {
-  color: #9ca3af !important;
-  opacity: 1 !important;
-}
-
-div[data-testid="stMetricLabel"] p {
-  color: #9ca3af !important;
-  opacity: 1 !important;
+.stat-label {
+  color: #9ca3af;
+  font-size: 0.9rem;
   font-weight: 600 !important;
+  margin-bottom: 2px;
 }
 
-div[data-testid="stMetricValue"] {
-  color: #e5e7eb;
-}
-
-div[data-testid="stMetricValue"] > div {
-  color: #f8fafc !important;
+.stat-value {
+  color: #f8fafc;
+  font-size: 2.05rem;
+  line-height: 1.05;
+  font-weight: 600;
 }
 
 div[data-testid="stSelectbox"] label {
@@ -190,6 +193,18 @@ def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
         },
     )
     return fig
+
+
+def render_stat_card(label: str, value: str) -> None:
+    st.markdown(
+        f"""
+<div class="stat-card">
+  <div class="stat-label">{label}</div>
+  <div class="stat-value">{value}</div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
 
 
 def build_transactions_df(current_df: pd.DataFrame, previous_df: pd.DataFrame) -> pd.DataFrame:
@@ -330,10 +345,12 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
+    st.markdown('<div class="field-label">Select month</div>', unsafe_allow_html=True)
     selected_month = st.selectbox(
-        "Select month",
+        "select_month",
         options=month_options,
         index=0,
+        label_visibility="collapsed",
         format_func=lambda d: d.strftime("%Y-%m"),
     )
 
@@ -344,8 +361,10 @@ def main() -> None:
     )
 
     c1, c2 = st.columns(2)
-    c1.metric("Month", selected_month.strftime("%Y-%m"))
-    c2.metric("Holdings", f"{len(month_df)}")
+    with c1:
+        render_stat_card("Month", selected_month.strftime("%Y-%m"))
+    with c2:
+        render_stat_card("Holdings", f"{len(month_df)}")
 
     st.markdown('<div class="chart-title">Top 15 Weights (Pie)</div>', unsafe_allow_html=True)
     st.plotly_chart(build_weights_figure(month_df), use_container_width=True, config={"displayModeBar": False})
@@ -392,10 +411,14 @@ def main() -> None:
     gross_change = float(tx_df["abs_delta"].sum())
 
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("From Month", previous_month.strftime("%Y-%m"))
-    m2.metric("To Month", selected_month.strftime("%Y-%m"))
-    m3.metric("Buy Weight", f"{buy_weight * 100:.2f}%")
-    m4.metric("Sell Weight", f"{sell_weight * 100:.2f}%")
+    with m1:
+        render_stat_card("From Month", previous_month.strftime("%Y-%m"))
+    with m2:
+        render_stat_card("To Month", selected_month.strftime("%Y-%m"))
+    with m3:
+        render_stat_card("Buy Weight", f"{buy_weight * 100:.2f}%")
+    with m4:
+        render_stat_card("Sell Weight", f"{sell_weight * 100:.2f}%")
     st.caption(f"Gross reallocation: {gross_change * 100:.2f}%")
 
     st.markdown('<div class="chart-title">Top Weight Changes</div>', unsafe_allow_html=True)
