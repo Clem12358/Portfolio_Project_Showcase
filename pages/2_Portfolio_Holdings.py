@@ -67,6 +67,23 @@ def render_styles() -> None:
   margin-bottom: 10px;
 }
 
+div[data-testid="stPageLink"] a {
+  color: #d1d5db !important;
+  background: rgba(30, 41, 59, 0.45) !important;
+  border: 1px solid rgba(71, 85, 105, 0.65) !important;
+  border-radius: 10px !important;
+}
+
+div[data-testid="stPageLink"] a p {
+  color: #d1d5db !important;
+  font-weight: 600 !important;
+}
+
+div[data-testid="stPageLink"] a:hover {
+  color: #f8fafc !important;
+  border-color: rgba(59, 130, 246, 0.75) !important;
+}
+
 .panel {
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid rgba(55, 65, 81, 0.45);
@@ -91,11 +108,20 @@ div[data-testid="stMetric"] {
 }
 
 div[data-testid="stMetricLabel"] {
-  color: #9ca3af;
+  color: #cbd5e1;
+}
+
+div[data-testid="stMetricLabel"] p {
+  color: #cbd5e1 !important;
+  font-weight: 600 !important;
 }
 
 div[data-testid="stMetricValue"] {
   color: #e5e7eb;
+}
+
+div[data-testid="stMetricValue"] > div {
+  color: #f8fafc !important;
 }
 
 div[data-testid="stDataFrame"] {
@@ -304,10 +330,9 @@ def main() -> None:
         .reset_index(drop=True)
     )
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2 = st.columns(2)
     c1.metric("Month", selected_month.strftime("%Y-%m"))
     c2.metric("Holdings", f"{len(month_df)}")
-    c3.metric("Total Weight", f"{month_df['weight'].sum() * 100:.2f}%")
 
     st.markdown('<div class="chart-title">Top 15 Weights (Pie)</div>', unsafe_allow_html=True)
     st.plotly_chart(build_weights_figure(month_df), use_container_width=True, config={"displayModeBar": False})
