@@ -444,11 +444,16 @@ def render_navigation_links() -> None:
     st.markdown('<div class="nav-help">Click a tab to switch section.</div>', unsafe_allow_html=True)
     st.markdown('<div class="nav-current">Current page: Performance</div>', unsafe_allow_html=True)
 
-    nav_left, nav_right = st.columns(2)
+    nav_left, nav_middle, nav_right = st.columns(3)
     with nav_left:
         st.page_link("app.py", label="Open Performance")
-    with nav_right:
+    with nav_middle:
         st.page_link("pages/2_Portfolio_Holdings.py", label="Open Portfolio Holdings")
+    with nav_right:
+        st.page_link(
+            "pages/3_Overview_of_our_modeling_method.py",
+            label="Open Method Overview",
+        )
 
 
 def render_navigation_banner() -> None:
@@ -459,7 +464,7 @@ def render_navigation_banner() -> None:
     with c1:
         st.markdown(
             '<div class="nav-banner">'
-            "Use the navigation tabs to switch between Performance and Portfolio Holdings."
+            "Use the navigation tabs to switch between Performance, Portfolio Holdings, and Method Overview."
             "</div>",
             unsafe_allow_html=True,
         )
@@ -531,11 +536,18 @@ def main() -> None:
     )
     st.plotly_chart(monthly_figure, use_container_width=True, config={"displayModeBar": False})
 
-    st.markdown('<div class="nav-footer-title">Next section</div>', unsafe_allow_html=True)
-    st.page_link(
-        "pages/2_Portfolio_Holdings.py",
-        label="Next: Open Portfolio Holdings",
-    )
+    st.markdown('<div class="nav-footer-title">Next sections</div>', unsafe_allow_html=True)
+    next_left, next_right = st.columns(2)
+    with next_left:
+        st.page_link(
+            "pages/2_Portfolio_Holdings.py",
+            label="Next: Open Portfolio Holdings",
+        )
+    with next_right:
+        st.page_link(
+            "pages/3_Overview_of_our_modeling_method.py",
+            label="Read: Method Overview",
+        )
 
 
 if __name__ == "__main__":
