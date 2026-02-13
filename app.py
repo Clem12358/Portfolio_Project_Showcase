@@ -318,6 +318,32 @@ div[data-testid="stHorizontalBlock"] {
   margin-bottom: 3px;
 }
 
+div[data-testid="stPageLink"] a {
+  color: #d1d5db !important;
+  background: rgba(30, 41, 59, 0.45) !important;
+  border: 1px solid rgba(71, 85, 105, 0.65) !important;
+  border-radius: 10px !important;
+}
+
+div[data-testid="stPageLink"] a * {
+  color: #d1d5db !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+div[data-testid="stPageLink"] a[aria-current="page"] {
+  background: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(96, 165, 250, 0.8) !important;
+}
+
+div[data-testid="stPageLink"] a:hover {
+  border-color: rgba(59, 130, 246, 0.75) !important;
+}
+
+div[data-testid="stPageLink"] a[aria-current="page"] * {
+  color: #f8fafc !important;
+}
+
 div[data-testid="stPlotlyChart"] {
   background: linear-gradient(180deg, #111c33 0%, #0e1830 100%);
   border: 1px solid var(--panel-border);
