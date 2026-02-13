@@ -11,6 +11,16 @@ def render_styles() -> None:
   --secondary-text-color: #cbd5e1 !important;
 }
 
+:root,
+html,
+body,
+[data-testid="stAppViewContainer"],
+section[data-testid="stMain"],
+div[data-testid="stAppViewContainer"] section.main {
+  --text-color: #e5e7eb !important;
+  --secondary-text-color: #cbd5e1 !important;
+}
+
 [data-testid="stAppViewContainer"],
 section[data-testid="stMain"],
 div[data-testid="stAppViewContainer"] section.main {
@@ -300,7 +310,10 @@ div[data-baseweb="tab-list"] button[aria-selected="true"] {
 }
 
 div[data-testid="stLatex"] {
+  --text-color: #e5e7eb !important;
+  --secondary-text-color: #e5e7eb !important;
   color: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
 div[data-testid="stLatex"] * {
@@ -350,6 +363,22 @@ mjx-container[jax="CHTML"] mjx-math * {
   fill: #e5e7eb !important;
   stroke: #e5e7eb !important;
   opacity: 1 !important;
+}
+
+div[data-testid="stLatex"] svg,
+div[data-testid="stLatex"] svg *,
+div[data-testid="stLatex"] mjx-container,
+div[data-testid="stLatex"] mjx-container * {
+  color: #e5e7eb !important;
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+  opacity: 1 !important;
+}
+
+/* Fallback: force bright formulas if Streamlit renderer injects dark inline colors */
+div[data-testid="stLatex"] mjx-container[jax="SVG"],
+div[data-testid="stLatex"] svg {
+  filter: brightness(0) invert(0.92);
 }
 
 div[data-testid="stMarkdownContainer"] p,
