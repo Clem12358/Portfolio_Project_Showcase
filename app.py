@@ -389,7 +389,11 @@ def render_navigation_links() -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Portfolio Performance Showcase", layout="wide")
+    st.set_page_config(
+        page_title="Portfolio Performance Showcase",
+        layout="wide",
+        initial_sidebar_state="collapsed",
+    )
 
     if not SNAPSHOT_PATH.exists():
         st.error(f"Missing snapshot file: {SNAPSHOT_PATH}")

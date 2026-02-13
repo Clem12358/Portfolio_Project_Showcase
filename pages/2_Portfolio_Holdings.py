@@ -315,7 +315,11 @@ def render_navigation_links() -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Portfolio Holdings", layout="wide")
+    st.set_page_config(
+        page_title="Portfolio Holdings",
+        layout="wide",
+        initial_sidebar_state="collapsed",
+    )
     render_styles()
     render_navigation_links()
 
