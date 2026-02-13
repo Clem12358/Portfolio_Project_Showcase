@@ -67,21 +67,73 @@ def render_styles() -> None:
   margin-bottom: 10px;
 }
 
+.nav-kicker {
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.nav-help {
+  color: #9ca3af;
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+}
+
+.nav-current {
+  color: #d1d5db;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+
+.nav-banner {
+  color: #dbeafe;
+  background: linear-gradient(120deg, rgba(29, 78, 216, 0.26) 0%, rgba(37, 99, 235, 0.16) 100%);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.nav-footer-title {
+  color: #d1d5db;
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
 div[data-testid="stPageLink"] a {
   color: #d1d5db !important;
   background: rgba(30, 41, 59, 0.45) !important;
   border: 1px solid rgba(71, 85, 105, 0.65) !important;
   border-radius: 10px !important;
+  min-height: 2.6rem !important;
 }
 
-div[data-testid="stPageLink"] a p {
+div[data-testid="stPageLink"] a * {
   color: #d1d5db !important;
+  opacity: 1 !important;
   font-weight: 600 !important;
 }
 
+div[data-testid="stPageLink"] a[aria-current="page"] {
+  background: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(96, 165, 250, 0.8) !important;
+  box-shadow: inset 0 -2px 0 rgba(147, 197, 253, 0.95) !important;
+}
+
 div[data-testid="stPageLink"] a:hover {
-  color: #f8fafc !important;
   border-color: rgba(59, 130, 246, 0.75) !important;
+}
+
+div[data-testid="stPageLink"] a[aria-current="page"] * {
+  color: #f8fafc !important;
 }
 
 .panel {
@@ -151,6 +203,22 @@ div[data-testid="stPlotlyChart"] {
   border: 1px solid rgba(55, 65, 81, 0.45);
   border-radius: 10px;
   padding: 4px 5px 0 5px;
+}
+
+div[data-testid="stButton"] button {
+  width: 100%;
+  min-height: 2.35rem;
+  border-radius: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.8);
+  color: #e5e7eb;
+  background: rgba(17, 24, 39, 0.88);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+div[data-testid="stButton"] button:hover {
+  border-color: rgba(96, 165, 250, 0.85);
+  color: #f8fafc;
 }
 </style>
 """,
@@ -307,11 +375,33 @@ def render_navigation_links() -> None:
         st.warning("Page navigation is unavailable in this Streamlit version.")
         return
 
+    st.markdown('<div class="nav-kicker">Navigation</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-help">Click a tab to switch section.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-current">Current page: Portfolio Holdings</div>', unsafe_allow_html=True)
+
     nav_left, nav_right = st.columns(2)
     with nav_left:
-        st.page_link("app.py", label="Performance")
+        st.page_link("app.py", label="Open Performance")
     with nav_right:
-        st.page_link("pages/2_Portfolio_Holdings.py", label="Portfolio Holdings")
+        st.page_link("pages/2_Portfolio_Holdings.py", label="Open Portfolio Holdings")
+
+
+def render_navigation_banner() -> None:
+    if st.session_state.get("nav_tip_dismissed", False):
+        return
+
+    c1, c2 = st.columns([5.0, 1.0])
+    with c1:
+        st.markdown(
+            '<div class="nav-banner">'
+            "Use the navigation tabs to switch between Performance and Portfolio Holdings."
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c2:
+        if st.button("Dismiss tip", key="dismiss_nav_tip"):
+            st.session_state["nav_tip_dismissed"] = True
+            st.rerun()
 
 
 def main() -> None:
@@ -321,6 +411,7 @@ def main() -> None:
         initial_sidebar_state="collapsed",
     )
     render_styles()
+    render_navigation_banner()
     render_navigation_links()
 
     if not HOLDINGS_SNAPSHOT_PATH.exists():
@@ -398,58 +489,74 @@ def main() -> None:
     st.markdown('<div class="chart-title">Transactions vs Previous Month</div>', unsafe_allow_html=True)
     if previous_month is None:
         st.info("No previous month available for comparison in the selected window.")
-        return
+    else:
+        previous_df = (
+            holdings_df[holdings_df["as_of_date"] == previous_month]
+            .sort_values("weight", ascending=False)
+            .reset_index(drop=True)
+        )
+        tx_df = build_transactions_df(month_df, previous_df)
+        if tx_df.empty:
+            st.info("No allocation changes detected between these two months.")
+        else:
+            buy_weight = float(tx_df[tx_df["delta_weight"] > 0]["delta_weight"].sum())
+            sell_weight = float((-tx_df[tx_df["delta_weight"] < 0]["delta_weight"]).sum())
+            gross_change = float(tx_df["abs_delta"].sum())
 
-    previous_df = (
-        holdings_df[holdings_df["as_of_date"] == previous_month]
-        .sort_values("weight", ascending=False)
-        .reset_index(drop=True)
-    )
-    tx_df = build_transactions_df(month_df, previous_df)
-    if tx_df.empty:
-        st.info("No allocation changes detected between these two months.")
-        return
+            m1, m2, m3, m4 = st.columns(4)
+            with m1:
+                render_stat_card("From Month", previous_month.strftime("%Y-%m"))
+            with m2:
+                render_stat_card("To Month", selected_month.strftime("%Y-%m"))
+            with m3:
+                render_stat_card("Buy Weight", f"{buy_weight * 100:.2f}%")
+            with m4:
+                render_stat_card("Sell Weight", f"{sell_weight * 100:.2f}%")
+            st.caption(f"Gross reallocation: {gross_change * 100:.2f}%")
 
-    buy_weight = float(tx_df[tx_df["delta_weight"] > 0]["delta_weight"].sum())
-    sell_weight = float((-tx_df[tx_df["delta_weight"] < 0]["delta_weight"]).sum())
-    gross_change = float(tx_df["abs_delta"].sum())
+            st.markdown('<div class="chart-title">Top Weight Changes</div>', unsafe_allow_html=True)
+            st.plotly_chart(
+                build_transactions_figure(tx_df),
+                use_container_width=True,
+                config={"displayModeBar": False},
+            )
 
-    m1, m2, m3, m4 = st.columns(4)
-    with m1:
-        render_stat_card("From Month", previous_month.strftime("%Y-%m"))
-    with m2:
-        render_stat_card("To Month", selected_month.strftime("%Y-%m"))
-    with m3:
-        render_stat_card("Buy Weight", f"{buy_weight * 100:.2f}%")
-    with m4:
-        render_stat_card("Sell Weight", f"{sell_weight * 100:.2f}%")
-    st.caption(f"Gross reallocation: {gross_change * 100:.2f}%")
+            tx_display = tx_df.copy()
+            tx_display["prev_weight_pct"] = tx_display["prev_weight"] * 100
+            tx_display["curr_weight_pct"] = tx_display["curr_weight"] * 100
+            tx_display["delta_weight_pct"] = tx_display["delta_weight"] * 100
+            tx_display = tx_display[
+                [
+                    "action",
+                    "symbol",
+                    "company_name",
+                    "sector",
+                    "prev_weight_pct",
+                    "curr_weight_pct",
+                    "delta_weight_pct",
+                ]
+            ]
 
-    st.markdown('<div class="chart-title">Top Weight Changes</div>', unsafe_allow_html=True)
-    st.plotly_chart(build_transactions_figure(tx_df), use_container_width=True, config={"displayModeBar": False})
+            st.markdown('<div class="chart-title">Transaction Details</div>', unsafe_allow_html=True)
+            st.dataframe(
+                tx_display,
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "action": st.column_config.TextColumn("Action", width="small"),
+                    "symbol": st.column_config.TextColumn("Symbol", width="small"),
+                    "company_name": st.column_config.TextColumn("Company Name"),
+                    "sector": st.column_config.TextColumn("Sector"),
+                    "prev_weight_pct": st.column_config.NumberColumn("Prev Weight (%)", format="%.2f%%"),
+                    "curr_weight_pct": st.column_config.NumberColumn("Curr Weight (%)", format="%.2f%%"),
+                    "delta_weight_pct": st.column_config.NumberColumn("Change (%)", format="%+.2f%%"),
+                },
+            )
 
-    tx_display = tx_df.copy()
-    tx_display["prev_weight_pct"] = tx_display["prev_weight"] * 100
-    tx_display["curr_weight_pct"] = tx_display["curr_weight"] * 100
-    tx_display["delta_weight_pct"] = tx_display["delta_weight"] * 100
-    tx_display = tx_display[
-        ["action", "symbol", "company_name", "sector", "prev_weight_pct", "curr_weight_pct", "delta_weight_pct"]
-    ]
-
-    st.markdown('<div class="chart-title">Transaction Details</div>', unsafe_allow_html=True)
-    st.dataframe(
-        tx_display,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "action": st.column_config.TextColumn("Action", width="small"),
-            "symbol": st.column_config.TextColumn("Symbol", width="small"),
-            "company_name": st.column_config.TextColumn("Company Name"),
-            "sector": st.column_config.TextColumn("Sector"),
-            "prev_weight_pct": st.column_config.NumberColumn("Prev Weight (%)", format="%.2f%%"),
-            "curr_weight_pct": st.column_config.NumberColumn("Curr Weight (%)", format="%.2f%%"),
-            "delta_weight_pct": st.column_config.NumberColumn("Change (%)", format="%+.2f%%"),
-        },
+    st.markdown('<div class="nav-footer-title">Back to overview</div>', unsafe_allow_html=True)
+    st.page_link(
+        "app.py",
+        label="Back: Open Performance",
     )
 
 

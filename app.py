@@ -310,6 +310,47 @@ div[data-testid="stHorizontalBlock"] {
   margin: 9px 0 8px 0;
 }
 
+.nav-kicker {
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.nav-help {
+  color: #9ca3af;
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+}
+
+.nav-current {
+  color: #d1d5db;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+
+.nav-banner {
+  color: #dbeafe;
+  background: linear-gradient(120deg, rgba(29, 78, 216, 0.26) 0%, rgba(37, 99, 235, 0.16) 100%);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.nav-footer-title {
+  color: #d1d5db;
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
 .chart-title {
   color: #d1d5db;
   font-size: 0.9rem;
@@ -323,6 +364,7 @@ div[data-testid="stPageLink"] a {
   background: rgba(30, 41, 59, 0.45) !important;
   border: 1px solid rgba(71, 85, 105, 0.65) !important;
   border-radius: 10px !important;
+  min-height: 2.6rem !important;
 }
 
 div[data-testid="stPageLink"] a * {
@@ -334,6 +376,7 @@ div[data-testid="stPageLink"] a * {
 div[data-testid="stPageLink"] a[aria-current="page"] {
   background: rgba(59, 130, 246, 0.2) !important;
   border-color: rgba(96, 165, 250, 0.8) !important;
+  box-shadow: inset 0 -2px 0 rgba(147, 197, 253, 0.95) !important;
 }
 
 div[data-testid="stPageLink"] a:hover {
@@ -349,6 +392,22 @@ div[data-testid="stPlotlyChart"] {
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   padding: 5px 6px 0 6px;
+}
+
+div[data-testid="stButton"] button {
+  width: 100%;
+  min-height: 2.35rem;
+  border-radius: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.8);
+  color: #e5e7eb;
+  background: rgba(17, 24, 39, 0.88);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+div[data-testid="stButton"] button:hover {
+  border-color: rgba(96, 165, 250, 0.85);
+  color: #f8fafc;
 }
 
 @media (max-width: 1200px) {
@@ -381,11 +440,33 @@ def render_navigation_links() -> None:
         st.warning("Page navigation is unavailable in this Streamlit version.")
         return
 
+    st.markdown('<div class="nav-kicker">Navigation</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-help">Click a tab to switch section.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="nav-current">Current page: Performance</div>', unsafe_allow_html=True)
+
     nav_left, nav_right = st.columns(2)
     with nav_left:
-        st.page_link("app.py", label="Performance")
+        st.page_link("app.py", label="Open Performance")
     with nav_right:
-        st.page_link("pages/2_Portfolio_Holdings.py", label="Portfolio Holdings")
+        st.page_link("pages/2_Portfolio_Holdings.py", label="Open Portfolio Holdings")
+
+
+def render_navigation_banner() -> None:
+    if st.session_state.get("nav_tip_dismissed", False):
+        return
+
+    c1, c2 = st.columns([5.0, 1.0])
+    with c1:
+        st.markdown(
+            '<div class="nav-banner">'
+            "Use the navigation tabs to switch between Performance and Portfolio Holdings."
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c2:
+        if st.button("Dismiss tip", key="dismiss_nav_tip"):
+            st.session_state["nav_tip_dismissed"] = True
+            st.rerun()
 
 
 def main() -> None:
@@ -406,6 +487,7 @@ def main() -> None:
     cards = build_cards(kpis, kpis_since_coverage)
 
     render_styles()
+    render_navigation_banner()
     render_navigation_links()
 
     for idx in range(0, len(cards), 4):
@@ -448,6 +530,12 @@ def main() -> None:
         coverage_start_date=coverage_start_date,
     )
     st.plotly_chart(monthly_figure, use_container_width=True, config={"displayModeBar": False})
+
+    st.markdown('<div class="nav-footer-title">Next section</div>', unsafe_allow_html=True)
+    st.page_link(
+        "pages/2_Portfolio_Holdings.py",
+        label="Next: Open Portfolio Holdings",
+    )
 
 
 if __name__ == "__main__":
