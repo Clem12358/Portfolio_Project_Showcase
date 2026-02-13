@@ -90,6 +90,10 @@ def render_styles() -> None:
   margin-bottom: 0.45rem;
 }
 
+.nav-section-spacer {
+  height: 1.15rem;
+}
+
 .nav-banner {
   color: #dbeafe;
   background: linear-gradient(120deg, rgba(29, 78, 216, 0.26) 0%, rgba(37, 99, 235, 0.16) 100%);
@@ -389,6 +393,7 @@ def render_navigation_links() -> None:
             "pages/3_Overview_of_our_modeling_method.py",
             label="Open Method Overview",
         )
+    st.markdown('<div class="nav-section-spacer"></div>', unsafe_allow_html=True)
 
 
 def render_navigation_banner() -> None:

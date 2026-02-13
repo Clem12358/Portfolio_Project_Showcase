@@ -9,6 +9,13 @@ def render_styles() -> None:
   background: linear-gradient(180deg, #040c20 0%, #020917 100%);
 }
 
+[data-testid="stAppViewContainer"],
+section[data-testid="stMain"],
+div[data-testid="stAppViewContainer"] section.main {
+  --text-color: #e5e7eb !important;
+  --secondary-text-color: #cbd5e1 !important;
+}
+
 .block-container {
   max-width: 1030px;
   padding-top: 6.2rem;
@@ -122,6 +129,10 @@ def render_styles() -> None:
   margin-bottom: 0.45rem;
 }
 
+.nav-section-spacer {
+  height: 1.15rem;
+}
+
 .nav-banner {
   color: #dbeafe;
   background: linear-gradient(120deg, rgba(29, 78, 216, 0.26) 0%, rgba(37, 99, 235, 0.16) 100%);
@@ -197,19 +208,32 @@ details[data-testid="stExpander"] {
   border-radius: 10px !important;
 }
 
-details[data-testid="stExpander"] summary {
+div[data-testid="stExpander"] details summary,
+details[data-testid="stExpander"] summary,
+div[data-baseweb="accordion"] button {
   color: #e5e7eb !important;
+  opacity: 1 !important;
 }
 
-details[data-testid="stExpander"] summary * {
+div[data-testid="stExpander"] details summary *,
+details[data-testid="stExpander"] summary *,
+div[data-baseweb="accordion"] button * {
   color: #e5e7eb !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
 
-details[data-testid="stExpander"] summary svg {
+div[data-testid="stExpander"] details summary svg,
+details[data-testid="stExpander"] summary svg,
+div[data-baseweb="accordion"] button svg {
   color: #93c5fd !important;
+}
+
+div[data-testid="stExpander"] details summary svg *,
+details[data-testid="stExpander"] summary svg *,
+div[data-baseweb="accordion"] button svg * {
   fill: #93c5fd !important;
+  stroke: #93c5fd !important;
 }
 
 div[data-baseweb="tab-list"] button {
@@ -225,14 +249,27 @@ div[data-testid="stLatex"] {
   color: #e5e7eb !important;
 }
 
+div[data-testid="stLatex"] * {
+  color: #e5e7eb !important;
+}
+
 div[data-testid="stLatex"] .katex,
 div[data-testid="stLatex"] .katex * {
   color: #e5e7eb !important;
 }
 
-mjx-container,
+mjx-container {
+  color: #e5e7eb !important;
+}
+
 mjx-container * {
   color: #e5e7eb !important;
+}
+
+mjx-container[jax="SVG"] svg,
+mjx-container[jax="SVG"] svg * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }
 
 div[data-testid="stMarkdownContainer"] p,
@@ -280,6 +317,7 @@ def render_navigation_links() -> None:
             "pages/3_Overview_of_our_modeling_method.py",
             label="Open Method Overview",
         )
+    st.markdown('<div class="nav-section-spacer"></div>', unsafe_allow_html=True)
 
 
 def render_navigation_banner() -> None:
