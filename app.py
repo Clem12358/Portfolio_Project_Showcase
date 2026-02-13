@@ -310,6 +310,29 @@ div[data-testid="stHorizontalBlock"] {
   margin: 9px 0 8px 0;
 }
 
+.signature-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.55rem;
+}
+
+.signature-pill {
+  background: linear-gradient(130deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.92) 100%);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  border-radius: 999px;
+  padding: 0.36rem 0.82rem;
+  color: #dbeafe;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.12) inset;
+}
+
+.signature-pill strong {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
 .nav-kicker {
   color: #cbd5e1;
   font-size: 0.8rem;
@@ -439,6 +462,17 @@ def render_card(card: dict) -> None:
     )
 
 
+def render_signature() -> None:
+    st.markdown(
+        """
+<div class="signature-wrap">
+  <div class="signature-pill">By <strong>Dylan Cavin</strong> &amp; <strong>Clement Durix</strong></div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+
 def render_navigation_links() -> None:
     if not hasattr(st, "page_link"):
         st.warning("Page navigation is unavailable in this Streamlit version.")
@@ -497,6 +531,7 @@ def main() -> None:
     cards = build_cards(kpis, kpis_since_coverage)
 
     render_styles()
+    render_signature()
     render_navigation_banner()
     render_navigation_links()
 
