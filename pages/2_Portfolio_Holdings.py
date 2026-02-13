@@ -153,6 +153,101 @@ def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
     return fig
 
 
+def build_transactions_df(current_df: pd.DataFrame, previous_df: pd.DataFrame) -> pd.DataFrame:
+    prev = previous_df.set_index("symbol")
+    curr = current_df.set_index("symbol")
+    symbols = sorted(set(prev.index).union(set(curr.index)))
+
+    rows = []
+    for symbol in symbols:
+        prev_w = float(prev.at[symbol, "weight"]) if symbol in prev.index else 0.0
+        curr_w = float(curr.at[symbol, "weight"]) if symbol in curr.index else 0.0
+        delta = curr_w - prev_w
+        if abs(delta) < 1e-10:
+            continue
+
+        company_name = None
+        if symbol in curr.index:
+            company_name = curr.at[symbol, "company_name"]
+        elif symbol in prev.index:
+            company_name = prev.at[symbol, "company_name"]
+
+        sector = None
+        if symbol in curr.index:
+            sector = curr.at[symbol, "sector"]
+        elif symbol in prev.index:
+            sector = prev.at[symbol, "sector"]
+
+        if prev_w == 0 and curr_w > 0:
+            action = "BUY"
+        elif curr_w == 0 and prev_w > 0:
+            action = "SELL"
+        elif delta > 0:
+            action = "INCREASE"
+        else:
+            action = "DECREASE"
+
+        rows.append(
+            {
+                "action": action,
+                "symbol": symbol,
+                "company_name": company_name if pd.notna(company_name) else symbol,
+                "sector": sector if pd.notna(sector) else "",
+                "prev_weight": prev_w,
+                "curr_weight": curr_w,
+                "delta_weight": delta,
+                "abs_delta": abs(delta),
+            }
+        )
+
+    tx_df = pd.DataFrame(rows).sort_values("abs_delta", ascending=False).reset_index(drop=True)
+    return tx_df
+
+
+def build_transactions_figure(tx_df: pd.DataFrame) -> go.Figure:
+    top = tx_df.nlargest(20, "abs_delta").copy()
+    top["delta_pct"] = top["delta_weight"] * 100
+    top = top.sort_values("delta_pct")
+
+    colors = ["#10b981" if v > 0 else "#ef4444" for v in top["delta_pct"]]
+    labels = top["symbol"] + " - " + top["company_name"]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=top["delta_pct"],
+            y=labels,
+            orientation="h",
+            marker_color=colors,
+            hovertemplate="%{y}<br>Weight change: %{x:+.2f}%<extra></extra>",
+        )
+    )
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        height=420,
+        margin={"l": 58, "r": 18, "t": 6, "b": 30},
+        showlegend=False,
+    )
+    fig.update_xaxes(
+        title="Change in Weight (%)",
+        title_font={"size": 10, "color": "#9ca3af"},
+        tickfont={"size": 10, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        linecolor="#4b5563",
+        zeroline=True,
+        zerolinecolor="#64748b",
+    )
+    fig.update_yaxes(
+        tickfont={"size": 10, "color": "#d1d5db"},
+        showgrid=False,
+        linecolor="#4b5563",
+    )
+    return fig
+
+
 def render_navigation_links() -> None:
     if not hasattr(st, "page_link"):
         st.warning("Page navigation is unavailable in this Streamlit version.")
@@ -232,6 +327,63 @@ def main() -> None:
             "company_name": st.column_config.TextColumn("Company Name"),
             "weight_pct": st.column_config.NumberColumn("Weight (%)", format="%.2f%%"),
             "sector": st.column_config.TextColumn("Sector"),
+        },
+    )
+
+    months_asc = sorted(month_options)
+    selected_idx = months_asc.index(selected_month)
+    previous_month = months_asc[selected_idx - 1] if selected_idx > 0 else None
+
+    st.markdown('<div class="chart-title">Transactions vs Previous Month</div>', unsafe_allow_html=True)
+    if previous_month is None:
+        st.info("No previous month available for comparison in the selected window.")
+        return
+
+    previous_df = (
+        holdings_df[holdings_df["as_of_date"] == previous_month]
+        .sort_values("weight", ascending=False)
+        .reset_index(drop=True)
+    )
+    tx_df = build_transactions_df(month_df, previous_df)
+    if tx_df.empty:
+        st.info("No allocation changes detected between these two months.")
+        return
+
+    buy_weight = float(tx_df[tx_df["delta_weight"] > 0]["delta_weight"].sum())
+    sell_weight = float((-tx_df[tx_df["delta_weight"] < 0]["delta_weight"]).sum())
+    gross_change = float(tx_df["abs_delta"].sum())
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("From Month", previous_month.strftime("%Y-%m"))
+    m2.metric("To Month", selected_month.strftime("%Y-%m"))
+    m3.metric("Buy Weight", f"{buy_weight * 100:.2f}%")
+    m4.metric("Sell Weight", f"{sell_weight * 100:.2f}%")
+    st.caption(f"Gross reallocation: {gross_change * 100:.2f}%")
+
+    st.markdown('<div class="chart-title">Top Weight Changes</div>', unsafe_allow_html=True)
+    st.plotly_chart(build_transactions_figure(tx_df), use_container_width=True, config={"displayModeBar": False})
+
+    tx_display = tx_df.copy()
+    tx_display["prev_weight_pct"] = tx_display["prev_weight"] * 100
+    tx_display["curr_weight_pct"] = tx_display["curr_weight"] * 100
+    tx_display["delta_weight_pct"] = tx_display["delta_weight"] * 100
+    tx_display = tx_display[
+        ["action", "symbol", "company_name", "sector", "prev_weight_pct", "curr_weight_pct", "delta_weight_pct"]
+    ]
+
+    st.markdown('<div class="chart-title">Transaction Details</div>', unsafe_allow_html=True)
+    st.dataframe(
+        tx_display,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "action": st.column_config.TextColumn("Action", width="small"),
+            "symbol": st.column_config.TextColumn("Symbol", width="small"),
+            "company_name": st.column_config.TextColumn("Company Name"),
+            "sector": st.column_config.TextColumn("Sector"),
+            "prev_weight_pct": st.column_config.NumberColumn("Prev Weight (%)", format="%.2f%%"),
+            "curr_weight_pct": st.column_config.NumberColumn("Curr Weight (%)", format="%.2f%%"),
+            "delta_weight_pct": st.column_config.NumberColumn("Change (%)", format="%+.2f%%"),
         },
     )
 
