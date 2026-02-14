@@ -11,6 +11,27 @@ def render_styles() -> None:
   --secondary-text-color: #cbd5e1 !important;
 }
 
+header[data-testid="stHeader"],
+div[data-testid="stAppHeader"] {
+  background: #000000 !important;
+}
+
+header[data-testid="stHeader"] *,
+div[data-testid="stAppHeader"] * {
+  color: #e5e7eb !important;
+}
+
+div[data-testid="stToolbar"] button,
+div[data-testid="stToolbar"] a {
+  color: #e5e7eb !important;
+}
+
+div[data-testid="stToolbar"] svg,
+div[data-testid="stToolbar"] svg * {
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+}
+
 :root,
 html,
 body,

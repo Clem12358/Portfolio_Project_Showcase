@@ -315,6 +315,27 @@ def render_styles() -> None:
   background: linear-gradient(180deg, #040c20 0%, #020917 100%);
 }
 
+header[data-testid="stHeader"],
+div[data-testid="stAppHeader"] {
+  background: #000000 !important;
+}
+
+header[data-testid="stHeader"] *,
+div[data-testid="stAppHeader"] * {
+  color: #e5e7eb !important;
+}
+
+div[data-testid="stToolbar"] button,
+div[data-testid="stToolbar"] a {
+  color: #e5e7eb !important;
+}
+
+div[data-testid="stToolbar"] svg,
+div[data-testid="stToolbar"] svg * {
+  fill: #e5e7eb !important;
+  stroke: #e5e7eb !important;
+}
+
 .block-container {
   max-width: 1030px;
   padding-top: 6.2rem;
