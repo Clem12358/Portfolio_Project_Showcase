@@ -128,6 +128,21 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.
     df = pd.DataFrame(chart_data)
     df["date"] = pd.to_datetime(df["date"])
     df = rebase_since_coverage(df, coverage_start_date)
+    y_values = pd.concat(
+        [
+            pd.to_numeric(df["benchmark"], errors="coerce"),
+            pd.to_numeric(df["portfolio"], errors="coerce"),
+        ],
+        ignore_index=True,
+    ).dropna()
+
+    y_range = [-0.2, 0.6]
+    if not y_values.empty:
+        y_min = float(y_values.min())
+        y_max = float(y_values.max())
+        span = max(y_max - y_min, 0.05)
+        pad = span * 0.08
+        y_range = [min(-0.2, y_min - pad), max(0.6, y_max + pad)]
 
     fig = go.Figure()
     fig.add_trace(
@@ -182,7 +197,7 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.
         gridcolor="#334155",
         gridwidth=1,
         zeroline=False,
-        range=[-0.2, 0.6],
+        range=y_range,
         linecolor="#4b5563",
     )
     return fig
