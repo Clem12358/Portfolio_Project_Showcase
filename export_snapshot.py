@@ -654,7 +654,7 @@ def export_symbol_names(run_id: str) -> None:
 # ---------------------------------------------------------------------------
 
 def export_covariance(run_id: str) -> None:
-    log.info("Exporting covariance matrix...")
+    log.info("Exporting correlation matrix...")
 
     with engine.connect() as conn:
         # Get the last rebalance date
@@ -698,8 +698,8 @@ def export_covariance(run_id: str) -> None:
     price_matrix = price_matrix.tail(252)
     returns = price_matrix.pct_change(fill_method=None).iloc[1:]
 
-    # Covariance matrix, annualized
-    cov = returns.cov() * 252
+    # Correlation matrix
+    cov = returns.corr()
 
     ordered = [s for s in symbols_sorted if s in cov.columns]
     ordered_sectors = [sectors_sorted[symbols_sorted.index(s)] for s in ordered]
@@ -716,7 +716,6 @@ def export_covariance(run_id: str) -> None:
     payload = {
         "as_of_date": as_of_date,
         "lookback_days": 252,
-        "annualized": True,
         "symbols": ordered,
         "sectors": ordered_sectors,
         "matrix": matrix,

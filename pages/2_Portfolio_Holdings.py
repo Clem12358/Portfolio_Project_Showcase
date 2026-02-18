@@ -393,21 +393,16 @@ def build_sector_allocation_figure(holdings_df: pd.DataFrame) -> go.Figure:
 # Covariance matrix heatmap
 # ---------------------------------------------------------------------------
 
-def build_covariance_figure(cov_data: dict) -> go.Figure:
+def build_correlation_figure(cov_data: dict) -> go.Figure:
     symbols = cov_data["symbols"]
     sectors = cov_data["sectors"]
     matrix = np.array(cov_data["matrix"])
-
-    # Clip color range to 95th percentile so outliers don't wash out the scale
-    abs_vals = np.abs(matrix).ravel()
-    zmax = float(np.percentile(abs_vals, 95))
-    zmin = -zmax
 
     hover_text = []
     for i, s1 in enumerate(symbols):
         row_text = []
         for j, s2 in enumerate(symbols):
-            row_text.append(f"{s1} vs {s2}<br>Cov: {matrix[i][j]:.4f}")
+            row_text.append(f"{s1} vs {s2}<br>Corr: {matrix[i][j]:.3f}")
         hover_text.append(row_text)
 
     fig = go.Figure(data=go.Heatmap(
@@ -416,12 +411,12 @@ def build_covariance_figure(cov_data: dict) -> go.Figure:
         y=symbols,
         colorscale="RdBu_r",
         zmid=0,
-        zmin=zmin,
-        zmax=zmax,
+        zmin=-1,
+        zmax=1,
         text=hover_text,
         hoverinfo="text",
         colorbar={
-            "title": {"text": "Cov", "font": {"color": "#9ca3af", "size": 10}},
+            "title": {"text": "Corr", "font": {"color": "#9ca3af", "size": 10}},
             "tickfont": {"color": "#9ca3af", "size": 9},
             "thickness": 12,
             "len": 0.6,
@@ -767,11 +762,11 @@ def main() -> None:
     # --- Covariance Matrix ---
     if covariance_payload and covariance_payload.get("symbols"):
         st.markdown(
-            '<div class="chart-title">Annualized Covariance Matrix (252-day lookback)</div>',
+            '<div class="chart-title">Correlation Matrix (252-day lookback)</div>',
             unsafe_allow_html=True,
         )
         st.plotly_chart(
-            build_covariance_figure(covariance_payload),
+            build_correlation_figure(covariance_payload),
             use_container_width=True,
             config={"displayModeBar": False},
         )
