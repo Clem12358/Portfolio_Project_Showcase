@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -10,10 +11,26 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 HOLDINGS_SNAPSHOT_PATH = REPO_ROOT / "data" / "holdings_snapshot.json"
 PERFORMANCE_SNAPSHOT_PATH = REPO_ROOT / "data" / "performance_snapshot.json"
 SYMBOL_NAME_SNAPSHOT_PATH = REPO_ROOT / "data" / "symbol_name_snapshot.json"
+COVARIANCE_SNAPSHOT_PATH = REPO_ROOT / "data" / "covariance_snapshot.json"
+
+SECTOR_COLORS = {
+    "Technology": "#3b82f6",
+    "Healthcare": "#10b981",
+    "Financial Services": "#f59e0b",
+    "Consumer Cyclical": "#ef4444",
+    "Consumer Defensive": "#f97316",
+    "Industrials": "#8b5cf6",
+    "Energy": "#06b6d4",
+    "Basic Materials": "#84cc16",
+    "Communication Services": "#ec4899",
+    "Real Estate": "#14b8a6",
+    "Utilities": "#a78bfa",
+    "Unknown": "#6b7280",
+}
 
 
 @st.cache_data
-def load_snapshots() -> tuple[pd.DataFrame, dict, dict]:
+def load_snapshots() -> tuple[pd.DataFrame, dict, dict, dict | None]:
     holdings_payload = json.loads(HOLDINGS_SNAPSHOT_PATH.read_text(encoding="utf-8"))
     performance_payload = json.loads(PERFORMANCE_SNAPSHOT_PATH.read_text(encoding="utf-8"))
     names_payload = (
@@ -21,11 +38,17 @@ def load_snapshots() -> tuple[pd.DataFrame, dict, dict]:
         if SYMBOL_NAME_SNAPSHOT_PATH.exists()
         else {"mapping": {}}
     )
+    covariance_payload = (
+        json.loads(COVARIANCE_SNAPSHOT_PATH.read_text(encoding="utf-8"))
+        if COVARIANCE_SNAPSHOT_PATH.exists()
+        else None
+    )
 
     holdings_df = pd.DataFrame(holdings_payload["rows"])
     holdings_df["as_of_date"] = pd.to_datetime(holdings_df["as_of_date"])
     holdings_df["weight"] = pd.to_numeric(holdings_df["weight"], errors="coerce").fillna(0.0)
     holdings_df["expected_return"] = pd.to_numeric(holdings_df["expected_return"], errors="coerce")
+    holdings_df["unrealized_pct"] = pd.to_numeric(holdings_df.get("unrealized_pct"), errors="coerce")
     symbol_name_map = names_payload.get("mapping", {})
     holdings_df["company_name"] = holdings_df["symbol"].map(symbol_name_map).fillna(holdings_df["symbol"])
 
@@ -37,7 +60,7 @@ def load_snapshots() -> tuple[pd.DataFrame, dict, dict]:
         end_month = pd.Timestamp(kpis_end_date).to_period("M").to_timestamp("M")
         holdings_df = holdings_df[holdings_df["as_of_date"] <= end_month].copy()
 
-    return holdings_df, holdings_payload, performance_payload
+    return holdings_df, holdings_payload, performance_payload, covariance_payload
 
 
 def render_styles() -> None:
@@ -245,48 +268,336 @@ div[data-testid="stButton"] button:hover {
   border-color: rgba(96, 165, 250, 0.85);
   color: #f8fafc;
 }
+
+.tx-panel {
+  background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
+  border: 1px solid rgba(55, 65, 81, 0.45);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  min-height: 120px;
+}
+
+.tx-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.tx-title {
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tx-badge {
+  font-size: 0.7rem;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-family: monospace;
+}
+
+.tx-badge-green { background: rgba(16,185,129,0.15); color: #34d399; }
+.tx-badge-red { background: rgba(239,68,68,0.15); color: #f87171; }
+.tx-badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.tx-badge-orange { background: rgba(249,115,22,0.15); color: #fb923c; }
+
+.tx-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(55,65,81,0.2);
+  font-size: 0.78rem;
+}
+
+.tx-sym { color: #60a5fa; font-family: monospace; font-weight: 600; }
+.tx-name { color: #6b7280; margin-left: 4px; }
+.tx-weight { color: #d1d5db; font-family: monospace; }
+.tx-none { color: #6b7280; font-size: 0.78rem; font-style: italic; }
 </style>
 """,
         unsafe_allow_html=True,
     )
 
 
-def build_weights_figure(month_df: pd.DataFrame) -> go.Figure:
-    top = month_df.nlargest(15, "weight").copy()
-    labels = top["symbol"] + " - " + top["company_name"]
-    values = top["weight"] * 100
+# ---------------------------------------------------------------------------
+# Sector Allocation Over Time (replaces pie chart)
+# ---------------------------------------------------------------------------
+
+def build_sector_allocation_figure(holdings_df: pd.DataFrame) -> go.Figure:
+    sector_ts = (
+        holdings_df.groupby(["as_of_date", "sector"])["weight"]
+        .sum()
+        .reset_index()
+    )
+    pivoted = sector_ts.pivot(index="as_of_date", columns="sector", values="weight").fillna(0)
+    pivoted = pivoted.sort_index()
 
     fig = go.Figure()
-    fig.add_trace(
-        go.Pie(
-            labels=labels,
-            values=values,
-            hole=0.0,
-            sort=False,
-            textinfo="percent",
-            textfont={"size": 10, "color": "#e5e7eb"},
-            marker={"line": {"color": "#0f172a", "width": 1}},
-            hovertemplate="%{label}<br>Weight: %{value:.2f}%<extra></extra>",
-        )
+    for sector in sorted(pivoted.columns):
+        color = SECTOR_COLORS.get(sector, "#6b7280")
+        fig.add_trace(go.Scatter(
+            x=pivoted.index,
+            y=pivoted[sector],
+            name=sector,
+            mode="lines",
+            stackgroup="one",
+            groupnorm="percent",
+            line={"width": 0.5, "color": color},
+            fillcolor=color,
+            hovertemplate=f"{sector}<br>%{{x|%Y-%m}}: %{{y:.1f}}%<extra></extra>",
+        ))
+
+    fig.add_hline(
+        y=25, line_dash="dot", line_color="rgba(239,68,68,0.5)", line_width=1,
+        annotation_text="25%", annotation_position="right",
+        annotation_font={"size": 9, "color": "#ef4444"},
     )
 
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        height=330,
-        margin={"l": 8, "r": 8, "t": 6, "b": 6},
+        height=360,
+        margin={"l": 40, "r": 10, "t": 10, "b": 30},
         showlegend=True,
         legend={
-            "font": {"size": 10, "color": "#d1d5db"},
-            "orientation": "v",
-            "x": 1.0,
-            "xanchor": "left",
-            "y": 0.5,
-            "yanchor": "middle",
+            "font": {"size": 9, "color": "#d1d5db"},
+            "orientation": "h",
+            "x": 0.5,
+            "xanchor": "center",
+            "y": -0.12,
+            "yanchor": "top",
         },
+    )
+    fig.update_xaxes(
+        tickformat="%Y-%m",
+        dtick="M3",
+        tickfont={"size": 9, "color": "#9ca3af"},
+        showgrid=False,
+        linecolor="#4b5563",
+    )
+    fig.update_yaxes(
+        ticksuffix="%",
+        tickfont={"size": 9, "color": "#9ca3af"},
+        showgrid=True,
+        gridcolor="#334155",
+        linecolor="#4b5563",
+        range=[0, 100],
     )
     return fig
 
+
+# ---------------------------------------------------------------------------
+# Covariance matrix heatmap
+# ---------------------------------------------------------------------------
+
+def build_covariance_figure(cov_data: dict) -> go.Figure:
+    symbols = cov_data["symbols"]
+    sectors = cov_data["sectors"]
+    matrix = np.array(cov_data["matrix"])
+
+    hover_text = []
+    for i, s1 in enumerate(symbols):
+        row_text = []
+        for j, s2 in enumerate(symbols):
+            row_text.append(f"{s1} vs {s2}<br>Cov: {matrix[i][j]:.4f}")
+        hover_text.append(row_text)
+
+    fig = go.Figure(data=go.Heatmap(
+        z=matrix,
+        x=symbols,
+        y=symbols,
+        colorscale="RdBu_r",
+        zmid=0,
+        text=hover_text,
+        hoverinfo="text",
+        colorbar={
+            "title": {"text": "Cov", "font": {"color": "#9ca3af", "size": 10}},
+            "tickfont": {"color": "#9ca3af", "size": 9},
+            "thickness": 12,
+            "len": 0.6,
+        },
+    ))
+
+    # Add sector divider lines
+    prev_sector = sectors[0] if sectors else ""
+    for i, sec in enumerate(sectors):
+        if sec != prev_sector:
+            fig.add_hline(y=i - 0.5, line_color="rgba(148,163,184,0.3)", line_width=1)
+            fig.add_vline(x=i - 0.5, line_color="rgba(148,163,184,0.3)", line_width=1)
+        prev_sector = sec
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        height=550,
+        margin={"l": 60, "r": 20, "t": 10, "b": 60},
+    )
+    fig.update_xaxes(
+        tickfont={"size": 8, "color": "#9ca3af"},
+        tickangle=45,
+        side="bottom",
+    )
+    fig.update_yaxes(
+        tickfont={"size": 8, "color": "#9ca3af"},
+        autorange="reversed",
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Transaction panels (4 subpanels)
+# ---------------------------------------------------------------------------
+
+def _compute_transactions(current_df: pd.DataFrame, previous_df: pd.DataFrame) -> dict:
+    prev = previous_df.set_index("symbol")
+    curr = current_df.set_index("symbol")
+
+    cur_syms = set(curr.index)
+    prev_syms = set(prev.index)
+
+    def _name(idx, frame):
+        n = frame.at[idx, "company_name"] if idx in frame.index else idx
+        return n if pd.notna(n) else idx
+
+    new_positions = []
+    for sym in sorted(cur_syms - prev_syms):
+        new_positions.append({
+            "symbol": sym,
+            "company_name": _name(sym, curr),
+            "new_weight": float(curr.at[sym, "weight"]),
+        })
+    new_positions.sort(key=lambda x: -x["new_weight"])
+
+    closed_positions = []
+    for sym in sorted(prev_syms - cur_syms):
+        closed_positions.append({
+            "symbol": sym,
+            "company_name": _name(sym, prev),
+            "old_weight": float(prev.at[sym, "weight"]),
+        })
+    closed_positions.sort(key=lambda x: -x["old_weight"])
+
+    increased = []
+    decreased = []
+    for sym in sorted(cur_syms & prev_syms):
+        old_w = float(prev.at[sym, "weight"])
+        new_w = float(curr.at[sym, "weight"])
+        delta = new_w - old_w
+        if abs(delta) < 1e-7:
+            continue
+        entry = {
+            "symbol": sym,
+            "company_name": _name(sym, curr),
+            "old_weight": old_w,
+            "new_weight": new_w,
+            "change": delta,
+        }
+        if delta > 0:
+            increased.append(entry)
+        else:
+            decreased.append(entry)
+
+    increased.sort(key=lambda x: -x["change"])
+    decreased.sort(key=lambda x: x["change"])
+
+    return {
+        "new_positions": new_positions,
+        "closed_positions": closed_positions,
+        "increased": increased,
+        "decreased": decreased,
+    }
+
+
+def _render_tx_panel(title: str, badge_class: str, items: list[dict], render_fn) -> None:
+    count = len(items)
+    badge_html = f'<span class="tx-badge {badge_class}">{count}</span>'
+    html = f'<div class="tx-panel">'
+    html += f'<div class="tx-header"><span class="tx-title">{title}</span>{badge_html}</div>'
+
+    if not items:
+        html += '<div class="tx-none">None</div>'
+    else:
+        for item in items:
+            html += render_fn(item)
+
+    html += "</div>"
+    st.markdown(html, unsafe_allow_html=True)
+
+
+def _render_new(item: dict) -> str:
+    w = item["new_weight"] * 100
+    return (
+        f'<div class="tx-row">'
+        f'<span><span class="tx-sym">{item["symbol"]}</span>'
+        f'<span class="tx-name">{item["company_name"]}</span></span>'
+        f'<span class="tx-weight">{w:.2f}%</span>'
+        f'</div>'
+    )
+
+
+def _render_closed(item: dict) -> str:
+    w = item["old_weight"] * 100
+    return (
+        f'<div class="tx-row">'
+        f'<span><span class="tx-sym">{item["symbol"]}</span>'
+        f'<span class="tx-name">{item["company_name"]}</span></span>'
+        f'<span class="tx-weight">{w:.2f}%</span>'
+        f'</div>'
+    )
+
+
+def _render_change(item: dict) -> str:
+    old_w = item["old_weight"] * 100
+    new_w = item["new_weight"] * 100
+    delta = item["change"] * 100
+    sign = "+" if delta > 0 else ""
+    return (
+        f'<div class="tx-row">'
+        f'<span><span class="tx-sym">{item["symbol"]}</span>'
+        f'<span class="tx-name">{item["company_name"]}</span></span>'
+        f'<span class="tx-weight">{old_w:.2f}% &rarr; {new_w:.2f}% ({sign}{delta:.2f}%)</span>'
+        f'</div>'
+    )
+
+
+def render_transactions_panels(
+    month_df: pd.DataFrame,
+    previous_df: pd.DataFrame | None,
+    selected_month,
+    previous_month,
+) -> None:
+    st.markdown(
+        '<div class="chart-title">Monthly Transactions'
+        + (f' <span style="color:#6b7280;font-size:0.75rem">vs {previous_month.strftime("%Y-%m")}</span>' if previous_month else "")
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+
+    if previous_df is None or previous_df.empty:
+        st.info("First rebalance — all positions are new entries.")
+        return
+
+    tx = _compute_transactions(month_df, previous_df)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        _render_tx_panel("New Positions", "tx-badge-green", tx["new_positions"], _render_new)
+    with col2:
+        _render_tx_panel("Closed Positions", "tx-badge-red", tx["closed_positions"], _render_closed)
+
+    col3, col4 = st.columns(2)
+    with col3:
+        _render_tx_panel("Weight Increases", "tx-badge-blue", tx["increased"], _render_change)
+    with col4:
+        _render_tx_panel("Weight Decreases", "tx-badge-orange", tx["decreased"], _render_change)
+
+
+# ---------------------------------------------------------------------------
+# UI helpers
+# ---------------------------------------------------------------------------
 
 def render_stat_card(label: str, value: str) -> None:
     st.markdown(
@@ -298,101 +609,6 @@ def render_stat_card(label: str, value: str) -> None:
 """,
         unsafe_allow_html=True,
     )
-
-
-def build_transactions_df(current_df: pd.DataFrame, previous_df: pd.DataFrame) -> pd.DataFrame:
-    prev = previous_df.set_index("symbol")
-    curr = current_df.set_index("symbol")
-    symbols = sorted(set(prev.index).union(set(curr.index)))
-
-    rows = []
-    for symbol in symbols:
-        prev_w = float(prev.at[symbol, "weight"]) if symbol in prev.index else 0.0
-        curr_w = float(curr.at[symbol, "weight"]) if symbol in curr.index else 0.0
-        delta = curr_w - prev_w
-        if abs(delta) < 1e-10:
-            continue
-
-        company_name = None
-        if symbol in curr.index:
-            company_name = curr.at[symbol, "company_name"]
-        elif symbol in prev.index:
-            company_name = prev.at[symbol, "company_name"]
-
-        sector = None
-        if symbol in curr.index:
-            sector = curr.at[symbol, "sector"]
-        elif symbol in prev.index:
-            sector = prev.at[symbol, "sector"]
-
-        if prev_w == 0 and curr_w > 0:
-            action = "BUY"
-        elif curr_w == 0 and prev_w > 0:
-            action = "SELL"
-        elif delta > 0:
-            action = "INCREASE"
-        else:
-            action = "DECREASE"
-
-        rows.append(
-            {
-                "action": action,
-                "symbol": symbol,
-                "company_name": company_name if pd.notna(company_name) else symbol,
-                "sector": sector if pd.notna(sector) else "",
-                "prev_weight": prev_w,
-                "curr_weight": curr_w,
-                "delta_weight": delta,
-                "abs_delta": abs(delta),
-            }
-        )
-
-    tx_df = pd.DataFrame(rows).sort_values("abs_delta", ascending=False).reset_index(drop=True)
-    return tx_df
-
-
-def build_transactions_figure(tx_df: pd.DataFrame) -> go.Figure:
-    top = tx_df.nlargest(20, "abs_delta").copy()
-    top["delta_pct"] = top["delta_weight"] * 100
-    top = top.sort_values("delta_pct")
-
-    colors = ["#10b981" if v > 0 else "#ef4444" for v in top["delta_pct"]]
-    labels = top["symbol"] + " - " + top["company_name"]
-
-    fig = go.Figure()
-    fig.add_trace(
-        go.Bar(
-            x=top["delta_pct"],
-            y=labels,
-            orientation="h",
-            marker_color=colors,
-            hovertemplate="%{y}<br>Weight change: %{x:+.2f}%<extra></extra>",
-        )
-    )
-
-    fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        height=420,
-        margin={"l": 58, "r": 18, "t": 6, "b": 30},
-        showlegend=False,
-    )
-    fig.update_xaxes(
-        title="Change in Weight (%)",
-        title_font={"size": 10, "color": "#9ca3af"},
-        tickfont={"size": 10, "color": "#9ca3af"},
-        showgrid=True,
-        gridcolor="#334155",
-        linecolor="#4b5563",
-        zeroline=True,
-        zerolinecolor="#64748b",
-    )
-    fig.update_yaxes(
-        tickfont={"size": 10, "color": "#d1d5db"},
-        showgrid=False,
-        linecolor="#4b5563",
-    )
-    return fig
 
 
 def render_navigation_links() -> None:
@@ -435,6 +651,10 @@ def render_navigation_banner() -> None:
             st.rerun()
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main() -> None:
     st.set_page_config(
         page_title="Portfolio Holdings",
@@ -452,7 +672,7 @@ def main() -> None:
         st.error(f"Missing performance snapshot file: {PERFORMANCE_SNAPSHOT_PATH}")
         st.stop()
 
-    holdings_df, holdings_payload, performance_payload = load_snapshots()
+    holdings_df, holdings_payload, performance_payload, covariance_payload = load_snapshots()
     if holdings_df.empty:
         st.error("Holdings snapshot is empty for the current coverage window.")
         st.stop()
@@ -471,6 +691,15 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
+    # --- Sector Allocation Over Time (full time series) ---
+    st.markdown('<div class="chart-title">Sector Allocation Over Time</div>', unsafe_allow_html=True)
+    st.plotly_chart(
+        build_sector_allocation_figure(holdings_df),
+        use_container_width=True,
+        config={"displayModeBar": False},
+    )
+
+    # --- Month selector ---
     st.markdown('<div class="field-label">Select month</div>', unsafe_allow_html=True)
     selected_month = st.selectbox(
         "select_month",
@@ -492,13 +721,12 @@ def main() -> None:
     with c2:
         render_stat_card("Holdings", f"{len(month_df)}")
 
-    st.markdown('<div class="chart-title">Top 15 Weights (Pie)</div>', unsafe_allow_html=True)
-    st.plotly_chart(build_weights_figure(month_df), use_container_width=True, config={"displayModeBar": False})
-
+    # --- Holdings table with Unrealized column ---
     display_df = month_df.copy()
     display_df["weight_pct"] = display_df["weight"] * 100
+    display_df["unrealized_display"] = display_df["unrealized_pct"] * 100
 
-    display_df = display_df[["symbol", "company_name", "weight_pct", "sector"]]
+    display_df = display_df[["symbol", "company_name", "weight_pct", "sector", "unrealized_display"]]
 
     st.markdown('<div class="chart-title">All Holdings for Selected Month</div>', unsafe_allow_html=True)
     st.dataframe(
@@ -510,80 +738,38 @@ def main() -> None:
             "company_name": st.column_config.TextColumn("Company Name"),
             "weight_pct": st.column_config.NumberColumn("Weight (%)", format="%.2f%%"),
             "sector": st.column_config.TextColumn("Sector"),
+            "unrealized_display": st.column_config.NumberColumn("Unrealized (%)", format="%+.1f%%"),
         },
     )
 
+    # --- Monthly Transactions (4 subpanels) ---
     months_asc = sorted(month_options)
     selected_idx = months_asc.index(selected_month)
     previous_month = months_asc[selected_idx - 1] if selected_idx > 0 else None
 
-    st.markdown('<div class="chart-title">Transactions vs Previous Month</div>', unsafe_allow_html=True)
     if previous_month is None:
-        st.info("No previous month available for comparison in the selected window.")
+        render_transactions_panels(month_df, None, selected_month, None)
     else:
         previous_df = (
             holdings_df[holdings_df["as_of_date"] == previous_month]
             .sort_values("weight", ascending=False)
             .reset_index(drop=True)
         )
-        tx_df = build_transactions_df(month_df, previous_df)
-        if tx_df.empty:
-            st.info("No allocation changes detected between these two months.")
-        else:
-            buy_weight = float(tx_df[tx_df["delta_weight"] > 0]["delta_weight"].sum())
-            sell_weight = float((-tx_df[tx_df["delta_weight"] < 0]["delta_weight"]).sum())
-            gross_change = float(tx_df["abs_delta"].sum())
+        render_transactions_panels(month_df, previous_df, selected_month, previous_month)
 
-            m1, m2, m3, m4 = st.columns(4)
-            with m1:
-                render_stat_card("From Month", previous_month.strftime("%Y-%m"))
-            with m2:
-                render_stat_card("To Month", selected_month.strftime("%Y-%m"))
-            with m3:
-                render_stat_card("Buy Weight", f"{buy_weight * 100:.2f}%")
-            with m4:
-                render_stat_card("Sell Weight", f"{sell_weight * 100:.2f}%")
-            st.caption(f"Gross reallocation: {gross_change * 100:.2f}%")
+    # --- Covariance Matrix ---
+    if covariance_payload and covariance_payload.get("symbols"):
+        st.markdown(
+            '<div class="chart-title">Annualized Covariance Matrix (252-day lookback)</div>',
+            unsafe_allow_html=True,
+        )
+        st.plotly_chart(
+            build_covariance_figure(covariance_payload),
+            use_container_width=True,
+            config={"displayModeBar": False},
+        )
 
-            st.markdown('<div class="chart-title">Top Weight Changes</div>', unsafe_allow_html=True)
-            st.plotly_chart(
-                build_transactions_figure(tx_df),
-                use_container_width=True,
-                config={"displayModeBar": False},
-            )
-
-            tx_display = tx_df.copy()
-            tx_display["prev_weight_pct"] = tx_display["prev_weight"] * 100
-            tx_display["curr_weight_pct"] = tx_display["curr_weight"] * 100
-            tx_display["delta_weight_pct"] = tx_display["delta_weight"] * 100
-            tx_display = tx_display[
-                [
-                    "action",
-                    "symbol",
-                    "company_name",
-                    "sector",
-                    "prev_weight_pct",
-                    "curr_weight_pct",
-                    "delta_weight_pct",
-                ]
-            ]
-
-            st.markdown('<div class="chart-title">Transaction Details</div>', unsafe_allow_html=True)
-            st.dataframe(
-                tx_display,
-                use_container_width=True,
-                hide_index=True,
-                column_config={
-                    "action": st.column_config.TextColumn("Action", width="small"),
-                    "symbol": st.column_config.TextColumn("Symbol", width="small"),
-                    "company_name": st.column_config.TextColumn("Company Name"),
-                    "sector": st.column_config.TextColumn("Sector"),
-                    "prev_weight_pct": st.column_config.NumberColumn("Prev Weight (%)", format="%.2f%%"),
-                    "curr_weight_pct": st.column_config.NumberColumn("Curr Weight (%)", format="%.2f%%"),
-                    "delta_weight_pct": st.column_config.NumberColumn("Change (%)", format="%+.2f%%"),
-                },
-            )
-
+    # --- Navigation footer ---
     st.markdown('<div class="nav-footer-title">Navigate</div>', unsafe_allow_html=True)
     nav_bottom_left, nav_bottom_right = st.columns(2)
     with nav_bottom_left:
