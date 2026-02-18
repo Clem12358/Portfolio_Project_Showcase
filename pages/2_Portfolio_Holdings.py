@@ -55,10 +55,8 @@ def load_snapshots() -> tuple[pd.DataFrame, dict, dict, dict | None]:
     coverage_start = performance_payload.get("coverage_start_date")
     if coverage_start:
         holdings_df = holdings_df[holdings_df["as_of_date"] >= pd.Timestamp(coverage_start)].copy()
-    kpis_end_date = performance_payload.get("kpis", {}).get("end_date")
-    if kpis_end_date:
-        end_month = pd.Timestamp(kpis_end_date).to_period("M").to_timestamp("M")
-        holdings_df = holdings_df[holdings_df["as_of_date"] <= end_month].copy()
+    # No upper-date filter: show all holdings including the latest rebalance
+    # even if weekly return data hasn't caught up yet
 
     return holdings_df, holdings_payload, performance_payload, covariance_payload
 
