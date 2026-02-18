@@ -398,6 +398,11 @@ def build_covariance_figure(cov_data: dict) -> go.Figure:
     sectors = cov_data["sectors"]
     matrix = np.array(cov_data["matrix"])
 
+    # Clip color range to 95th percentile so outliers don't wash out the scale
+    abs_vals = np.abs(matrix).ravel()
+    zmax = float(np.percentile(abs_vals, 95))
+    zmin = -zmax
+
     hover_text = []
     for i, s1 in enumerate(symbols):
         row_text = []
@@ -411,6 +416,8 @@ def build_covariance_figure(cov_data: dict) -> go.Figure:
         y=symbols,
         colorscale="RdBu_r",
         zmid=0,
+        zmin=zmin,
+        zmax=zmax,
         text=hover_text,
         hoverinfo="text",
         colorbar={
