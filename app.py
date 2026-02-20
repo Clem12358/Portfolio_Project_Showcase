@@ -6,6 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+from mobile_styles import get_mobile_css
+
 
 SNAPSHOT_PATH = Path("data/performance_snapshot.json")
 RISK_FREE_RATE_ANNUAL = 0.02
@@ -172,6 +174,7 @@ def build_figure(chart_data: list[dict], coverage_start_date: str | None) -> go.
         height=320,
         margin={"l": 44, "r": 16, "t": 6, "b": 48},
         hovermode="x unified",
+        dragmode=False,
         legend={
             "orientation": "h",
             "x": 0.5,
@@ -232,6 +235,7 @@ def build_drawdown_figure(cumulative_chart_data: list[dict], coverage_start_date
         height=230,
         margin={"l": 44, "r": 16, "t": 6, "b": 28},
         hovermode="x unified",
+        dragmode=False,
         showlegend=False,
     )
     fig.update_xaxes(
@@ -284,6 +288,7 @@ def build_monthly_returns_figure(monthly_chart_data: list[dict], coverage_start_
         height=260,
         margin={"l": 44, "r": 16, "t": 6, "b": 36},
         hovermode="x unified",
+        dragmode=False,
         showlegend=False,
         bargap=0.18,
     )
@@ -530,6 +535,9 @@ div[data-testid="stButton"] button:hover {
   .summary-line { font-size: 0.7rem; }
   .chart-title { font-size: 0.84rem; }
 }
+"""
+            + get_mobile_css()
+            + """
 </style>
 """,
         unsafe_allow_html=True,
@@ -655,21 +663,21 @@ def main() -> None:
         chart_data=snapshot["charts"]["cumulative_returns"],
         coverage_start_date=coverage_start_date,
     )
-    st.plotly_chart(figure, use_container_width=True, config={"displayModeBar": False})
+    st.plotly_chart(figure, use_container_width=True, config={"displayModeBar": False, "scrollZoom": False, "doubleClick": False})
 
     st.markdown('<div class="chart-title">Drawdown</div>', unsafe_allow_html=True)
     drawdown_figure = build_drawdown_figure(
         cumulative_chart_data=snapshot["charts"]["cumulative_returns"],
         coverage_start_date=coverage_start_date,
     )
-    st.plotly_chart(drawdown_figure, use_container_width=True, config={"displayModeBar": False})
+    st.plotly_chart(drawdown_figure, use_container_width=True, config={"displayModeBar": False, "scrollZoom": False, "doubleClick": False})
 
     st.markdown('<div class="chart-title">Monthly Returns</div>', unsafe_allow_html=True)
     monthly_figure = build_monthly_returns_figure(
         monthly_chart_data=snapshot["charts"]["monthly_returns"],
         coverage_start_date=coverage_start_date,
     )
-    st.plotly_chart(monthly_figure, use_container_width=True, config={"displayModeBar": False})
+    st.plotly_chart(monthly_figure, use_container_width=True, config={"displayModeBar": False, "scrollZoom": False, "doubleClick": False})
 
     st.markdown('<div class="nav-footer-title">Next sections</div>', unsafe_allow_html=True)
     next_left, next_right = st.columns(2)

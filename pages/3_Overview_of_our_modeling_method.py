@@ -1,4 +1,10 @@
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from mobile_styles import get_mobile_css
 
 
 def render_styles() -> None:
@@ -422,6 +428,9 @@ div[data-testid="stButton"] button:hover {
   border-color: rgba(96, 165, 250, 0.85);
   color: #f8fafc;
 }
+"""
+            + get_mobile_css()
+            + """
 </style>
 """,
         unsafe_allow_html=True,

@@ -1,10 +1,14 @@
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from mobile_styles import get_mobile_css
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -314,6 +318,9 @@ div[data-testid="stButton"] button:hover {
 .tx-name { color: #6b7280; margin-left: 4px; }
 .tx-weight { color: #d1d5db; font-family: monospace; }
 .tx-none { color: #6b7280; font-size: 0.78rem; font-style: italic; }
+"""
+            + get_mobile_css()
+            + """
 </style>
 """,
         unsafe_allow_html=True,
@@ -359,6 +366,7 @@ def build_sector_allocation_figure(holdings_df: pd.DataFrame) -> go.Figure:
         plot_bgcolor="rgba(0,0,0,0)",
         height=360,
         margin={"l": 40, "r": 10, "t": 10, "b": 30},
+        dragmode=False,
         showlegend=True,
         legend={
             "font": {"size": 9, "color": "#d1d5db"},
@@ -434,6 +442,7 @@ def build_correlation_figure(cov_data: dict) -> go.Figure:
         plot_bgcolor="rgba(0,0,0,0)",
         height=550,
         margin={"l": 60, "r": 20, "t": 10, "b": 60},
+        dragmode=False,
     )
     fig.update_xaxes(
         tickfont={"size": 8, "color": "#9ca3af"},
@@ -696,7 +705,7 @@ def main() -> None:
     st.plotly_chart(
         build_sector_allocation_figure(holdings_df),
         use_container_width=True,
-        config={"displayModeBar": False},
+        config={"displayModeBar": False, "scrollZoom": False, "doubleClick": False},
     )
 
     # --- Month selector ---
@@ -766,7 +775,7 @@ def main() -> None:
         st.plotly_chart(
             build_correlation_figure(covariance_payload),
             use_container_width=True,
-            config={"displayModeBar": False},
+            config={"displayModeBar": False, "scrollZoom": False, "doubleClick": False},
         )
 
     # --- Navigation footer ---
