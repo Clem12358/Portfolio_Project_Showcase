@@ -366,6 +366,12 @@ div[data-testid="stHorizontalBlock"] {
   gap: 0.62rem;
 }
 
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.62rem;
+}
+
 .kpi-card {
   background: linear-gradient(160deg, #141f37 0%, #101a2e 100%);
   border: 1px solid var(--panel-border);
@@ -544,14 +550,19 @@ div[data-testid="stButton"] button:hover {
     )
 
 
-def render_card(card: dict) -> None:
+def _card_html(card: dict) -> str:
+    return (
+        f'<div class="kpi-card">'
+        f'<div class="kpi-label">{card["label"]}</div>'
+        f'<div class="kpi-value kpi-{card["color"]}">{card["value"]}</div>'
+        f"</div>"
+    )
+
+
+def render_cards(cards: list[dict]) -> None:
+    inner = "\n".join(_card_html(c) for c in cards)
     st.markdown(
-        f"""
-<div class="kpi-card">
-  <div class="kpi-label">{card["label"]}</div>
-  <div class="kpi-value kpi-{card["color"]}">{card["value"]}</div>
-</div>
-""",
+        f'<div class="kpi-grid">{inner}</div>',
         unsafe_allow_html=True,
     )
 
@@ -638,11 +649,7 @@ def main() -> None:
     render_navigation_banner()
     render_navigation_links()
 
-    for idx in range(0, len(cards), 4):
-        cols = st.columns(4)
-        for col, card in zip(cols, cards[idx : idx + 4]):
-            with col:
-                render_card(card)
+    render_cards(cards)
 
     st.markdown(
         f"""

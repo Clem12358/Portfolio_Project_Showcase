@@ -23,6 +23,9 @@ def get_mobile_css() -> str:
     min-width: 100% !important;
   }
 
+  /* KPI grid: 2 columns on mobile */
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+
   /* KPI cards */
   .kpi-card { min-height: 64px; padding: 8px 12px 7px 12px; }
   .kpi-label { font-size: 0.82rem; }
