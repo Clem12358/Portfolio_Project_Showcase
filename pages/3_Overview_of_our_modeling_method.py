@@ -483,7 +483,7 @@ def render_stage_map() -> None:
         ("Valuation", "Multi-model valuation architecture"),
         ("Forecasting", "Revenue and cash-flow engine"),
         ("ML Signal", "Upside features and XGBoost alpha"),
-        ("Optimization", "Mean-variance-sparsity allocation"),
+        ("Optimization", "Black-Litterman portfolio construction"),
     ]
     for col, (title, text) in zip(cols, stages):
         with col:
@@ -551,10 +551,12 @@ def render_title_1() -> None:
             "and dynamically switches valuation frameworks by company type."
         )
         st.markdown(
-            "- **Standard Industrials (Non-Financials):** EV/Sales, EV/EBITDA, EV/EBIT, and UFCF-DCF discounted with WACC."
+            "- **Standard Industrials (Non-Financials):** EV/Sales, EV/EBITDA, EV/EBIT, P/E, P/B, DDM, RIM, "
+            "and UFCF-DCF discounted with WACC. Terminal exit via peer EV/EBITDA multiple."
         )
         st.markdown(
-            "- **Financial Institutions (Banks/Insurance):** P/E, P/TBV, DDM, RIM, and LFCF-based DCF discounted with Cost of Equity (CoE)."
+            "- **Financial Institutions (Banks/Insurance):** P/E, P/TBV, DDM, RIM, and LFCF-based DCF discounted "
+            "with Cost of Equity (CoE). Terminal exit via peer P/E multiple (EV-based multiples are skipped)."
         )
 
 
@@ -613,11 +615,21 @@ def render_title_5() -> None:
             "For terminal exit multiples, peer groups are selected dynamically via a K-Nearest Neighbors framework."
         )
         st.markdown(
-            "- **Features:** Size (log market cap), Growth (NTM revenue), Profitability (EBITDA margin), Risk (beta), Leverage (Debt/EBITDA)."
+            "- **Features (Non-Financials):** Size (log market cap), Growth (NTM revenue), Profitability (EBITDA margin), Risk (beta), Leverage (Debt/EBITDA)."
+        )
+        st.markdown(
+            "- **Features (Financials):** Size (log market cap), P/E, P/B, Risk (beta) — margin and leverage are not meaningful for banks."
         )
         st.markdown("- **Algorithm:** Euclidean distance in standardized feature space, selecting the 15 nearest peers.")
         st.markdown(
-            "- **Aggregation:** harmonic mean of peer EV/EBITDA to reduce sensitivity to high-multiple outliers."
+            "- **Aggregation (Non-Financials):** harmonic mean of peer EV/EBITDA to reduce sensitivity to high-multiple outliers."
+        )
+        st.markdown(
+            "- **Aggregation (Financials):** median peer P/E as exit multiple (EV-based multiples are skipped)."
+        )
+        st.markdown(
+            "- **Terminal Value:** the exit multiple is applied to the **T+1 terminal metric** "
+            "(EBITDA or Net Income grown by one year at terminal growth rate), consistent with standard practice."
         )
 
 
@@ -644,15 +656,25 @@ def render_title_7() -> None:
 
 def render_title_8() -> None:
     with st.expander("8. Machine Learning Architecture (XGBoost)", expanded=False):
-        st.markdown("An XGBoost regressor combines 23 features into a single alpha signal.")
+        st.markdown("An XGBoost regressor combines valuation and risk features into a single alpha signal.")
         st.markdown(
-            "- **Inputs:** valuation upside features, Monte Carlo uncertainty features, and meta-features (size, peer count, data richness)."
+            "- **Inputs:** valuation upside features, Monte Carlo uncertainty features (IQR, skew), "
+            "and meta-features (size, peer count, data richness)."
         )
-        st.markdown("- **Target:** market-adjusted forward return (stock return minus market mean).")
-        render_formula(r"y_{i,t+h} = r_{i,t+h} - \bar{r}_{m,t+h}")
+        st.markdown(
+            "- **Target:** market-adjusted forward return using **value-weighted** cross-sectional demeaning "
+            "(stock return minus market-cap-weighted mean return)."
+        )
+        render_formula(r"y_{i,t+h} = r_{i,t+h} - \bar{r}^{\,\mathrm{vw}}_{m,t+h}, \quad \bar{r}^{\,\mathrm{vw}}_{m,t+h} = \sum_j w_j \, r_{j,t+h}")
         st.markdown(
             "- **Validation:** walk-forward expanding-window training to eliminate look-ahead bias."
         )
+        st.markdown(
+            "- **Historical Adjustment:** the raw growth proxy is time-series demeaned per stock to remove "
+            "persistent valuation bias (e.g., a stock that perpetually shows +30% upside). "
+            "Only the *change* in conviction is retained."
+        )
+        render_formula(r"\alpha^{\mathrm{adj}}_{i,t} = \alpha_{i,t} - f_i \cdot \bar{\alpha}_{i,\,3y}, \quad f_i = \min\!\left(\tfrac{\text{months of history}}{36},\, 1\right)")
 
 
 def render_title_9() -> None:
@@ -666,15 +688,30 @@ def render_title_9() -> None:
 
 
 def render_title_10() -> None:
-    with st.expander("10. Portfolio Optimization (Mean-Variance-Sparsity)", expanded=True):
-        st.markdown("Final portfolio weights are solved via quadratic programming.")
-        st.markdown("- **Covariance:** Ledoit-Wolf shrinkage for stable risk estimation.")
-        st.markdown("- **Objective:** maximize expected return while penalizing risk and excess dispersion.")
-        render_formula(
-            r"\max_w \quad w^\top\mu - \frac{\gamma}{2}\,w^\top\Sigma w - \lambda \lVert w \rVert_1"
+    with st.expander("10. Portfolio Optimization (Black-Litterman)", expanded=True):
+        st.markdown("Final portfolio weights are derived via a **Black-Litterman** framework, combining market equilibrium with model views.")
+        st.markdown("- **Market Prior:** CAPM equilibrium returns from a Ledoit-Wolf shrinkage covariance matrix.")
+        render_formula(r"\Pi = \delta \, \Sigma \, w_{\mathrm{mkt}}")
+        st.markdown(
+            "- **Views:** the demeaned growth proxy from XGBoost provides stock-level return views."
         )
         st.markdown(
-            "This produces a concentrated, risk-aware portfolio and helps filter high-upside but high-uncertainty value traps."
+            "- **View Confidence ($\\Omega$):** diagonal matrix derived from Monte Carlo IQR — "
+            "stocks with wider valuation uncertainty receive lower confidence, reducing their influence on posterior returns."
+        )
+        render_formula(r"\Omega_{ii} \propto \mathrm{IQR}_i^2")
+        st.markdown("- **Posterior Returns:**")
+        render_formula(
+            r"\mu_{\mathrm{BL}} = \left[(\tau\Sigma)^{-1} + P^\top \Omega^{-1} P\right]^{-1}"
+            r"\left[(\tau\Sigma)^{-1}\Pi + P^\top \Omega^{-1} Q\right]"
+        )
+        st.markdown(
+            "- **QP Optimization:** posterior expected returns are fed into a quadratic program with "
+            "long-only, max-weight, and cardinality constraints to produce final portfolio weights."
+        )
+        st.markdown(
+            "This approach naturally discounts high-upside but high-uncertainty value traps "
+            "and produces a concentrated, risk-aware portfolio."
         )
 
 
