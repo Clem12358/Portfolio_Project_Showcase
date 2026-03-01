@@ -570,11 +570,10 @@ def render_title_2() -> None:
         )
         render_formula(r"g_0 = \operatorname{clip}\!\left(\mathrm{CAGR}^{\mathrm{adj}}_{3y}, -0.50,\ 0.50\right)")
         st.markdown(
-            "2. **Terminal Convergence ($g_{term}$):** sector long-run growth from mature stable peers, scaled by 0.35 and clamped to $[1\\%, 4\\%]$."
+            "2. **Terminal Convergence ($g_{term}$):** fixed at **2.5%** (nominal GDP anchor), "
+            "consistent across all sectors."
         )
-        render_formula(
-            r"g_{\mathrm{term}} = \operatorname{clip}\!\left(0.35 \times \bar{g}^{\mathrm{stable}}_{\mathrm{sector}},\ 0.01,\ 0.04\right)"
-        )
+        render_formula(r"g_{\mathrm{term}} = 2.5\%")
         st.markdown(
             "3. **Fade Mechanism:** Years 1-5 keep $g_0$, years 6-10 fade linearly from $g_0$ to $g_{term}$."
         )
