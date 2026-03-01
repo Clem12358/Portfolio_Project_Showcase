@@ -635,11 +635,25 @@ def render_title_5() -> None:
 def render_title_6() -> None:
     with st.expander("6. Monte Carlo Simulation & Uncertainty Quantification", expanded=False):
         st.markdown("Each asset runs **10,000 simulations** to quantify valuation uncertainty.")
-        st.markdown("- **Stochastic Inputs:** WACC/CoE, terminal growth, and cash-flow multipliers.")
-        render_formula(r"WACC,\ CoE \sim \mathcal{N}\!\left(\mu_{\mathrm{sector}},\ \sigma^2_{\mathrm{sector}}\right)")
-        render_formula(r"m_t \sim \operatorname{LogNormal}(\mu_t,\ \sigma_t^2), \quad m_t > 0")
+        st.markdown("- **Three stochastic inputs are perturbed simultaneously:**")
         st.markdown(
-            "- **Time-Horizon Scaling:** uncertainty widens with horizon, increasing shock variance from Year 1 to Year 10."
+            "  1. **Discount rate (WACC or CoE):** drawn from a Normal distribution calibrated to the "
+            "cross-sectional dispersion of discount rates within the stock's sector."
+        )
+        render_formula(r"WACC \sim \mathcal{N}\!\left(\mu_{\mathrm{sector}},\ \sigma^2_{\mathrm{sector}}\right), \quad \text{clipped to } [3\%, 30\%]")
+        st.markdown(
+            "  2. **Terminal growth rate:** drawn from a Normal distribution with sector-calibrated sigma, "
+            "floored at 0% and capped below WACC to ensure convergence."
+        )
+        render_formula(r"g \sim \mathcal{N}\!\left(\mu_g,\ \sigma^2_g\right), \quad g \in [0,\ WACC - 0.5\%]")
+        st.markdown(
+            "  3. **Cash-flow multipliers:** each forecast year receives a LogNormal shock centered on 1 "
+            "(so the expected cash flow is unchanged), capturing company-specific forecast noise."
+        )
+        render_formula(r"m_t \sim \operatorname{LogNormal}\!\left(-\tfrac{\sigma_t^2}{2},\ \sigma_t^2\right), \quad \mathbb{E}[m_t] = 1")
+        st.markdown(
+            "- **Time-Horizon Scaling:** the cash-flow shock variance grows linearly with forecast distance, "
+            "reflecting that near-term cash flows are more predictable than those 10 years out."
         )
         render_formula(r"\sigma_t = \sigma_1 + \frac{t-1}{9}\left(\sigma_{10} - \sigma_1\right), \quad t \in \{1,\dots,10\}")
 
