@@ -724,10 +724,8 @@ def render_title_10() -> None:
             r"\max_{w,\,z}\;\; \mu_{\mathrm{BL}}^\top w \;-\; \frac{\gamma}{2}\, w^\top \Sigma w"
             r"\;-\; \lambda_{\mathrm{tc}}\, \|w - w^{\mathrm{prev}}\|_1"
         )
-        render_formula(
-            r"\sum_i z_i \leq 40,\quad z_i \in \{0,1\},\quad"
-            r"z_i \cdot 0.2\% \leq w_i \leq z_i \cdot 5\%"
-        )
+        render_formula(r"\sum_i z_i \leq 40, \quad z_i \in \{0,1\}")
+        render_formula(r"z_i \cdot 0.2\% \leq w_i \leq z_i \cdot 5\%")
         st.markdown(
             "- **Long-only, fully invested** ($\\sum w_i = 1$, $w \\geq 0$) · "
             "**Turnover penalty** ($\\lambda_{\\mathrm{tc}} = 10$ bps) · "
