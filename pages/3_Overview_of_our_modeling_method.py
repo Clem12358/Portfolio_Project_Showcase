@@ -483,7 +483,7 @@ def render_stage_map() -> None:
         ("Valuation", "Multi-model valuation architecture"),
         ("Forecasting", "Revenue and cash-flow engine"),
         ("ML Signal", "Upside features and XGBoost alpha"),
-        ("Optimization", "Black-Litterman portfolio construction"),
+        ("Optimization", "Black-Litterman + MIQP portfolio construction"),
     ]
     for col, (title, text) in zip(cols, stages):
         with col:
@@ -701,30 +701,73 @@ def render_title_9() -> None:
 
 
 def render_title_10() -> None:
-    with st.expander("10. Portfolio Optimization (Black-Litterman)", expanded=True):
-        st.markdown("Final portfolio weights are derived via a **Black-Litterman** framework, combining market equilibrium with model views.")
+    with st.expander("10. Portfolio Construction (Black-Litterman + MIQP)", expanded=True):
+        st.markdown(
+            "Final portfolio weights are derived in two steps: **Black-Litterman** expected return estimation "
+            "followed by **Mixed-Integer Quadratic Programming (MIQP)** to enforce exact position count and size constraints."
+        )
+
+        st.markdown("**Black-Litterman Expected Returns**")
         st.markdown("- **Market Prior:** CAPM equilibrium returns from a Ledoit-Wolf shrinkage covariance matrix.")
         render_formula(r"\Pi = \delta \, \Sigma \, w_{\mathrm{mkt}}")
+        st.markdown("- **Views ($Q$):** the demeaned growth proxy from XGBoost provides stock-level return views.")
         st.markdown(
-            "- **Views:** the demeaned growth proxy from XGBoost provides stock-level return views."
+            "- **View Confidence ($\\Omega$):** diagonal uncertainty matrix built from four signals: "
+            "Monte Carlo IQR (valuation dispersion), historical data coverage, number of valuation methods available, "
+            "and method agreement. Stocks with wider uncertainty or thinner data receive lower confidence and a larger $\\Omega_{ii}$, "
+            "pulling the posterior back toward equilibrium."
         )
-        st.markdown(
-            "- **View Confidence ($\\Omega$):** diagonal matrix derived from Monte Carlo IQR — "
-            "stocks with wider valuation uncertainty receive lower confidence, reducing their influence on posterior returns."
+        render_formula(
+            r"\Omega_{ii} = \frac{\tau \, \sigma_i^2}{\text{confidence}_i}, \quad"
+            r"\text{confidence}_i = f_{\mathrm{IQR}} \cdot f_{\mathrm{hist}} \cdot f_{\mathrm{methods}}"
         )
-        render_formula(r"\Omega_{ii} \propto \mathrm{IQR}_i^2")
         st.markdown("- **Posterior Returns:**")
         render_formula(
             r"\mu_{\mathrm{BL}} = \left[(\tau\Sigma)^{-1} + P^\top \Omega^{-1} P\right]^{-1}"
             r"\left[(\tau\Sigma)^{-1}\Pi + P^\top \Omega^{-1} Q\right]"
         )
+
+        st.markdown("**MIQP Portfolio Optimization**")
         st.markdown(
-            "- **QP Optimization:** posterior expected returns are fed into a quadratic program with "
-            "long-only, max-weight, and cardinality constraints to produce final portfolio weights."
+            "Posterior returns feed a Mixed-Integer Quadratic Program. "
+            "Unlike continuous sparse-QP approaches that use L1 penalties and produce variable position counts, "
+            "MIQP introduces a **binary indicator vector $z \\in \\{0,1\\}^N$** that enforces an exact upper bound "
+            "on the number of holdings and links position size to whether the asset is held at all."
+        )
+        render_formula(
+            r"\max_{w,\,z,\,t}\;\; \mu_{\mathrm{BL}}^\top w"
+            r"\;-\; \frac{\gamma}{2}\, w^\top \Sigma w"
+            r"\;-\; \lambda_{\mathrm{tc}} \textstyle\sum_i t_i"
+        )
+        st.markdown("subject to:")
+        render_formula(
+            r"\textstyle\sum_i w_i = 1,\quad w \geq 0"
+            r"\quad\text{[long-only, fully invested]}"
+        )
+        render_formula(
+            r"\textstyle\sum_i z_i \leq 40,\quad z_i \in \{0,1\}"
+            r"\quad\text{[hard cardinality constraint]}"
+        )
+        render_formula(
+            r"z_i \cdot 0.2\% \;\leq\; w_i \;\leq\; z_i \cdot 5\%"
+            r"\quad\text{[position bounds linked to binary — no dust positions]}"
+        )
+        render_formula(
+            r"t_i \geq w_i - w_i^{\mathrm{prev}},\quad"
+            r"t_i \geq w_i^{\mathrm{prev}} - w_i"
+            r"\quad\text{[turnover linearization, } \lambda_{\mathrm{tc}} = 10\text{ bps]}"
         )
         st.markdown(
-            "This approach naturally discounts high-upside but high-uncertainty value traps "
-            "and produces a concentrated, risk-aware portfolio."
+            "- **Pre-screening:** before the MIP solve, the universe is reduced to the top-200 candidates "
+            "by expected return (plus all current holdings), keeping the problem tractable."
+        )
+        st.markdown(
+            "- **Solver:** SCIP (open-source MIP solver) via CVXPY, with a 120-second time limit "
+            "and an automatic fallback to equal-weight top-40 on infeasibility."
+        )
+        st.markdown(
+            "This design yields predictable position counts, clean minimum-size enforcement, and explicit "
+            "turnover control — producing a concentrated, risk-aware portfolio aligned with operational constraints."
         )
 
 
