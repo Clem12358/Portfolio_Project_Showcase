@@ -702,26 +702,14 @@ def render_title_9() -> None:
 
 def render_title_10() -> None:
     with st.expander("10. Portfolio Construction (Black-Litterman + MIQP)", expanded=True):
-        st.markdown(
-            "Final portfolio weights are derived in two steps: **Black-Litterman** expected return estimation "
-            "followed by **Mixed-Integer Quadratic Programming (MIQP)** to enforce exact position count and size constraints."
-        )
-
         st.markdown("**Black-Litterman Expected Returns**")
         st.markdown("- **Market Prior:** CAPM equilibrium returns from a Ledoit-Wolf shrinkage covariance matrix.")
         render_formula(r"\Pi = \delta \, \Sigma \, w_{\mathrm{mkt}}")
-        st.markdown("- **Views ($Q$):** the demeaned growth proxy from XGBoost provides stock-level return views.")
         st.markdown(
-            "- **View Confidence ($\\Omega$):** diagonal uncertainty matrix built from four signals: "
-            "Monte Carlo IQR (valuation dispersion), historical data coverage, number of valuation methods available, "
-            "and method agreement. Stocks with wider uncertainty or thinner data receive lower confidence and a larger $\\Omega_{ii}$, "
-            "pulling the posterior back toward equilibrium."
+            "- **Views & Confidence:** the XGBoost growth proxy provides stock-level return views. "
+            "View confidence is derived from Monte Carlo IQR, historical data coverage, and number of valuation methods — "
+            "stocks with wider uncertainty get a larger $\\Omega_{ii}$, pulling the posterior back toward equilibrium."
         )
-        render_formula(
-            r"\Omega_{ii} = \frac{\tau \, \sigma_i^2}{\text{confidence}_i}, \quad"
-            r"\text{confidence}_i = f_{\mathrm{IQR}} \cdot f_{\mathrm{hist}} \cdot f_{\mathrm{methods}}"
-        )
-        st.markdown("- **Posterior Returns:**")
         render_formula(
             r"\mu_{\mathrm{BL}} = \left[(\tau\Sigma)^{-1} + P^\top \Omega^{-1} P\right]^{-1}"
             r"\left[(\tau\Sigma)^{-1}\Pi + P^\top \Omega^{-1} Q\right]"
@@ -729,45 +717,21 @@ def render_title_10() -> None:
 
         st.markdown("**MIQP Portfolio Optimization**")
         st.markdown(
-            "Posterior returns feed a Mixed-Integer Quadratic Program. "
-            "Unlike continuous sparse-QP approaches that use L1 penalties and produce variable position counts, "
-            "MIQP introduces a **binary indicator vector $z \\in \\{0,1\\}^N$** that enforces an exact upper bound "
-            "on the number of holdings and links position size to whether the asset is held at all."
+            "Posterior returns feed a Mixed-Integer Quadratic Program with a **binary indicator $z_i \\in \\{0,1\\}$** "
+            "per asset, enabling hard cardinality control and exact position-size enforcement."
         )
         render_formula(
-            r"\max_{w,\,z,\,t}\;\; \mu_{\mathrm{BL}}^\top w"
-            r"\;-\; \frac{\gamma}{2}\, w^\top \Sigma w"
-            r"\;-\; \lambda_{\mathrm{tc}} \textstyle\sum_i t_i"
-        )
-        st.markdown("subject to:")
-        render_formula(
-            r"\textstyle\sum_i w_i = 1,\quad w \geq 0"
-            r"\quad\text{[long-only, fully invested]}"
+            r"\max_{w,\,z}\;\; \mu_{\mathrm{BL}}^\top w \;-\; \frac{\gamma}{2}\, w^\top \Sigma w"
+            r"\;-\; \lambda_{\mathrm{tc}}\, \|w - w^{\mathrm{prev}}\|_1"
         )
         render_formula(
-            r"\textstyle\sum_i z_i \leq 40,\quad z_i \in \{0,1\}"
-            r"\quad\text{[hard cardinality constraint]}"
-        )
-        render_formula(
-            r"z_i \cdot 0.2\% \;\leq\; w_i \;\leq\; z_i \cdot 5\%"
-            r"\quad\text{[position bounds linked to binary — no dust positions]}"
-        )
-        render_formula(
-            r"t_i \geq w_i - w_i^{\mathrm{prev}},\quad"
-            r"t_i \geq w_i^{\mathrm{prev}} - w_i"
-            r"\quad\text{[turnover linearization, } \lambda_{\mathrm{tc}} = 10\text{ bps]}"
+            r"\sum_i z_i \leq 40,\quad z_i \in \{0,1\},\quad"
+            r"z_i \cdot 0.2\% \leq w_i \leq z_i \cdot 5\%"
         )
         st.markdown(
-            "- **Pre-screening:** before the MIP solve, the universe is reduced to the top-200 candidates "
-            "by expected return (plus all current holdings), keeping the problem tractable."
-        )
-        st.markdown(
-            "- **Solver:** SCIP (open-source MIP solver) via CVXPY, with a 120-second time limit "
-            "and an automatic fallback to equal-weight top-40 on infeasibility."
-        )
-        st.markdown(
-            "This design yields predictable position counts, clean minimum-size enforcement, and explicit "
-            "turnover control — producing a concentrated, risk-aware portfolio aligned with operational constraints."
+            "- **Long-only, fully invested** ($\\sum w_i = 1$, $w \\geq 0$) · "
+            "**Turnover penalty** ($\\lambda_{\\mathrm{tc}} = 10$ bps) · "
+            "**Solver:** SCIP via CVXPY (120s limit, fallback to equal-weight top-40)."
         )
 
 
